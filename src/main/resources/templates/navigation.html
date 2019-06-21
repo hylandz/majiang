@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/community.css">
+    <script src="../static/js/jquery-3.4.1.min.js"></script>
+    <script src="../static/js/bootstrap.min.js" type="application/javascript"></script>
+</head>
 <body>
 
 <div th:fragment="nav">
@@ -37,10 +45,9 @@
                         </ul>
                     </li>
                     <li th:if="${session.user == null}">
-                        <a href="https://github.com/login/oauth/authorize?client_id=69e311bad26e3f579725&redirect_uri=http://localhost:8887/callback&scope=user&state=1">登录</a>
+                        <a href="https://github.com/login/oauth/authorize?client_id=c4bb3fcaa494d4a6a120&redirect_uri=http://localhost:8887/callback&scope=user&state=1">登录</a>
                     </li>
-
-                </ul>
+                 </ul>
             </div>
         </div>
     </nav>
