@@ -1,4 +1,4 @@
-package com.xlx.majiang.model;
+package com.xlx.majiang.mapper;
 
 /**
  * 用户
