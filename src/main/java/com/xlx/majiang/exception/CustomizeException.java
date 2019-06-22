@@ -1,8 +1,8 @@
 package com.xlx.majiang.exception;
 
 /**
- * 自定义异常
- *
+ * 运行时异常的实例类:
+ * 捕捉运行时的异常
  * @Author xielx on 2019/6/21
  */
 public class CustomizeException extends RuntimeException{

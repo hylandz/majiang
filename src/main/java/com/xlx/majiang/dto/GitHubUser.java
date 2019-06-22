@@ -9,10 +9,11 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * @Author xielx on 2019/6/21
  */
 public class GitHubUser {
-  // github用户名
-  private String name;
 
+  //id
   private Long id;
+  // 用户名称
+  private String name;
 
   //个性签名
   private String bio;

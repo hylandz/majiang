@@ -1,6 +1,7 @@
 package com.xlx.majiang.exception;
 /**
- * 自定义异常状态枚举
+ * 异常枚举:
+ * 提供各种自定义异常
  * @author xielx on date 2019/6/22
  **/
 public enum CustomizeErrorCodeEnum implements  ICustomizeErrorCode{

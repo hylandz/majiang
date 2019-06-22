@@ -18,3 +18,15 @@
 
 ## 为什么md文件写入不到本地文件夹中了?
 + 需要手动刷新IDEA软件与本地磁盘存储的项目
+
+## GitHub oauth2认证的过程
+1. 点击第三方登录,认证
+  + GET: https://github.com/login/oauth/authorize
+
+需要参数 | 描述
+----|:-----
+`client_id`|github API给定id(String)
+`redirect_uri`|认证成功返回的url(String)
+`scope`|获取资源信息范围,user用户,repo仓库(String)
+`state`|随机字符串(String)
+

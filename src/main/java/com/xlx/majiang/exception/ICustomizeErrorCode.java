@@ -1,11 +1,8 @@
 package com.xlx.majiang.exception;
 
 /**
- * Created with IntelliJ IDEA.
- * Author: xielx
- * Date: 2019/6/21
- * Time: 23:57
- * To change this template use File | Settings | File and Code Templates.
+ * 异常结果的处理接口:
+ * 提供灵活处理异常方法
  */
 public interface ICustomizeErrorCode {
 

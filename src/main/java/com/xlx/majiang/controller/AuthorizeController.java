@@ -1,11 +1,10 @@
 package com.xlx.majiang.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.xlx.majiang.dto.AccessTokenDTO;
-
 import com.xlx.majiang.dto.GitHubUser;
+import com.xlx.majiang.mapper.UserMapper;
+import com.xlx.majiang.model.User;
 import com.xlx.majiang.provider.GitHubProvider;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 
 /**
  * github认证
@@ -33,9 +33,10 @@ public class AuthorizeController {
   @Autowired
   private GitHubProvider gitHubProvider;
 
-
+  @Autowired
+  private UserMapper userMapper;
   @GetMapping("/callback")
-  public GitHubUser callback(@RequestParam(name = "code") String code,
+  public String callback(@RequestParam(name = "code") String code,
                          @RequestParam(name = "state") String state,
                          HttpServletRequest request) {
 
@@ -48,11 +49,21 @@ public class AuthorizeController {
 
     String  token = gitHubProvider.getAccessToken(accessTokenDTO);
     GitHubUser gitHubUser = gitHubProvider.getUser(token);
-    System.out.println("GitHub用户对象:" + gitHubUser);
-
     if(gitHubUser != null && gitHubUser.getId() != null){
-
+      User user = new User();
+      user.setAccountId(String.valueOf(gitHubUser.getId()));
+      user.setName(gitHubUser.getName());
+      //
+      user.setToken(UUID.randomUUID().toString());
+      user.setBio(gitHubUser.getBio());
+      user.setAvatarUrl(gitHubUser.getAvatarUrl());
+      user.setGmtCreate(System.currentTimeMillis());
+      userMapper.insert(user);
+      request.getSession().setAttribute("user",gitHubUser);
+      return "redirect:/";
+    }else {
+      //登录失败,重写登录
+      return "redirect:/";
     }
-    return gitHubUser;
   }
 }
