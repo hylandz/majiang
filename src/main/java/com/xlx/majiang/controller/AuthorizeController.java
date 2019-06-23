@@ -2,7 +2,10 @@ package com.xlx.majiang.controller;
 
 import com.xlx.majiang.dto.AccessTokenDTO;
 import com.xlx.majiang.dto.GitHubUser;
+import com.xlx.majiang.mapper.UserMapper;
+import com.xlx.majiang.model.User;
 import com.xlx.majiang.provider.GitHubProvider;
+import com.xlx.majiang.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
@@ -33,18 +37,21 @@ public class AuthorizeController {
   private GitHubProvider gitHubProvider;
 
   @Autowired
-  private UserMapper userMapper;
+  private UserService userService;
+
+  /**
+   *
+   * @param code
+   * @param state
+   * @param response
+   * @return
+   */
   @GetMapping("/callback")
   public String callback(@RequestParam(name = "code") String code,
                          @RequestParam(name = "state") String state,
                          HttpServletResponse response) {
 
-    AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
-    accessTokenDTO.setClient_id(clientId);
-    accessTokenDTO.setClient_secret(clientSecret);
-    accessTokenDTO.setCode(code);
-    accessTokenDTO.setRedirect_uri(redirectUri);
-    accessTokenDTO.setState(state);
+    AccessTokenDTO accessTokenDTO = new AccessTokenDTO(clientId,clientSecret,code,redirectUri,state);
 
     String  accessToken = gitHubProvider.getAccessToken(accessTokenDTO);
     GitHubUser gitHubUser = gitHubProvider.getUser(accessToken);
@@ -58,14 +65,33 @@ public class AuthorizeController {
       user.setBio(gitHubUser.getBio());
       user.setAvatarUrl(gitHubUser.getAvatarUrl());
       user.setGmtCreate(System.currentTimeMillis());
-      userMapper.insert(user);
-      //添加cookie
+      userService.createOrUpdate(user);
 
+      //添加cookie
       response.addCookie(new Cookie("token",token));
+
       return "redirect:/";
     }else {
       //登录失败,重写登录
       return "redirect:/";
     }
   }
+
+  /**
+   * 注销
+   * @param request
+   * @param response
+   * @return
+   */
+  @GetMapping("/logout")
+  public String logout(HttpServletRequest request,HttpServletResponse response){
+   // request.getSession().invalidate();
+    request.getSession().removeAttribute("user");
+    request.getSession().removeAttribute("unReadCount");
+    Cookie cookie = new Cookie("token",null);
+    cookie.setMaxAge(0);
+    response.addCookie(cookie);
+    return "redirect:/";
+  }
+
 }

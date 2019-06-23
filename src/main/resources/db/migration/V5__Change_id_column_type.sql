@@ -1,0 +1,1 @@
+alter table USER alter column ID BIGINT auto_increment;

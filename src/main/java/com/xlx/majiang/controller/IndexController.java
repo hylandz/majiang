@@ -1,39 +1,33 @@
 package com.xlx.majiang.controller;
+
+import com.xlx.majiang.dto.PaginationDTO;
+import com.xlx.majiang.mapper.UserMapper;
+import com.xlx.majiang.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
 public class IndexController {
 
   @Autowired
-  private UserMapper userMapper;
-  /*
-   *
-   * @param name
-   * @return
-   */
-  @GetMapping("/")
-  public String index(HttpServletRequest request){
-    // 检测cookie的存在,来实现记住我的功能
-    Cookie[] cookies = request.getCookies();
+  private QuestionService questionService;
 
-    for (Cookie cookie : cookies){
-      System.out.println("key=" + cookie.getName() + ",value=" + cookie.getValue());
-      if ("token".equals(cookie.getName())){
-        String token = cookie.getValue();
-        User user = userMapper.findUserByToken(token);
-        if(user != null){
-          request.getSession().setAttribute("user",user);
-        }
-        break;
-      }
-    }
-    return "navigation";
+
+  @GetMapping("/")
+  public String index(@RequestParam(name = "page", defaultValue = "1") Integer page,
+                      @RequestParam(name = "size", required = false, defaultValue = "5") Integer size,
+                      Model model) {
+    PaginationDTO paginationDTO = questionService.list(page, size);
+    System.out.println("agination=" + paginationDTO);
+    model.addAttribute("pagination", paginationDTO);
+
+    return "index";
   }
+
+
 
 }

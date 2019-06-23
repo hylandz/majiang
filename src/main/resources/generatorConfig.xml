@@ -5,34 +5,80 @@
 
 <generatorConfiguration>
 
+
+    <!-- 属性按顺序写入,maven命令: mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate -->
+
+
+
+    <!-- 导入属性配置 -->
+    <properties resource="application.properties"/>
+
     <context id="DB2Tables" targetRuntime="MyBatis3">
 
-        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
-        <jdbcConnection driverClass="org.h2.Driver"
-                        connectionURL="jdbc:h2:~/community"
-                        userId="sa"
-                        password="123">
+
+
+        <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
+
+        <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <!--jdbc的数据连接 -->
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                        connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
         </jdbcConnection>
 
+        <!-- 可选,类型处理器,在数据库类型和java类型之间的转换控制 -->
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
+        <!-- Model模型生成器,pojo类
+	    	targetPackage:pojo类所在的包全名
+	    	targetProject:pojo类所在项目下的路径
+	    -->
         <javaModelGenerator targetPackage="com.xlx.majiang.model" targetProject="src/main/java">
+            <!-- 是否允许子包,targetPackage.xxx.xx -->
             <property name="enableSubPackages" value="true"/>
+            <!-- 是否对类CHAR类型的列进行trim操作 -->
             <property name="trimStrings" value="true"/>
+            <!-- 是否可以改变,即pojo类对象不会有setter方法,只有构造 -->
+            <property name="immutable" value="false"/>
         </javaModelGenerator>
 
+
+        <!-- 为每一个数据库表生成sqlMap.xml映射文件
+        	targetPackage:sqlMap映射文件所在包名
+        	targetProject:sqlMap映射文件所在项目路径
+        -->
         <sqlMapGenerator targetPackage="mapper" targetProject="src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
+
+        <!-- 客户端代码，生成易于使用的针对Model对象和XML配置文件 的代码
+        	type="ANNOTATEDMAPPER",生成Java Model 和基于注解的Mapper对象
+            type="MIXEDMAPPER",生成基于注解的Java Model 和相应的Mapper对象
+            type="XMLMAPPER",生成SQLMap XML文件和独立的Mapper接口
+
+            targetPackage:接口所在包名
+        	targetProject:接口所在项目路径
+         -->
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.xlx.majiang.mapper"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table tableName="user" domainObjectName="Aser"></table>
+
+        <!-- 要生成的表 tableName:数据库中的表名或视图名
+        	domainObjectName:pojo类名
+        	enableXxxByExample:是否要生成对应的Example
+         -->
+        <table tableName="user" domainObjectName="User"></table>
         <table tableName="question" domainObjectName="Question"></table>
         <table tableName="comment" domainObjectName="Comment"></table>
         <table tableName="notification" domainObjectName="Notification"></table>
