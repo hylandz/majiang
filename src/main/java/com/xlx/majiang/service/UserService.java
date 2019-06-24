@@ -3,9 +3,9 @@ package com.xlx.majiang.service;
 import com.xlx.majiang.mapper.UserMapper;
 import com.xlx.majiang.model.User;
 import com.xlx.majiang.model.UserExample;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -16,7 +16,7 @@ import java.util.List;
 @Service
 public class UserService {
 
-  @Autowired
+  @Resource
   private UserMapper userMapper;
 
   /**

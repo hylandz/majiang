@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,10 +34,10 @@ public class AuthorizeController {
   @Value("${github.redirect.uri}")
   private String redirectUri;
 
-  @Autowired
+  @Resource
   private GitHubProvider gitHubProvider;
 
-  @Autowired
+  @Resource
   private UserService userService;
 
   /**

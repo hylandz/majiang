@@ -93,7 +93,8 @@ public class NotificationService {
 
 
   /**
-   * 读取通知
+   * 读取通知:
+   *  由未读消息点击读取时的操作
    * @param id 通知id
    * @param user 用户
    * @return dto
