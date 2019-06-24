@@ -7,7 +7,7 @@ package com.xlx.majiang.enums;
 public enum NotificationTypeEnum {
 
   /*回答了问题*/
-  REPLY_QUESTION(1,"回复了评论"),
+  REPLY_QUESTION(1,"回复了问题"),
 
   /*回复了评论*/
   REPLY_COMMRNTS(2,"回复了评论");

@@ -43,14 +43,11 @@ public class SessionInterceptor implements HandlerInterceptor {
             request.getSession().setAttribute("user",userList.get(0));
             Long unReadCount = notificationService.unReadCount(userList.get(0).getId());
             request.getSession().setAttribute("unReadCount",unReadCount);
-            return true;
           }
+          break;
         }
       }
     }
-    //cookie==null
-    //response.sendRedirect("/");
-    System.out.println("未登录~~");
     return true;
   }
 

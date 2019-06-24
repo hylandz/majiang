@@ -142,7 +142,7 @@ public class QuestionService {
    * @param queryDTO 相关问题
    * @return List
    */
-  List<QuestionDTO> selectRelated(QuestionDTO queryDTO) {
+  public List<QuestionDTO> selectRelated(QuestionDTO queryDTO) {
     if (StringUtils.isBlank(queryDTO.getTag())) {
       return new ArrayList<>();
     }

@@ -78,9 +78,9 @@
         	domainObjectName:pojo类名
         	enableXxxByExample:是否要生成对应的Example
          -->
-        <table tableName="user" domainObjectName="User"></table>
-        <table tableName="question" domainObjectName="Question"></table>
-        <table tableName="comment" domainObjectName="Comment"></table>
-        <table tableName="notification" domainObjectName="Notification"></table>
+<!--        <table tableName="user" domainObjectName="User"></table>-->
+<!--        <table tableName="question" domainObjectName="Question"></table>-->
+        <!--       <table tableName="comment" domainObjectName="Comment"></table>-->
+       <table tableName="notification" domainObjectName="Notification"></table>
     </context>
 </generatorConfiguration>

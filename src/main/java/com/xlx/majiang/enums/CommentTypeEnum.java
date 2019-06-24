@@ -1,8 +1,9 @@
 package com.xlx.majiang.enums;
 
 /**
- * 评论类型枚举
- * @author: xielx on 2019/6/22
+ * 评论类型枚举:
+ * 1.提问
+ * 2.评论
  */
 public enum CommentTypeEnum {
 

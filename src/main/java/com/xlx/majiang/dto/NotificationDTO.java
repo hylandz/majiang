@@ -1,6 +1,8 @@
 package com.xlx.majiang.dto;
 
 import lombok.Data;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * NotificationDTO
@@ -22,4 +24,9 @@ public class NotificationDTO {
 
   //
   private String typeName;
+
+  @Override
+  public String toString() {
+    return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
+  }
 }

@@ -2,6 +2,8 @@ package com.xlx.majiang.dto;
 
 import com.xlx.majiang.model.User;
 import lombok.Data;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
  * question
@@ -25,4 +27,8 @@ public class QuestionDTO {
 
   //User对象
   private User user;
+  @Override
+  public String toString() {
+    return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
+  }
 }
