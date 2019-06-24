@@ -131,3 +131,7 @@ body {
 .menu .icon:hover {
     color: #499ef3;
 }
+
+.tag-one{
+    cursor: pointer;
+}

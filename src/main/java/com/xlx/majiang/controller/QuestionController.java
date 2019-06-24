@@ -27,7 +27,7 @@ public class QuestionController {
   private CommentService commentService;
 
   /**
-   * 查看问题
+   * 查看问题和对应的评论
    * @param id questionId
    * @param model view
    * @return String

@@ -5,8 +5,8 @@ import com.xlx.majiang.model.Question;
 import com.xlx.majiang.model.User;
 import com.xlx.majiang.service.NotificationService;
 import com.xlx.majiang.service.QuestionService;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author xielx on 2019/6/24
  */
+@Controller
 public class ProfileController {
 
 
@@ -41,7 +42,7 @@ public class ProfileController {
   @GetMapping("/profile/{action}")
   public String profile(@RequestParam(name = "page",defaultValue = "1") Integer page,
                         @RequestParam(name = "size",required = false,defaultValue = "5") Integer size,
-                        @PathVariable("action") String action,
+                        @PathVariable(name = "action") String action,
                         HttpServletRequest request,
                         Model model){
 
@@ -51,7 +52,7 @@ public class ProfileController {
     }
 
     //????
-    if ("question".equals(action)){
+    if ("questions".equals(action)){
       PaginationDTO<Question> paginationDTO = questionService.list(user.getId(),page,size);
       model.addAttribute("section","questions");
       model.addAttribute("sectionName","我的提问");

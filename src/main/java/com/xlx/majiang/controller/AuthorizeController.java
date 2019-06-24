@@ -2,7 +2,6 @@ package com.xlx.majiang.controller;
 
 import com.xlx.majiang.dto.AccessTokenDTO;
 import com.xlx.majiang.dto.GitHubUser;
-import com.xlx.majiang.mapper.UserMapper;
 import com.xlx.majiang.model.User;
 import com.xlx.majiang.provider.GitHubProvider;
 import com.xlx.majiang.service.UserService;
@@ -37,7 +36,7 @@ public class AuthorizeController {
   @Resource
   private GitHubProvider gitHubProvider;
 
-  @Resource
+  @Autowired
   private UserService userService;
 
   /**

@@ -33,7 +33,7 @@ function comment2target(targetId, type, content) {
                 if (response.code == 2003) {
                     var isAccepted = confirm(response.message);
                     if (isAccepted) {
-                        window.open("https://github.com/login/oauth/authorize?client_id=69e311bad26e3f579725&redirect_uri=http://localhost:8887/callback&scope=user&state=1");
+                        window.open("https://github.com/login/oauth/authorize?client_id=c4bb3fcaa494d4a6a120&redirect_uri=http://localhost:8887/callback&scope=user&state=1");
                         window.localStorage.setItem("closable", true);
                     }
                 } else {
@@ -117,18 +117,29 @@ function collapseComments(e) {
     }
 }
 
+
+/**
+ * 标签tag
+ */
 function showSelectTag() {
     $("#select-tag").show();
 }
 
+/**
+ * 点击标签
+ * @param e
+ */
 function selectTag(e) {
     var value = e.getAttribute("data-tag");
+
     var previous = $("#tag").val();
     if (previous.indexOf(value) == -1) {
         if (previous) {
             $("#tag").val(previous + ',' + value);
         } else {
+            //不起作用
             $("#tag").val(value);
+
         }
     }
 }

@@ -9,6 +9,16 @@
     <script src="js/jquery-3.4.1.min.js" type="application/javascript"></script>
     <script src="js/bootstrap.min.js" type="application/javascript"></script>
 </head>
+<!--<script th:inline="javascript">
+    window.onload=function () {
+        var closable = window.localStorage.getItem("closable");
+        console.log('111111:' + closable);
+        if (closable == true){
+            window.close();
+            window.localStorage.removeItem("closable");
+        }
+    }
+</script>-->
 <body>
 
 <div th:insert="~{navigation :: nav}"></div>

@@ -25,14 +25,14 @@ import java.util.stream.Collectors;
 public class CommentService {
 
 
-  @Resource
+  @Resource(name = "commentMapper")
   private CommentMapper commentMapper;
   @Resource
   private QuestionMapper questionMapper;
   @Resource
-  private QuestionExtMapper questionExtMapper;
+  private QuestionExtraMapper questionExtraMapper;
   @Resource
-  private CommentExtMapper commentExtMapper;
+  private CommentExtraMapper commentExtraMapper;
 
   @Resource
   private NotificationMapper notificationMapper;
@@ -90,7 +90,7 @@ public class CommentService {
       parentComment.setId(comment.getParentId());
       parentComment.setCommentCount(1);
       //
-      commentExtMapper.incCommentCount(parentComment);
+      commentExtraMapper.incCommentCount(parentComment);
 
 
       //创建通知
@@ -110,7 +110,7 @@ public class CommentService {
       //设置评论量
       dbQuestion.setCommentCount(1);
       //
-      questionExtMapper.incCommentCount(dbQuestion);
+      questionExtraMapper.incCommentCount(dbQuestion);
 
       //通知
       createNotify(comment,dbQuestion.getCreator(),user.getName(),dbQuestion.getTitle(),NotificationTypeEnum.REPLY_QUESTION,dbQuestion.getId());
@@ -120,9 +120,9 @@ public class CommentService {
   }
 
   /**
-   * 根据标签获得CommentDTO
+   * 根据标签获得不同类型的CommentDTO
    * @param id parentId
-   * @param commentTypeEnum 回复类型
+   * @param commentTypeEnum Comment类型
    * @return list
    */
   public List<CommentDTO> listByTargetId(Long id,CommentTypeEnum commentTypeEnum){

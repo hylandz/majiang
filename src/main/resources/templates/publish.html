@@ -3,12 +3,12 @@
 <head>
     <title>发布 - 码匠社区</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/community.css">
-    <script src="js/jquery-3.4.1.min.js"></script>
-    <script src="js/bootstrap.min.js" type="application/javascript"></script>
-    <script src="js/community.js" type="application/javascript"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="/css/community.css">
+    <script src="/js/jquery-3.4.1.min.js"></script>
+    <script src="/js/bootstrap.min.js" type="application/javascript"></script>
+    <script src="/js/community.js" type="application/javascript"></script>
 </head>
 <body>
 
@@ -52,7 +52,7 @@
                                  th:each="selectCategory: ${tags}"
                                  th:class="${selectCategoryStat.first ? 'active tab-pane':'tab-pane'}">
                                 <span>
-                                    <span class="label label-info" th:each="selectTag: ${selectCategory.tags}">
+                                    <span class="label label-info tag-one" th:each="selectTag: ${selectCategory.tags}">
                                     <span class="glyphicon glyphicon-tags" onclick="selectTag(this)"
                                           th:data-tag="${selectTag}"
                                           th:text="${' '+selectTag}">

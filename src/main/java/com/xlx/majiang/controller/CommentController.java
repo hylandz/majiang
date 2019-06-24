@@ -3,20 +3,18 @@ package com.xlx.majiang.controller;
 import com.xlx.majiang.dto.CommentCreateDTO;
 import com.xlx.majiang.dto.CommentDTO;
 import com.xlx.majiang.dto.ResultDTO;
+import com.xlx.majiang.enums.CommentTypeEnum;
 import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.model.Comment;
 import com.xlx.majiang.model.User;
 import com.xlx.majiang.service.CommentService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Objects;
+import java.util.List;
 
 /**
  * 评论
@@ -30,6 +28,12 @@ public class CommentController {
   private CommentService commentService;
 
 
+  /**
+   * 回复评论/问题
+   * @param commentCreateDTO dto
+   * @param request re
+   * @return dto
+   */
   @ResponseBody
   @RequestMapping(value = "/comment",method = RequestMethod.POST)
   public ResultDTO comment(@RequestBody CommentCreateDTO commentCreateDTO, HttpServletRequest request){
@@ -51,8 +55,22 @@ public class CommentController {
     comment.setGmtModified(System.currentTimeMillis());
     comment.setGmtCreate(System.currentTimeMillis());
     comment.setCommentator(user.getId());
-    //comment.setLikeCount();
+    comment.setLikeCount(1);
 
+    commentService.insert(comment,user);
     return  ResultDTO.okOf();
+  }
+
+
+  /**
+   *
+   * @param id
+   * @return
+   */
+  @ResponseBody
+  @RequestMapping(value = "/comment/{id}",method = RequestMethod.GET)
+  public ResultDTO<List<CommentDTO>> comments(@PathVariable("id") Long id){
+    List<CommentDTO> commentDTOList = commentService.listByTargetId(id, CommentTypeEnum.COMMENT);
+    return ResultDTO.oKOf(commentDTOList);
   }
 }

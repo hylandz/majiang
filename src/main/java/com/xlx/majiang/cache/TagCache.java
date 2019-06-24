@@ -52,8 +52,8 @@ public class TagCache {
   }
 
   /**
-   * ???
-   * @param tags 标签
+   * 检验并获取非法的标签
+   * @param tags 待校验标签
    * @return String
    */
   public static String filterInvalid(String tags) {

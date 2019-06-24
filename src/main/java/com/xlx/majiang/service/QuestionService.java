@@ -4,7 +4,7 @@ import com.xlx.majiang.dto.PaginationDTO;
 import com.xlx.majiang.dto.QuestionDTO;
 import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.exception.CustomizeException;
-import com.xlx.majiang.mapper.QuestionExtMapper;
+import com.xlx.majiang.mapper.QuestionExtraMapper;
 import com.xlx.majiang.mapper.QuestionMapper;
 import com.xlx.majiang.mapper.UserMapper;
 import com.xlx.majiang.model.Question;
@@ -34,7 +34,7 @@ public class QuestionService {
   @Resource
   private QuestionMapper questionMapper;
   @Resource
-  private QuestionExtMapper questionExtMapper;
+  private QuestionExtraMapper questionExtraMapper;
   @Resource
   private UserMapper userMapper;
 
@@ -134,7 +134,7 @@ public class QuestionService {
     Question question = new Question();
     question.setId(id);
     question.setViewCount(1);
-    questionExtMapper.incView(question);
+    questionExtraMapper.incView(question);
   }
 
   /**
@@ -154,7 +154,7 @@ public class QuestionService {
     Question question = new Question();
     question.setId(queryDTO.getId());
     question.setTag(regex);
-    List<Question> questionList = questionExtMapper.selectRelated(question);
+    List<Question> questionList = questionExtraMapper.selectRelated(question);
 
     // 将查询出的question集合封装到QuestionDTO集合
     List<QuestionDTO> questionDTOList = questionList.stream().map(q -> {

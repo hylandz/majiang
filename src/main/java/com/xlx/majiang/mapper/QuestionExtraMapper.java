@@ -8,7 +8,7 @@ import java.util.List;
  * 问题
  * @author: xielx on 2019/6/23
  */
-public interface QuestionExtMapper {
+public interface QuestionExtraMapper {
 
 
   /**

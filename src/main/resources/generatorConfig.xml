@@ -9,12 +9,10 @@
     <!-- 属性按顺序写入,maven命令: mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate -->
 
 
-
     <!-- 导入属性配置 -->
     <properties resource="application.properties"/>
 
     <context id="DB2Tables" targetRuntime="MyBatis3">
-
 
 
         <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"/>
@@ -78,9 +76,9 @@
         	domainObjectName:pojo类名
         	enableXxxByExample:是否要生成对应的Example
          -->
-<!--        <table tableName="user" domainObjectName="User"></table>-->
-<!--        <table tableName="question" domainObjectName="Question"></table>-->
-        <!--       <table tableName="comment" domainObjectName="Comment"></table>-->
-       <table tableName="notification" domainObjectName="Notification"></table>
+        <table tableName="user" domainObjectName="User"></table>
+        <table tableName="question" domainObjectName="Question"></table>
+        <table tableName="comment" domainObjectName="Comment"></table>
+        <table tableName="notification" domainObjectName="Notification"></table>
     </context>
 </generatorConfiguration>

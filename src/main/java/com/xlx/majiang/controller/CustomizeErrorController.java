@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author xielx on 2019/6/24
  */
-@Controller
-@RequestMapping("${server.error.path:${error.path:/error}}")
+//@Controller
+//@RequestMapping("${server.error.path:${error.path:/error}}")
 public class CustomizeErrorController implements ErrorController {
 
   @Override
