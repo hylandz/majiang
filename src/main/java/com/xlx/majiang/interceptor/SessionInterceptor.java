@@ -29,6 +29,7 @@ public class SessionInterceptor implements HandlerInterceptor {
   private NotificationService notificationService;
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    System.out.println("拦截器开始工作了~~~~");
     Cookie[] cookies = request.getCookies();
     if(cookies != null && cookies.length != 0){
       for (Cookie cookie : cookies){

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <title>登录页面</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css" />
+    <script type="application/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="application/javascript" src="/js/bootstrap.min.js"></script>
+    <style>
+
+        .banner {
+            color: #666;
+        }
+
+        #btn-big {
+            width: 349px;
+        }
+    </style>
+</head>
+<body>
+<div class="container" style="width: 60%;">
+    <div class="row clearfix">
+        <div class="col-md-12 banner">
+            <div class="page-header">
+                <h1 class="title-reg" style="display: none;">
+                    <span class="glyphicon glyphicon-th-list"></span> 注册账号
+                    <span style="float: right; font-size: 13px;">我已注册,现在就
+                        <button class="btn btn-default btn-go" onclick="doLoginNow()">登录</button>
+                    </span>
+                </h1>
+
+                <h1 class="title-login">
+                    <span class="glyphicon glyphicon-th"></span> 登录
+                    <span style="float: right; font-size: 13px;">还没账号,现在就
+                        <button class="btn btn-default btn-go" onclick="doRegister()">注册</button>
+                    </span>
+
+                </h1>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <!--数据表单-->
+            <form class="form-horizontal" role="form">
+                <!-- 用户名 -->
+                <div class="form-group has-feedback">
+                    <label for="username" class="col-sm-2 control-label">用户名</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="username" name="username" value=""
+                               placeholder="请输入您的真实姓名" autocomplete="off" required>
+                        <span class="glyphicon glyphicon-user form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <!-- 注册-手机号 -->
+                <div class="form-group reg-phone" style="display: none;">
+                    <label for="phone" class="col-sm-2 control-label">手机号</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="phone" name="phone"
+                               placeholder="可用于登录和设置密码" autocomplete="off" required>
+                    </div>
+                </div>
+                <!-- 密码 -->
+                <div class="form-group has-feedback">
+                    <label for="password" class="col-sm-2 control-label">密码</label>
+                    <div class="col-sm-5">
+                        <input type="password" class="form-control" id="password" name="password" value=""
+                               placeholder="请输入密码" required>
+                        <span class="glyphicon glyphicon-lock form-control-feedback" aria-hidden="true"></span>
+                    </div>
+                </div>
+                <!-- 注册-确认密码 -->
+                <div class="form-group reg-confirm" style="display: none;">
+                    <label for="confirm-pwd" class="col-sm-2 control-label">确认密码</label>
+                    <div class="col-sm-5">
+                        <input type="password" class="form-control" id="confirm-pwd" name="confirmPassword"
+                               placeholder="请再次输入密码" required>
+                    </div>
+                </div>
+                <!--验证码-->
+                <div class="form-group">
+                    <label for="verify-code" class="col-sm-2 control-label">验证码</label>
+                    <div class="col-sm-2">
+                        <input type="text" class="form-control" id="verify-code" name="captcha" value="JETB"
+                               placeholder="请输入验证码">
+                    </div>
+                    <div class="col-sm-3">
+                        <a href="#"><img src="img/JETB.jpg" alt="unknown" width="85px" height="32px"/></a>
+                        <span style="font-size: 11px; margin-left: 10px;">
+                            <a href="#">看不清?换一张 </a>
+                        </span>
+                    </div>
+
+                </div>
+                <!--注册-协议-->
+                <div class="form-group reg-protocol" style="display: none;">
+                    <div class="col-xs-offset-2 col-sm-4">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="reg-protocol" checked="checked">
+                                <span style="font-size: 12px;">
+                                    阅读并接受<a href="#">《用户协议》</a>及<a
+                                    href="#">《隐私权保护声明》</a>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!--记住我-->
+                <div class="form-group login-remember">
+                    <div class="col-xs-offset-2 col-sm-4">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="rememberMe"> 记住我
+                            </label>
+                        </div>
+                    </div>
+
+                </div>
+                <!--表单按钮-->
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" id="btn-big" class="btn btn-primary btn-login">注册</button>
+                        <!-- 忘记密码与第三方登录 -->
+                        <h6 class="big-btn-down">
+                            <a href="#">忘记密码?</a>
+                            <span style="margin-left: 204px;">
+                                <a href="https://github.com/login/oauth/authorize?client_id=c4bb3fcaa494d4a6a120&redirect_uri=http://localhost:8887/callback&scope=user&state=1">使用GitHub登录</a>
+                            </span>
+                        </h6>
+
+                    </div>
+                </div>
+                <!-- 信息提示-->
+                <div class="form-group login-info">
+                    <label for="confirm-pwd" class="col-sm-2 control-label"></label>
+                    <div class="col-sm-5">
+                        <div id="loginAlert" class="alert alert-warning fade">
+                            <a href="#" class="close" data-dismiss="alert">&times;</a>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+<script th:inline="javascript">
+
+    function login() {
+
+        var username = $('#username').val();
+        var pwd = $('password').val();
+        var remember = $("input[name='rememberMe']").is(':checked');
+
+        $.ajax('',{
+            data:{
+
+            },
+            dataType:'json',//服务器返回json格式数据
+            type:'post',//HTTP请求类型
+            timeout:10000,//超时时间设置为10秒；
+            success:function(data){
+
+            },
+            error:function(xhr,type,errorThrown){
+
+            }
+        });
+    };
+
+
+    function doLoginNow() {
+        //window.location.href='login.html';
+        $(".reg-phone").css("display", "none");
+        $(".reg-confirm").css("display", "none");
+        $(".reg-protocol").css("display", "none");
+        $(".login-remember").css("display", "block");
+        $(".title-login").css("display", "block");
+        $(".title-reg").css("display", "none");
+        $("#btn-big").attr("class", "btn btn-primary btn-login")
+        $("#btn-big").text("登录");
+        $('.big-btn-down').css("display", "block")
+    }
+
+    function doRegister() {
+        //window.location.href='login.html';
+        $(".reg-phone").css("display", "block");
+        $(".reg-confirm").css("display", "block");
+        $(".reg-protocol").css("display", "block");
+        $(".login-remember").css("display", "none");
+        $(".title-login").css("display", "none");
+        $(".title-reg").css("display", "block");
+        $("#btn-big").attr("class", "btn btn-primary btn-register")
+        $("#btn-big").text("注册");
+        $('.big-btn-down').css("display", "none")
+    }
+
+
+</script>
+</html>

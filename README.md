@@ -29,4 +29,28 @@
 `redirect_uri`|认证成功返回的url(String)
 `scope`|获取资源信息范围,user用户,repo仓库(String)
 `state`|随机字符串(String)
+2. 初次会让你确认是否授权,是,然后会让你登录Github
+3. 登录成功后,会返回你指定的redirect_uri,携带参数**code**,**state**
+4. 继续向github请求获取token
+  + POST:    https://github.com/login/oauth/access_token
 
+需要参数 | 描述
+----|:-----
+`client_id`|github API给定id(String)
+`client_secret`|github API 给定的secret
+`redirect_uri`|认证成功返回的url(String)
+`scope`|获取资源信息范围,user用户,repo仓库(String)
+`state`|随机字符串(String)
+`code`|返回的code
+
+5. 获取token后,请求获取github的用户信息
+  + GET:    https://api.github.com/user 
+需要参数 | 描述
+----|:-----
+`access_token`|从github那里获取的token
+
+
+
+## 脚本
+```sql
+```

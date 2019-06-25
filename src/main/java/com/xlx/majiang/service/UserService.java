@@ -56,4 +56,19 @@ public class UserService {
     }
   }
 
+
+
+  public User login(String userPassword){
+    UserExample userExample = new UserExample();
+    userExample.createCriteria()
+            .andAccountIdEqualTo(userPassword);
+    List<User> userList = userMapper.selectByExample(userExample);
+    if (userList.size() == 0){
+      //throw new CustomizeException(CustomizeErrorCodeEnum.PRINCIPAL_OR_CREDENTIALS_WRONG);
+      return null;
+    }
+
+    return userList.get(0);
+  }
+
 }

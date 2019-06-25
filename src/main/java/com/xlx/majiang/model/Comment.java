@@ -7,101 +7,101 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 评论类
  */
 public class Comment {
-    private Long id;
+  private Long id;
 
-    private Long parentId; //问题id
+  private Long parentId; //问题id
 
-    private Integer type; // 回复类型
+  private Integer type; // 回复类型
 
-    private Long commentator; //评论人id
+  private Long commentator; //评论人id
 
-    private String content; //回复内容
+  private String content; //回复内容
 
-    private Integer commentCount; //回复量
+  private Integer commentCount; //回复量
 
-    private Long gmtCreate;
+  private Long gmtCreate;
 
-    private Long gmtModified;
+  private Long gmtModified;
 
-    private Integer likeCount;
-
-
-
-    @Override
-    public String toString() {
-        return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
-    }
+  private Integer likeCount;
 
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+  @Override
+  public String toString() {
+    return ReflectionToStringBuilder.toString(this, ToStringStyle.JSON_STYLE);
+  }
 
-    public Long getParentId() {
-        return parentId;
-    }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
+  public Long getId() {
+    return id;
+  }
 
-    public Integer getType() {
-        return type;
-    }
+  public void setId(Long id) {
+    this.id = id;
+  }
 
-    public void setType(Integer type) {
-        this.type = type;
-    }
+  public Long getParentId() {
+    return parentId;
+  }
 
-    public Long getCommentator() {
-        return commentator;
-    }
+  public void setParentId(Long parentId) {
+    this.parentId = parentId;
+  }
 
-    public void setCommentator(Long commentator) {
-        this.commentator = commentator;
-    }
+  public Integer getType() {
+    return type;
+  }
 
-    public String getContent() {
-        return content;
-    }
+  public void setType(Integer type) {
+    this.type = type;
+  }
 
-    public void setContent(String content) {
-        this.content = content == null ? null : content.trim();
-    }
+  public Long getCommentator() {
+    return commentator;
+  }
 
-    public Integer getCommentCount() {
-        return commentCount;
-    }
+  public void setCommentator(Long commentator) {
+    this.commentator = commentator;
+  }
 
-    public void setCommentCount(Integer commentCount) {
-        this.commentCount = commentCount;
-    }
+  public String getContent() {
+    return content;
+  }
 
-    public Long getGmtCreate() {
-        return gmtCreate;
-    }
+  public void setContent(String content) {
+    this.content = content == null ? null : content.trim();
+  }
 
-    public void setGmtCreate(Long gmtCreate) {
-        this.gmtCreate = gmtCreate;
-    }
+  public Integer getCommentCount() {
+    return commentCount;
+  }
 
-    public Long getGmtModified() {
-        return gmtModified;
-    }
+  public void setCommentCount(Integer commentCount) {
+    this.commentCount = commentCount;
+  }
 
-    public void setGmtModified(Long gmtModified) {
-        this.gmtModified = gmtModified;
-    }
+  public Long getGmtCreate() {
+    return gmtCreate;
+  }
 
-    public Integer getLikeCount() {
-        return likeCount;
-    }
+  public void setGmtCreate(Long gmtCreate) {
+    this.gmtCreate = gmtCreate;
+  }
 
-    public void setLikeCount(Integer likeCount) {
-        this.likeCount = likeCount;
-    }
+  public Long getGmtModified() {
+    return gmtModified;
+  }
+
+  public void setGmtModified(Long gmtModified) {
+    this.gmtModified = gmtModified;
+  }
+
+  public Integer getLikeCount() {
+    return likeCount;
+  }
+
+  public void setLikeCount(Integer likeCount) {
+    this.likeCount = likeCount;
+  }
 }

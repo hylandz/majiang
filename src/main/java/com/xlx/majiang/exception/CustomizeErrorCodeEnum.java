@@ -15,8 +15,9 @@ public enum CustomizeErrorCodeEnum implements  ICustomizeErrorCode{
   COMMENT_NOT_FOUND(2006, "回复的评论不存在了，要不要换个试试？"),
   CONTENTS_IS_EMPTY(2007, "输入内容不能为空"),
   READ_NOTIFICATION_FAIL(2008, "兄弟你这是读别人的信息呢？"),
-  NOTIFICATION_NOT_FOUND(2009, "消息莫非是不翼而飞了？");
-
+  NOTIFICATION_NOT_FOUND(2009, "消息莫非是不翼而飞了？"),
+  UNAUTHENTICATED(2010,"用户名或密码错误"),
+  CAPTCHA_WRONG(2011,"验证码错误");
 
   private Integer code;
 
