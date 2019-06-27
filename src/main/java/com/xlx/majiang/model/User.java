@@ -10,19 +10,19 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class User {
     private Long id;// 主键
 
-    private String accountId; // 账户id
+    private String accountId; // 第三方账户id
 
-    private String name; // 姓名
+    private String name; // 第三方账户姓名
 
-    private String token; // token
+    private String token; // token,当作cookie
 
     private Long gmtCreate; // 创建时间
 
     private Long gmtModified; // 修改时间
 
-    private String bio; // 个性签名
+    private String bio; // 第三方账户个性签名
 
-    private String avatarUrl; // 昵称头像
+    private String avatarUrl; // 第三方账户昵称头像
 
 
     @Override

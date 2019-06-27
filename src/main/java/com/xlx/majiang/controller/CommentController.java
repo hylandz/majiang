@@ -1,5 +1,6 @@
 package com.xlx.majiang.controller;
 
+import com.xlx.majiang.cache.Constants;
 import com.xlx.majiang.dto.CommentCreateDTO;
 import com.xlx.majiang.dto.CommentDTO;
 import com.xlx.majiang.dto.ResultDTO;
@@ -38,7 +39,7 @@ public class CommentController {
   @RequestMapping(value = "/comment",method = RequestMethod.POST)
   public ResultDTO comment(@RequestBody CommentCreateDTO commentCreateDTO, HttpServletRequest request){
 
-    User user = (User) request.getSession().getAttribute("user");
+    User user = (User) request.getSession().getAttribute(Constants.USER_SESSION);
     if (user == null){
       return ResultDTO.errorOf(CustomizeErrorCodeEnum.NOT_LOGIN);
     }
@@ -55,7 +56,7 @@ public class CommentController {
     comment.setGmtModified(System.currentTimeMillis());
     comment.setGmtCreate(System.currentTimeMillis());
     comment.setCommentator(user.getId());
-    comment.setLikeCount(1);
+    comment.setLikeCount(0);
 
     commentService.insert(comment,user);
     return  ResultDTO.okOf();

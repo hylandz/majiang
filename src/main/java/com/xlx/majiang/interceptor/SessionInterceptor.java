@@ -35,7 +35,7 @@ public class SessionInterceptor implements HandlerInterceptor {
       for (Cookie cookie : cookies){
         if ("token".equals(cookie.getName())){
           String token = cookie.getValue();
-
+          System.out.println("用cookie取数据了");
           UserExample userExample = new UserExample();
           userExample.createCriteria().andTokenEqualTo(token);
 

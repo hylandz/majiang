@@ -1,5 +1,6 @@
 package com.xlx.majiang.controller;
 
+import com.xlx.majiang.cache.Constants;
 import com.xlx.majiang.dto.NotificationDTO;
 import com.xlx.majiang.enums.NotificationTypeEnum;
 import com.xlx.majiang.model.User;
@@ -31,7 +32,7 @@ public class NotificationController {
    */
   @GetMapping("/notification/{id}")
   public String profile(@PathVariable("id") Long id, HttpServletRequest request) {
-    User user = (User) request.getSession().getAttribute("user");
+    User user = (User) request.getSession().getAttribute(Constants.USER_SESSION);
     if (user == null) {
       return "redirect:/";
     }

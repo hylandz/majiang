@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <title>找回密码页面</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css" />
+    <script type="application/javascript" src="/js/jquery-3.4.1.min.js"></script>
+    <script type="application/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="application/javascript" src="/layer/layer.js"></script>
+    <script type="application/javascript" src="/js/forgetPwd.js"></script>
+    <style>
+        *{
+            font-family: arial;
+        }
+        .banner{
+            color: #666;
+        }
+        .lr{
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="container" style="width: 60%; margin: 0 auto;">
+    <div class="row clearfix">
+        <div class="col-md-12 banner">
+            <div class="page-header">
+                <h1>
+                    <span class="glyphicon glyphicon-wrench"></span> 找回密码
+
+                    <span style="float: right; font-size: 12px;">
+							<a class="lr" th:href="@{/login}">登录</a>
+							&nbsp;&nbsp;|&nbsp;&nbsp;
+							<a class="lr" th:href="@{/login}">注册</a>
+						</span>
+
+                </h1>
+            </div>
+        </div>
+
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12">
+            <!--登录表单-->
+            <form class="form-horizontal" role="form">
+
+                <div class="form-group">
+                    <label for="emailName" class="col-sm-2 control-label">邮箱</label>
+                    <div class="col-sm-3">
+                        <input type="email" class="form-control" id="emailName"
+                               placeholder="user@example.com" autocomplete="off" required>
+                    </div>
+                </div>
+
+                <!--验证码-->
+                <div class="form-group">
+                    <label for="emailCode" class="col-sm-2 control-label">验证码</label>
+                    <div class="col-sm-3">
+                        <input type="text" class="form-control" id="emailCode" placeholder="请输入验证码">
+                    </div>
+                    <div class="col-sm-4">
+                        <!--请始终为 button 写上type属性-->
+                        <button class="btn" type="button" name="btnEmail" onclick="getCode(this)">获取验证码</button>
+                    </div>
+
+                </div>
+
+                <!--按钮-->
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="button" class="btn btn-success" style="width: 200px;" onclick="verifyEmailCode()">找回密码</button>
+
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

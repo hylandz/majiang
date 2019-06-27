@@ -1,5 +1,6 @@
 package com.xlx.majiang.controller;
 
+import com.xlx.majiang.cache.Constants;
 import com.xlx.majiang.cache.TagCache;
 import com.xlx.majiang.dto.QuestionDTO;
 import com.xlx.majiang.model.Question;
@@ -101,7 +102,7 @@ public class PublishController {
     }
 
     // 取出当前用户
-    User user = (User) request.getSession().getAttribute("user");
+    User user = (User) request.getSession().getAttribute(Constants.USER_SESSION);
     if (user == null){
       model.addAttribute("error","用户未登录");
       return "publish";

@@ -54,3 +54,31 @@
 ## 脚本
 ```sql
 ```
+
+## 推荐前端提示工具
++ LayUI/Layer
+```javascript
+layer.tips('提示消息','#id或.class',{tips:1});
+```
++ Bootstrap 的Tooltip
+```javascript
+// 元素属性加入 data-toggle="tooltip" //固定的  data-placement="bottom"//出现位置  title="标题!"
+$('[data-toggle="tooltip"]').tooltip();// 提示框要写在 jQuery 的初始化代码里: 然后在指定的元素上调用 tooltip() 方法
+```
+
+
+
+## 疑难杂症
+1. 前端错误显示不符合预期
+  + 描述:
+  > 采用Bootstrap的警告框提示,警告框除了第一次登录错误能正确显示外,关闭警告框其他错误登录操作,信息显示不了
+  + 分析:
+  > 使用ajax进行登录,由于异步执行,主页面不刷新原因导致新错误无法覆盖原先的
+  + 解决方法:
+  > 方法一:不使用ajax,普通表单登录,controller层返回view
+  > 方法二:使用警告框,使用其他CSS样式显示信息(采纳)
+  
+2.  
+## 自动登录的过程理解
+> 当选择[✔]记住我时,后台登录成功会存储一个cookie,
+> 在拦截器那里会拦截所有请求,每次?都检测cookie是否存在,存在就数据库查找取user,存储session中

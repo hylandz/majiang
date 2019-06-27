@@ -1,5 +1,6 @@
 package com.xlx.majiang.controller;
 
+import com.xlx.majiang.cache.Constants;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -13,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author xielx on 2019/6/24
  */
-//@Controller
-//@RequestMapping("${server.error.path:${error.path:/error}}")
+@Controller
+@RequestMapping("${server.error.path:$*error.path:/error}}")
 public class CustomizeErrorController implements ErrorController {
 
   @Override
@@ -49,7 +50,7 @@ public class CustomizeErrorController implements ErrorController {
 
   private HttpStatus getStatus(HttpServletRequest request){
 
-    Integer statusCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
+    Integer statusCode = (Integer) request.getAttribute(Constants.STATUS_CODE);
     if (statusCode == null){
       return HttpStatus.INTERNAL_SERVER_ERROR;
     }

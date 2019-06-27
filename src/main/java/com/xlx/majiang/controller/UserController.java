@@ -1,5 +1,6 @@
 package com.xlx.majiang.controller;
 
+import com.xlx.majiang.cache.Constants;
 import com.xlx.majiang.dto.ResultDTO;
 import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.model.User;
@@ -15,7 +16,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.UUID;
 
 /**
  * user
@@ -37,42 +37,50 @@ public class UserController {
     return "login";
   }
 
+  @GetMapping("/forgetPwd")
+  public String forgetPassword(){
+    return "forgetPwd";
+  }
+
   @ResponseBody
   @PostMapping("/login")
-  public ResultDTO doLogin(@RequestParam(name = "username") String userName,
-                           @RequestParam(name = "password") String userPassword,
+  public ResultDTO doLogin(@RequestParam(name = "username") String username,
+                           @RequestParam(name = "password") String password,
                            @RequestParam(name = "captcha",required = false) String captcha,
                            @RequestParam(name="rememberMe") boolean rememberMe,
                            HttpServletRequest request,
                            HttpServletResponse response){
 
+
+    System.out.println("接收参数:" +username +","+ password + "," + captcha + "," + rememberMe);
     //检验参数
-    if (captcha == null || "jteb".equalsIgnoreCase(captcha)) {
+    if (captcha == null || !"jetb".equalsIgnoreCase(captcha)) {
       //model.addAttribute("error", "验证码错误");
       return ResultDTO.errorOf(CustomizeErrorCodeEnum.CAPTCHA_WRONG);
     }
-    if (userName == null || userName == "") {
+    if (username == null || username == "") {
       //model.addAttribute("error", "用户名不能为空");
-      return ResultDTO.errorOf(CustomizeErrorCodeEnum.UNAUTHENTICATED);
+      return ResultDTO.errorOf(CustomizeErrorCodeEnum.ACCOUNT_IS_NULL);
     }
-    if (userPassword == null || userPassword == "") {
+    if (password == null || password == "") {
       //model.addAttribute("error", "密码不能为空");
-      return ResultDTO.errorOf(CustomizeErrorCodeEnum.UNAUTHENTICATED);
+      return ResultDTO.errorOf(CustomizeErrorCodeEnum.CREDENTIALS_IS_NULL);
     }
 
 
-    User user =userService.login(userPassword);
-
+    User user =userService.login(password);
+    System.out.println(user);
+    System.out.println("===========记住我" + rememberMe);
     if (user != null){
       if(rememberMe){
         //记住我
-        response.addCookie(new Cookie("token", UUID.randomUUID().toString()));
+        response.addCookie(new Cookie("token", user.getToken()));
         return ResultDTO.okOf();
       }else {
         //不记住
-        request.getSession().setAttribute("user",user);
+        request.getSession().setAttribute(Constants.USER_SESSION,user);
         Long unReadCount = notificationService.unReadCount(user.getId());
-        request.getSession().setAttribute("unReadCount",unReadCount);
+        request.getSession().setAttribute(Constants.UN_READ_COUNT,unReadCount);
         return ResultDTO.okOf();
       }
 

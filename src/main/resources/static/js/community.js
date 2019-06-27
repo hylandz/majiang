@@ -30,10 +30,10 @@ function comment2target(targetId, type, content) {
             if (response.code == 200) {
                 window.location.reload();
             } else {
-                if (response.code == 2003) {
+                if (response.code == 2003) {//
                     var isAccepted = confirm(response.message);
                     if (isAccepted) {
-                        window.open("https://github.com/login/oauth/authorize?client_id=c4bb3fcaa494d4a6a120&redirect_uri=http://localhost:8887/callback&scope=user&state=1");
+                        window.open("/login","_self");
                         window.localStorage.setItem("closable", true);
                     }
                 } else {
