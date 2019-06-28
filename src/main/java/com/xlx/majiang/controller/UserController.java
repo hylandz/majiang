@@ -92,7 +92,11 @@ public class UserController {
     if (user != null){
       if(rememberMe){
         //记住我
-        response.addCookie(new Cookie("token", user.getToken()));
+        Cookie cookie = new Cookie("token", user.getToken());
+        cookie.setMaxAge(7*24*60*60);
+        cookie.setPath("/");
+        response.addCookie(cookie);
+
         return ResultDTO.okOf();
       }else {
         //不记住

@@ -102,8 +102,7 @@ public class AuthorizeController {
 
     //生成随机验证码
     String code = EmailUtils.getRandomCode();
-    System.out.println("验证码:" + code);
-    //String codeNum = EmailUtils.getRandomNumber();
+
     try {
       EmailUtils.sendSimpleEmail(emailName,code);
     } catch (EmailException e) {
@@ -112,7 +111,7 @@ public class AuthorizeController {
     HttpSession session = request.getSession();
     session.setAttribute(Constants.EMAIL_CODE,code);
     session.setAttribute("start",System.currentTimeMillis());
-    //session.setMaxInactiveInterval(60);
+    session.setMaxInactiveInterval(60);
     return ResultDTO.okOf();
   }
 
@@ -135,8 +134,8 @@ public class AuthorizeController {
     String code = (String) request.getSession().getAttribute(Constants.EMAIL_CODE);
     long start = (long) request.getSession().getAttribute("start");
 
-    long result = System.currentTimeMillis() -start;
-    if (result >= 60000 || !emailCode.equalsIgnoreCase(code)){
+    long result = System.currentTimeMillis() - start;
+    if (result > 60000 || !emailCode.equalsIgnoreCase(code)){
       return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_CODE_IS_NOT_AVAILABLE);
     }
 

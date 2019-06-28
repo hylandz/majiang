@@ -27,6 +27,14 @@ public class CustomizeException extends RuntimeException{
   public String getMessage() {
     return message;
   }
+
+  public CustomizeException(String message,Throwable throwable){
+    super(message,throwable);
+  }
+
+  public CustomizeException(String message){
+    super(message);
+  }
 }
 
 

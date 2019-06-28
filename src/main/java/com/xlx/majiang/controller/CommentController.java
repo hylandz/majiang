@@ -40,6 +40,7 @@ public class CommentController {
   @RequestMapping(value = "/comment",method = RequestMethod.POST)
   public ResultDTO comment(@RequestBody CommentCreateDTO commentCreateDTO, HttpServletRequest request){
 
+
     User user = (User) request.getSession().getAttribute(Constants.USER_SESSION);
     if (user == null){
       return ResultDTO.errorOf(CustomizeErrorCodeEnum.NOT_LOGIN);
@@ -66,13 +67,14 @@ public class CommentController {
 
 
   /**
-   *
-   * @param id
+   * 展开二级列表时,显示二级列表的评论数据
+   * @param id 问题回答的id
    * @return
    */
   @ResponseBody
   @RequestMapping(value = "/comment/{id}",method = RequestMethod.GET)
   public ResultDTO<List<CommentDTO>> comments(@PathVariable("id") Long id){
+
     List<CommentDTO> commentDTOList = commentService.listCommentByIdType(id, CommentTypeEnum.COMMENT);
     return ResultDTO.oKOf(commentDTOList);
   }

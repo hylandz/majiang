@@ -77,7 +77,7 @@ public class CommentService {
       }
 
       //判断关于该评论的问题存在?
-      Question dbQuestion = questionMapper.selectByPrimaryKey(comment.getParentId());
+      Question dbQuestion = questionMapper.selectByPrimaryKey(dbComment.getParentId());
       if (dbQuestion == null){
         throw new CustomizeException(CustomizeErrorCodeEnum.QUESTION_NOT_FOUND);
       }
@@ -85,7 +85,7 @@ public class CommentService {
       // 都存在,回复评论
       commentMapper.insert(comment);
 
-      //设置评论数
+      //评论了问题的回答,该回答的评论数需要+1
       Comment parentComment  = new Comment();
       parentComment.setId(comment.getParentId());
       parentComment.setCommentCount(1);
@@ -93,12 +93,12 @@ public class CommentService {
       commentExtraMapper.incCommentCount(parentComment);
 
 
-      //创建通知
+      //新增通知,有人回复了评论
       createNotify(comment,dbComment.getCommentator(),user.getName(),dbQuestion.getTitle(),NotificationTypeEnum.REPLY_COMMRNTS,dbQuestion.getId());
     }else {
       /*=====================是回答问题'QUESTION(1)'类型================*/
 
-      //处理要回复的问题不存在情况
+      //获取问题
       Question dbQuestion = questionMapper.selectByPrimaryKey(comment.getParentId());
       if (dbQuestion == null){
         throw new CustomizeException(CustomizeErrorCodeEnum.QUESTION_NOT_FOUND);
@@ -107,12 +107,12 @@ public class CommentService {
       // 插入回答
       commentMapper.insert(comment);
 
-      //设置评论量
+      //修改获取问题的评论量+1
       dbQuestion.setCommentCount(1);
       //
       questionExtraMapper.incCommentCount(dbQuestion);
 
-      //通知,有人回答了问题
+      //新增通知,有人回答了问题
       createNotify(comment,dbQuestion.getCreator(),user.getName(),dbQuestion.getTitle(),NotificationTypeEnum.REPLY_QUESTION,dbQuestion.getId());
 
     }
@@ -170,18 +170,17 @@ public class CommentService {
 
   }
 
-
+  public String getParentComment(Long parentId){
+    //二级菜单显示时,加入父级的评论,如B评论A: '很好啊' //@A "离职后会怎样"
+    CommentExample commentExample = new CommentExample();
+    commentExample.createCriteria().andParentIdEqualTo(parentId);
+    return "";
+  }
 
 
 
   /**
-   * 创建一个通知:
-   *   回复问题的通知:
-   *     该问题的回答 Comment对象
-   *     谁回答的问题 user.getName()
-   *     通知问题创建者(告诉[他]有人回答你的问题) question.getCreator()
-   *
-   *
+   * 通知的新增
    * @param comment 回复对象
    * @param receiver 接收通知人(告知你发的问题有人回答)
    * @param notifierName 发送通知人(回答的人)
@@ -191,13 +190,21 @@ public class CommentService {
    */
   private void createNotify(Comment comment, Long receiver, String notifierName, String outerTitle, NotificationTypeEnum notificationType, Long outerId) {
     Notification notification = new Notification();
+
     notification.setGmtCreate(System.currentTimeMillis());
+    //设置通知类型,回复了评论/回复了问题
     notification.setType(notificationType.getType());
+    //问题的id
     notification.setOuterId(outerId);
+    //评论创建者id
     notification.setNotifier(comment.getCommentator());
+    //通知状态首次创建都是未读0
     notification.setStatus(NotificationStatusEnum.UNREAD.getStatus());
+    //通知接收者(评论的被回复者)
     notification.setReceiver(receiver);
+    //通知发送者(评论的回复者)
     notification.setNotifierName(notifierName);
+    //问题的标题
     notification.setOuterTitle(outerTitle);
 
     notificationMapper.insert(notification);

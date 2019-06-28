@@ -8,15 +8,23 @@
 function post() {
     var questionId = $("#question_id").val();
     var content = $("#comment_content").val();
+    //parentId=问题id
     comment2target(questionId, 1, content);
 }
 
 /**
- * 提交评论
- * @param targetId 问题id
- * @param type 2
- * @param content 评论内容
+ * 提交评论2
+ * @param e
  */
+function comment(e) {
+    var commentId = e.getAttribute("data-id");
+    var content = $("#input-" + commentId).val();
+    //parentId=问题回答的id
+    comment2target(commentId, 2, content);
+}
+
+
+
 function comment2target(targetId, type, content) {
     if (!content) {
         alert("不能回复空内容~~~");
@@ -51,15 +59,6 @@ function comment2target(targetId, type, content) {
     });
 }
 
-/**
- * 提交评论2
- * @param e
- */
-function comment(e) {
-    var commentId = e.getAttribute("data-id");
-    var content = $("#input-" + commentId).val();
-    comment2target(commentId, 2, content);
-}
 
 /**
  * 展开二级评论

@@ -1,6 +1,6 @@
 create table USER
 (
-    ID BIGINT IDENTITY
+    ID BIGINT IDENTITY(1,1)
         primary key,
     ACCOUNT_ID VARCHAR(100),
     NAME VARCHAR(50),

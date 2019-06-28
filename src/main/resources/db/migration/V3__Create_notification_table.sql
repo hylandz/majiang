@@ -1,6 +1,6 @@
 create table NOTIFICATION
 (
-	ID BIGINT  auto_increment,
+	ID BIGINT  IDENTITY(1,1),
 	NOTIFIER BIGINT not null,
 	RECEIVER BIGINT not null,
 	OUTER_ID BIGINT not null,

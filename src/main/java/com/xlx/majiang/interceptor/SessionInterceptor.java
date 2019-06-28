@@ -1,5 +1,6 @@
 package com.xlx.majiang.interceptor;
 
+import com.xlx.majiang.cache.Constants;
 import com.xlx.majiang.mapper.UserMapper;
 import com.xlx.majiang.model.User;
 import com.xlx.majiang.model.UserExample;
@@ -15,7 +16,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
 /**
- * session拦截器
+ * session拦截器:
+ *
+ * 关键还是需要登录才能操作的功能要挡,跳转登录/首页
+ * 不用登录也能操作的就不拦截
  *
  * @author xielx on 2019/6/23
  */
@@ -29,26 +33,35 @@ public class SessionInterceptor implements HandlerInterceptor {
   private NotificationService notificationService;
   @Override
   public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-    System.out.println("拦截器开始工作了~~~~");
+
     Cookie[] cookies = request.getCookies();
     if(cookies != null && cookies.length != 0){
       for (Cookie cookie : cookies){
         if ("token".equals(cookie.getName())){
           String token = cookie.getValue();
-          System.out.println("用cookie取数据了");
+
           UserExample userExample = new UserExample();
           userExample.createCriteria().andTokenEqualTo(token);
 
           List<User> userList = userMapper.selectByExample(userExample);
           if (userList.size() != 0){
-            request.getSession().setAttribute("user",userList.get(0));
+            request.getSession().setAttribute(Constants.USER_SESSION,userList.get(0));
             Long unReadCount = notificationService.unReadCount(userList.get(0).getId());
-            request.getSession().setAttribute("unReadCount",unReadCount);
+            request.getSession().setAttribute(Constants.UN_READ_COUNT,unReadCount);
           }
           break;
         }
       }
     }
+
+    /*User user = (User) request.getSession().getAttribute(Constants.USER_SESSION);
+    if ( user!= null){
+      Long unReadCount = notificationService.unReadCount(user.getId());
+      request.getSession().setAttribute(Constants.UN_READ_COUNT,unReadCount);
+      return true;
+    }
+
+    response.sendRedirect("/");*/
     return true;
   }
 

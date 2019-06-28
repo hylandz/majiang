@@ -43,6 +43,7 @@ public class NotificationService {
 
     NotificationExample notificationExample = new NotificationExample();
     notificationExample.createCriteria().andReceiverEqualTo(userId);
+
     int totalCount = (int)notificationMapper.countByExample(notificationExample);
     int totalPage = (totalCount + size - 1) / size;
 
@@ -55,10 +56,10 @@ public class NotificationService {
     }
     int offSet = (page - 1) * size;
     paginationDTO.setPagination(page,totalPage);
-    NotificationExample example = new NotificationExample();
-    notificationExample.createCriteria().andReceiverEqualTo(userId);
-    example.setOrderByClause("gmt_create desc");
-    List<Notification> notificationList = notificationMapper.selectByExampleWithRowbounds(example,new RowBounds(offSet,size));
+    //NotificationExample example = new NotificationExample();
+
+    notificationExample.setOrderByClause("gmt_create desc");
+    List<Notification> notificationList = notificationMapper.selectByExampleWithRowbounds(notificationExample,new RowBounds(offSet,size));
 
     if (notificationList.size() == 0){
       return paginationDTO;
@@ -86,7 +87,7 @@ public class NotificationService {
   public Long unReadCount(Long userId){
     NotificationExample notificationExample = new NotificationExample();
     notificationExample.createCriteria()
-            .andIdEqualTo(userId)
+            .andReceiverEqualTo(userId)
             .andStatusEqualTo(NotificationStatusEnum.UNREAD.getStatus());
     return notificationMapper.countByExample(notificationExample);
   }
@@ -106,7 +107,7 @@ public class NotificationService {
       throw new CustomizeException(CustomizeErrorCodeEnum.NOTIFICATION_NOT_FOUND);
     }
 
-    if (Objects.equals(notification.getReceiver(),user.getId())){
+    if (!Objects.equals(notification.getReceiver(),user.getId())){
       throw new CustomizeException(CustomizeErrorCodeEnum.READ_NOTIFICATION_FAIL);
     }
     //消息已读

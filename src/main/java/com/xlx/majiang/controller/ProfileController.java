@@ -52,13 +52,14 @@ public class ProfileController {
       return "redirect:/";
     }
 
-    //????
+    //分页获取我的问题
     if ("questions".equals(action)){
       PaginationDTO<Question> paginationDTO = questionService.list(user.getId(),page,size);
       model.addAttribute("section","questions");
       model.addAttribute("sectionName","我的提问");
       model.addAttribute("pagination",paginationDTO);
     }else if ("replies".equals(action)){
+      //分页获取我的回复
       PaginationDTO<Question> paginationDTO = notificationService.list(user.getId(),page,size);
       model.addAttribute("section","replies");
       model.addAttribute("sectionName","最新回复");

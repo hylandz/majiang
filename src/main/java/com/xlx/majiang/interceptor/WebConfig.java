@@ -27,8 +27,15 @@ public class WebConfig implements WebMvcConfigurer{
      InterceptorRegistration registration = registry.addInterceptor(sessionInterceptor);
      //拦截所有,会排除默认的static resources
     registration.addPathPatterns("/**");
+
     //不拦截
     /*registration.excludePathPatterns("/");
+    registration.excludePathPatterns("/login");
+    registration.excludePathPatterns("/css/**");
+    registration.excludePathPatterns("/fonts/**");
+    registration.excludePathPatterns("/img/**");
+    registration.excludePathPatterns("/js/**");
+    registration.excludePathPatterns("/layer/**");
     registration.excludePathPatterns("https://github.com/**");*/
   }
 }

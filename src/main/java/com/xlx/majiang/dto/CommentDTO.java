@@ -24,6 +24,7 @@ public class CommentDTO {
   private Integer commentCount;
   private String content;
 
+ // private String parentComment = null;
  // User 对象
   private User user;
 

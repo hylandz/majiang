@@ -35,13 +35,11 @@ public class GitHubProvider {
       //404
       String str = response.body().string();
       String token = str.split("&")[0].split("=")[1];
-      System.out.println("access_token的github响应:" + str);
+
       return token;
     } catch (IOException e) {
-      e.printStackTrace();
+      throw new ClassCastException(e.getMessage());
     }
-    return null;
-
   }
 
   /*
@@ -61,9 +59,8 @@ public class GitHubProvider {
       GitHubUser gitHubUser = JSON.parseObject(strUser, GitHubUser.class);
       return gitHubUser;
     } catch (IOException e) {
-      e.printStackTrace();
+      throw new ClassCastException(e.getMessage());
     }
-    return null;
 
   }
 }
