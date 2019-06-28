@@ -3,7 +3,7 @@
  */
 
 /**
- * 提交回复
+ * 提交问题回答
  */
 function post() {
     var questionId = $("#question_id").val();
@@ -11,6 +11,12 @@ function post() {
     comment2target(questionId, 1, content);
 }
 
+/**
+ * 提交评论
+ * @param targetId 问题id
+ * @param type 2
+ * @param content 评论内容
+ */
 function comment2target(targetId, type, content) {
     if (!content) {
         alert("不能回复空内容~~~");
@@ -45,6 +51,10 @@ function comment2target(targetId, type, content) {
     });
 }
 
+/**
+ * 提交评论2
+ * @param e
+ */
 function comment(e) {
     var commentId = e.getAttribute("data-id");
     var content = $("#input-" + commentId).val();
@@ -142,4 +152,9 @@ function selectTag(e) {
 
         }
     }
+}
+
+
+function upVote() {
+
 }

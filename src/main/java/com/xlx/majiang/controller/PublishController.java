@@ -19,8 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * Controller:发布问题
- *
+ * Question业务处理:
+ * 1.问题发布(就是新增问题)
+ * 2.问题的修改
  * @author xielx on 2019/6/22
  */
 @Controller
@@ -30,7 +31,7 @@ public class PublishController {
   private QuestionService questionService;
 
   /**
-   * 跳转发布页面
+   * 点击发布按钮,跳转发布页面
    * @param model mo
    * @return string
    */
@@ -42,24 +43,25 @@ public class PublishController {
 
 
   /**
-   * 点击编辑时数据呈现
+   * 点击问题编辑时数据呈现
    * @param id questionId
    * @param model model
    * @return String
    */
   @GetMapping("/publish/{id}")
   public String editor(@PathVariable("id") Long id,Model model){
-    QuestionDTO questionDTO = questionService.getByQuestionId(id);
+    QuestionDTO questionDTO = questionService.getQuestionById(id);
     model.addAttribute("title", questionDTO.getTitle());
     model.addAttribute("description", questionDTO.getDescription());
     model.addAttribute("tag", questionDTO.getTag());
     model.addAttribute("id", questionDTO.getId());
+    model.addAttribute("edit", "编辑");//改变按钮名称
     model.addAttribute("tags", TagCache.list());
     return "publish";
   }
 
   /**
-   * 发起问题
+   * 问题新增与修改:id判断
    * @param title 问题标题
    * @param description 问题内容
    * @param tag 问题标签
@@ -75,6 +77,12 @@ public class PublishController {
                           @RequestParam(name = "id",required = false) Long id,
                           HttpServletRequest request,
                           Model model){
+
+     /* 如果能够提示错误信息后,跳转登录成功,再保存也行,
+      * 或者这个页面未登录本就不能跳转过来直接跳转首页或登录界面)
+      */
+
+    //未登录状态,发布问题仍然数据显示,
     model.addAttribute("title", title);
     model.addAttribute("description", description);
     model.addAttribute("tag", tag);
@@ -108,7 +116,7 @@ public class PublishController {
       return "publish";
     }
 
-    //发布问题<======>Question的新增
+    //Question的新增
     Question question = new Question();
     question.setTitle(title);
     question.setDescription(description);

@@ -1,6 +1,6 @@
 create table COMMENT
 (
-	ID BIGINT  auto_increment,
+	ID BIGINT  IDENTITY,
 	PARENT_ID BIGINT not null,
 	TYPE INTEGER not null,
 	COMMENTATOR BIGINT not null,

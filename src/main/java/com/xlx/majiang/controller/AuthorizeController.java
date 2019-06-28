@@ -51,7 +51,7 @@ public class AuthorizeController {
 
 
   /**
-   *
+   *  github认证后,获取github用户信息
    * @param code
    * @param state
    * @param response
@@ -65,7 +65,7 @@ public class AuthorizeController {
     AccessTokenDTO accessTokenDTO = new AccessTokenDTO(clientId,clientSecret,code,redirectUri,state);
 
     String  accessToken = gitHubProvider.getAccessToken(accessTokenDTO);
-    GitHubUser gitHubUser = gitHubProvider.getUser(accessToken);
+    GitHubUser gitHubUser = gitHubProvider.getGitHubUser(accessToken);
     if(gitHubUser != null && gitHubUser.getId() != null){
       User user = new User();
       user.setAccountId(String.valueOf(gitHubUser.getId()));
@@ -119,7 +119,7 @@ public class AuthorizeController {
   /**
    * 验证码验证
    * @param emailCode 接收的验证码
-   * @return
+   * @return .
    */
   @ResponseBody
   @PostMapping("/emailAuth")
@@ -150,7 +150,7 @@ public class AuthorizeController {
    * 注销
    * @param request
    * @param response
-   * @return
+   * @return .
    */
   @GetMapping("/logout")
   public String logout(HttpServletRequest request,HttpServletResponse response){

@@ -32,16 +32,34 @@ public class UserController {
   @Resource
   private NotificationService notificationService;
 
+  /**
+   * 跳转登录页面
+   * @return .
+   */
   @GetMapping("/login")
   public String login(){
     return "login";
   }
 
+  /**
+   * 跳转忘记密码页面
+   * @returnc .
+   */
   @GetMapping("/forgetPwd")
   public String forgetPassword(){
     return "forgetPwd";
   }
 
+  /**
+   * 登录验证
+   * @param username 用户名
+   * @param password 密码
+   * @param captcha 验证码
+   * @param rememberMe 记住我
+   * @param request req
+   * @param response res
+   * @return dto
+   */
   @ResponseBody
   @PostMapping("/login")
   public ResultDTO doLogin(@RequestParam(name = "username") String username,
@@ -68,7 +86,7 @@ public class UserController {
     }
 
 
-    User user =userService.login(password);
+    User user =userService.findUserByPwd(password);
     System.out.println(user);
     System.out.println("===========记住我" + rememberMe);
     if (user != null){

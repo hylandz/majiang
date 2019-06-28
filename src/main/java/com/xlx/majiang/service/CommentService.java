@@ -68,9 +68,9 @@ public class CommentService {
       throw  new CustomizeException(CustomizeErrorCodeEnum.TYPE_PARAM_WRONG);
     }
 
-    /*===================是'COMMENT(2)'类型=========================*/
+    /*===================是回复评论的'COMMENT(2)'类型=========================*/
     if (comment.getType() == CommentTypeEnum.COMMENT.getType()){
-      //判断别人对你的评论存在?
+      //获取
       Comment dbComment = commentMapper.selectByPrimaryKey(comment.getParentId());
       if (dbComment == null){
         throw new CustomizeException(CustomizeErrorCodeEnum.COMMENT_NOT_FOUND);
@@ -96,7 +96,7 @@ public class CommentService {
       //创建通知
       createNotify(comment,dbComment.getCommentator(),user.getName(),dbQuestion.getTitle(),NotificationTypeEnum.REPLY_COMMRNTS,dbQuestion.getId());
     }else {
-      /*=====================是'QUESTION(1)'类型================*/
+      /*=====================是回答问题'QUESTION(1)'类型================*/
 
       //处理要回复的问题不存在情况
       Question dbQuestion = questionMapper.selectByPrimaryKey(comment.getParentId());
@@ -112,7 +112,7 @@ public class CommentService {
       //
       questionExtraMapper.incCommentCount(dbQuestion);
 
-      //通知
+      //通知,有人回答了问题
       createNotify(comment,dbQuestion.getCreator(),user.getName(),dbQuestion.getTitle(),NotificationTypeEnum.REPLY_QUESTION,dbQuestion.getId());
 
     }
@@ -120,36 +120,44 @@ public class CommentService {
   }
 
   /**
-   * 根据标签获得不同类型的CommentDTO
-   * @param id parentId
+   * 依据问题的id与评论的type获取所有的comment(要封装一下)
+   * 思路:
+   * A:获取评论类型为Question/Comment的CommentDTO
+   * 1.查询出parentId=指定问题id和type=Question/Comment的comment结果集
+   * 2.从结果集里筛选出不重复的commentator(评论人,userId)
+   * 3.根据commentator获取User对象集(Map<userId,User>存储)
+   * 4.CommentDTO = comment对象 + 对应的User对象
+   * @param parentId 问题id
    * @param commentTypeEnum Comment类型
    * @return list
    */
-  public List<CommentDTO> listByTargetId(Long id,CommentTypeEnum commentTypeEnum){
+  public List<CommentDTO> listCommentByIdType(Long parentId,CommentTypeEnum commentTypeEnum){
     CommentExample commentExample = new CommentExample();
-    commentExample.createCriteria().andParentIdEqualTo(id).andTypeEqualTo(commentTypeEnum.getType());
+    commentExample.createCriteria().andParentIdEqualTo(parentId).andTypeEqualTo(commentTypeEnum.getType());
     commentExample.setOrderByClause("gmt_create desc");
 
-    // 根据parentId和typ获取Comment集合数据
+    // 根据parentId和typ获取所有Comment对象集
     List<Comment> commentList = commentMapper.selectByExample(commentExample);
 
     if (commentList.size() == 0){
       return  new ArrayList<>();
     }
 
-    //获取去重的评论人
+    //获取Comment对象集里不重复的评论人commentator(就是去重的userId)
     Set<Long> commentators = commentList.stream().map(comment -> comment.getCommentator()).collect(Collectors.toSet());
     List<Long> userIdList = new LinkedList<>();
     userIdList.addAll(commentators);
 
 
-    // 将获取去重的评论人集合转换为Map
+    // 根据去重的commentator(userId)获取对应的User对象,Map存储,Map<userId,user>
     UserExample userExample = new UserExample();
     userExample.createCriteria().andIdIn(userIdList);
     List<User> userList = userMapper.selectByExample(userExample);
     Map<Long,User> userMap = userList.stream().collect(Collectors.toMap(user ->user.getId(), user -> user));
 
-    //逐个comment封装成CommentDTO,收集为集合
+    /*
+     * CommentDTO = Comment对象(Comment对象集) + 对应的User对象(Comment对象集里commentator(userId))
+     */
 
     List<CommentDTO> commentDTOList = commentList.stream().map(comment -> {
       CommentDTO commentDTO = new CommentDTO();

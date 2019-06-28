@@ -27,19 +27,22 @@ public class QuestionController {
   private CommentService commentService;
 
   /**
-   * 查看问题和对应的评论
-   * @param id questionId
+   * 点击问题标题显示如下:
+   * 1.获取该问题的内容
+   * 2.获取与该问题tag标签类似的所有QuestionDTO集(页面右边相关问题功能)
+   * 3.获取对该问题的所有回复,不是对问题回答的评论
+   * @param questionId 问题id
    * @param model view
    * @return String
    */
   @GetMapping("/question/{id}")
-  public  String question(@PathVariable("id") Long id, Model model){
-    QuestionDTO questionDTO = questionService.getByQuestionId(id);
+  public  String question(@PathVariable("id") Long questionId, Model model){
+    QuestionDTO questionDTO = questionService.getQuestionById(questionId);
     List<QuestionDTO> questionDTOList = questionService.selectRelated(questionDTO);
-    List<CommentDTO> commentDTOList = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
+    List<CommentDTO> commentDTOList = commentService.listCommentByIdType(questionId, CommentTypeEnum.QUESTION);
 
-    //累加阅读量
-    questionService.incView(id);
+    //浏览问题一次累加阅读量
+    questionService.incView(questionId);
     model.addAttribute("question",questionDTO);
     model.addAttribute("relatedQuestions", questionDTOList);
     model.addAttribute("comments",commentDTOList);

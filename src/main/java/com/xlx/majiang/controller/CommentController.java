@@ -31,6 +31,7 @@ public class CommentController {
 
   /**
    * 回复评论/问题
+   * `@RequestBody`注解:当前端contentType:application/json使用
    * @param commentCreateDTO dto
    * @param request re
    * @return dto
@@ -57,6 +58,7 @@ public class CommentController {
     comment.setGmtCreate(System.currentTimeMillis());
     comment.setCommentator(user.getId());
     comment.setLikeCount(0);
+    comment.setCommentCount(0);
 
     commentService.insert(comment,user);
     return  ResultDTO.okOf();
@@ -71,7 +73,7 @@ public class CommentController {
   @ResponseBody
   @RequestMapping(value = "/comment/{id}",method = RequestMethod.GET)
   public ResultDTO<List<CommentDTO>> comments(@PathVariable("id") Long id){
-    List<CommentDTO> commentDTOList = commentService.listByTargetId(id, CommentTypeEnum.COMMENT);
+    List<CommentDTO> commentDTOList = commentService.listCommentByIdType(id, CommentTypeEnum.COMMENT);
     return ResultDTO.oKOf(commentDTOList);
   }
 }

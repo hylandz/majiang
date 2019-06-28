@@ -15,9 +15,9 @@ public class Question {
 
     private Integer viewCount; // 浏览量
 
-    private Integer likeCount; // 喜欢量
+    private Integer likeCount; // 点赞量
 
-    private String tag; // 标签?链接
+    private String tag; // 问题标签
 
     private Long creator; // 问题创建人
 

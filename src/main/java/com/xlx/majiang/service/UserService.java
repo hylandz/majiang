@@ -21,10 +21,10 @@ public class UserService {
 
   /**
    * 插入:
-   *    根据user的account_id查询数据库对象dbUser,未找到,插入前台数据
+   *    根据gitHubUser的account_id查询数据库是否有对应的用户,没有就新增用户
    * 更新:
-   *    找到,以dbUser的id为更新条件更新
-   * @param user 前台对象
+   *    用户存在,更新用户
+   * @param user User
    * @return boolean
    */
   public boolean createOrUpdate(User user){
@@ -57,8 +57,12 @@ public class UserService {
   }
 
 
-
-  public User login(String userPassword){
+  /**
+   * 依据密码获取用户
+   * @param userPassword pwd
+   * @return User
+   */
+  public User findUserByPwd(String userPassword){
     UserExample userExample = new UserExample();
     userExample.createCriteria()
             .andAccountIdEqualTo(userPassword);

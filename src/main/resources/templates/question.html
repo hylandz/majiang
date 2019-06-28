@@ -54,7 +54,7 @@
             <!--回复-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h4>
-                    <span th:text="${question.commentCount}"></span> 个回复
+                    <span th:text="${question.commentCount}"></span> 个回复:
                 </h4>
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comment-sp">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comments" th:each="comment : ${comments}">
@@ -71,11 +71,16 @@
                             </h5>
                             <div th:text="${comment.content}"></div>
                             <div class="menu">
-                                <span class="glyphicon glyphicon-thumbs-up icon"></span>
+                                <!--点赞-->
+                                <span th:data-id="${comment.id}" onclick="upVote(this)">
+                                    <span class="glyphicon glyphicon-thumbs-up icon"></span>
+                                    <span th:text="${comment.likeCount}?:0"></span>
+                                </span>
+                                <!--评论-->
                                 <span th:data-id="${comment.id}"
                                       onclick="collapseComments(this)" class="comment-icon">
                                     <span class="glyphicon glyphicon-comment"></span>
-                                    <span th:text="${comment.commentCount}"></span>
+                                    <span th:text="${comment.commentCount}?:0"></span>
                                 </span>
                                 <span class="pull-right"
                                       th:text="${#dates.format(comment.gmtCreate,'yyyy-MM-dd')}"></span>
@@ -99,7 +104,7 @@
             <!--回复输入框-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h4>
-                    提交回复
+                    提交回复:
                 </h4>
                 <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12 comment-sp">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="comment_section">
@@ -118,7 +123,7 @@
                     </div>
                     <input type="hidden" id="question_id" th:value="${question.id}">
                     <textarea class="form-control comment" rows="6" id="comment_content"></textarea>
-                    <button type="button" class="btn btn-success btn-comment" onclick="post()">回复</button>
+                    <button type="button" class="btn btn-success btn-comment" onclick="post()">回答</button>
                 </div>
             </div>
 

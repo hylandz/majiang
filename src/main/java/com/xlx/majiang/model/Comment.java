@@ -4,20 +4,20 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * 评论类
+ * 评论类:针对问题所引起的各个用户回答或评论
  */
 public class Comment {
   private Long id;
 
   private Long parentId; //问题id
 
-  private Integer type; // 回复类型
+  private Integer type; // 回复类型:是回复评论还是回答问题
 
-  private Long commentator; //评论人id
+  private Long commentator; //评论人id(User表id)
 
   private String content; //回复内容
 
-  private Integer commentCount; //回复量
+  private Integer commentCount; //针对你回复的问题或回复的评论的回复量
 
   private Long gmtCreate;
 

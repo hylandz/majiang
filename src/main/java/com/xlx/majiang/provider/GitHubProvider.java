@@ -17,7 +17,7 @@ import java.io.IOException;
 public class GitHubProvider {
 
   /*
-   * 获取AccessTokenDTO对象
+   * 获取用于得到github用户信息的token
    * @param accessTokenDTO
    * @return
    */
@@ -45,11 +45,11 @@ public class GitHubProvider {
   }
 
   /*
-   * 使用github返回的token获取github用户信息
+   * 获取github用户信息
    * @param accessToken 获取的token
    * @return
    */
-  public GitHubUser getUser(String accessToken) {
+  public GitHubUser getGitHubUser(String accessToken) {
     OkHttpClient client = new OkHttpClient();
     Request request = new Request.Builder()
             .url("https://api.github.com/user?access_token=" + accessToken)

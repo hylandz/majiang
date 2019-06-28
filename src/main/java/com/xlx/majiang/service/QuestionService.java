@@ -49,14 +49,14 @@ public class QuestionService {
   public PaginationDTO<QuestionDTO> list(Integer page, Integer size) {
 
     QuestionExample questionExample = new QuestionExample();
+    //降序
     questionExample.setOrderByClause("gmt_create desc");
 
     return PaginationDTOHelper(questionExample, page, size);
   }
 
   /**
-   * 属于userId的分页
-   *
+   * 指定用户的Question分页
    * @param userId 用户id
    * @param page   pageSize
    * @param size   pageSize
@@ -75,14 +75,22 @@ public class QuestionService {
   }
 
 
+  /**
+   * 问题新增或修改:
+   * 思路:
+   * 根据问题的id判断:
+   * 1.id==null,是新增操作
+   * 2.id!=null,是修操作
+   * @param question
+   */
   public void createOrUpdate(Question question) {
     if (question.getId() == null) {
-      //插入
+      //新增
       question.setGmtCreate(System.currentTimeMillis());
-      /*question.setGmtModified(question.getGmtCreate());
+      question.setGmtModified(question.getGmtCreate());
       question.setViewCount(0);
       question.setCommentCount(0);
-      question.setLikeCount(0);*/
+      question.setLikeCount(0);
 
       questionMapper.insertSelective(question);
     } else {
@@ -104,12 +112,12 @@ public class QuestionService {
 
 
   /**
-   * 依据questionId获取QuestionDTO对象
+   * 依据questionId获取QuestionDTO<Question,User>对象
    *
    * @param qId questionId
    * @return object
    */
-  public QuestionDTO getByQuestionId(Long qId) {
+  public QuestionDTO getQuestionById(Long qId) {
     Question question = questionMapper.selectByPrimaryKey(qId);
     if (question == null) {
       throw new CustomizeException(CustomizeErrorCodeEnum.QUESTION_NOT_FOUND);
@@ -126,19 +134,23 @@ public class QuestionService {
 
 
   /**
-   * 问题浏览
-   *
-   * @param id qid
+   * 问题被浏览一次自增一次
+   * @param questionId qid
    */
-  public void incView(Long id) {
+  public void incView(Long questionId) {
     Question question = new Question();
-    question.setId(id);
+    question.setId(questionId);
     question.setViewCount(1);
     questionExtraMapper.incView(question);
   }
 
   /**
    * 查询相关问题
+   * 思路:
+   * 当点击查看某个具体问题时,如Q1"为什么离职?"
+   * 以该问题的dto作参,使用该dto的id,tag查询
+   * 问题模糊查询
+   *
    * @param queryDTO 相关问题
    * @return List
    */
@@ -149,7 +161,7 @@ public class QuestionService {
 
     //切割 如 a,b,c,d
     String[] tagArray = StringUtils.split(queryDTO.getTag(), ",");
-    //转换 如 a|b|c|d
+    //将参数转换为sql查询的参数(正则) 如 a|b|c|d,
     String regex = Arrays.stream(tagArray).collect(Collectors.joining("|"));
     Question question = new Question();
     question.setId(queryDTO.getId());
@@ -167,8 +179,10 @@ public class QuestionService {
 
 
   /**
-   * 设置PaginationDTO
-   *
+   * 部分分页重复代码的抽取
+   * 思路:
+   *   1.先计算总记录数,在计算总页数,设置当前页
+   *   2.将查询到的数据封装到PaginationDTO里
    * @param example Question
    * @param page    currPage
    * @param size    pageSize
