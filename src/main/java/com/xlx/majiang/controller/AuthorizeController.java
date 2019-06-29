@@ -44,6 +44,8 @@ public class AuthorizeController {
 
   @Value("${email.from}")
   private String fromEmail;
+  @Value("${email.authorized.code}")
+  private String authCode;
   @Resource
   private GitHubProvider gitHubProvider;
 
@@ -106,7 +108,7 @@ public class AuthorizeController {
     String code = EmailUtils.getRandomNumber();
 
     try {
-      EmailUtils.sendSimpleEmail(fromEmail,emailName,code);
+      EmailUtils.sendSimpleEmail(fromEmail,emailName,code,authCode);
     } catch (EmailException e) {
       return ResultDTO.errorOf(2019,e.getMessage());
     }

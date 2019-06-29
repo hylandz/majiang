@@ -53,14 +53,14 @@ public class EmailUtils {
    * @param verifyCode 验证码
    * @throws EmailException ex
    */
-  public static void sendSimpleEmail(String fromEmail,String toEmail,String verifyCode) throws EmailException {
+  public static void sendSimpleEmail(String fromEmail,String toEmail,String verifyCode,String authCode) throws EmailException {
     long begin = System.currentTimeMillis();
     Email email = new SimpleEmail();
     //设置发送邮件服务器
     email.setHostName("smtp.qq.com");
     email.setSmtpPort(465);
-    //
-    email.setAuthenticator(new DefaultAuthenticator(fromEmail,"xxnvboshygclhbeb"));
+    //认证授权,需要有对应邮箱的授权码
+    email.setAuthenticator(new DefaultAuthenticator(fromEmail,authCode));
 
     //使用安全连接
     email.setSSLOnConnect(true);
