@@ -10,16 +10,18 @@
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                         data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">码匠社区</span>
+                    <span class="sr-only">MJ社区</span>
                 </button>
-                <a class="navbar-brand" href="/">码匠社区</a>
+                <a class="navbar-brand" href="/">MJ社区</a>
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <form class="navbar-form navbar-left">
-                    <div class="form-group">
+            <div class="collapse navbar-collapse"  id="bs-example-navbar-collapse-1">
+                <form class="navbar-form  navbar-left" role="form">
+                    <div class="form-group has-feedback">
                         <input type="text" class="form-control" placeholder="搜索问题">
+                        <span class="glyphicon glyphicon-search form-control-feedback" aria-hidden="true"></span>
                     </div>
                     <button type="submit" class="btn btn-default">搜索</button>
+
                 </form>
                 <ul class="nav navbar-nav navbar-right">
                     <li th:if="${session.user != null}">

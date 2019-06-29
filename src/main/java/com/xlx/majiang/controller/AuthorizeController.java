@@ -42,6 +42,8 @@ public class AuthorizeController {
   @Value("${github.redirect.uri}")
   private String redirectUri;
 
+  @Value("${email.from}")
+  private String fromEmail;
   @Resource
   private GitHubProvider gitHubProvider;
 
@@ -101,10 +103,10 @@ public class AuthorizeController {
 
 
     //生成随机验证码
-    String code = EmailUtils.getRandomCode();
+    String code = EmailUtils.getRandomNumber();
 
     try {
-      EmailUtils.sendSimpleEmail(emailName,code);
+      EmailUtils.sendSimpleEmail(fromEmail,emailName,code);
     } catch (EmailException e) {
       return ResultDTO.errorOf(2019,e.getMessage());
     }

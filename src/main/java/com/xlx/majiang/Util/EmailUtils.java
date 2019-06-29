@@ -14,7 +14,6 @@ import java.util.Random;
  */
 public class EmailUtils {
 
-
   /**
    * 获取4位随机字符
    * @return str
@@ -54,25 +53,25 @@ public class EmailUtils {
    * @param verifyCode 验证码
    * @throws EmailException ex
    */
-  public static void sendSimpleEmail(String toEmail,String verifyCode) throws EmailException {
+  public static void sendSimpleEmail(String fromEmail,String toEmail,String verifyCode) throws EmailException {
     long begin = System.currentTimeMillis();
     Email email = new SimpleEmail();
     //设置发送邮件服务器
     email.setHostName("smtp.qq.com");
     email.setSmtpPort(465);
     //
-    email.setAuthenticator(new DefaultAuthenticator("1491998594@qq.com","xxnvboshygclhbeb"));
+    email.setAuthenticator(new DefaultAuthenticator(fromEmail,"xxnvboshygclhbeb"));
 
     //使用安全连接
     email.setSSLOnConnect(true);
     //发件人邮箱
-    email.setFrom("1491998594@qq.com","爸爸");
+    email.setFrom(fromEmail,"MJ社区");
     //收件人邮箱
     email.addTo(toEmail);
     //邮件主题
-    email.setSubject("老司机驾驶证:");
+    email.setSubject("密码重置:");
     //邮件内容
-    email.setMsg("尊敬的黄司机先生:您好!\n 你的驾驶证号为:" + verifyCode + "\n" + "(有效期为一分钟)");
+    email.setMsg("尊敬的用户:您好!\n 您的验证码为:" + verifyCode + "\n" + "(有效期为一分钟)");
     email.send();
     long end = System.currentTimeMillis();
     System.out.println("耗时=" + (end-begin));

@@ -179,6 +179,40 @@ public class QuestionService {
 
 
   /**
+   * 获取热门话题
+   * @return .
+   */
+  public PaginationDTO<QuestionDTO> getTopQuestion(){
+    PaginationDTO<QuestionDTO> paginationDTO = new PaginationDTO<>();
+    QuestionExample questionExample = new QuestionExample();
+    questionExample.setOrderByClause("comment_count desc");
+
+    List<Question> questionList = questionMapper.selectByExampleWithRowbounds(questionExample,new RowBounds(0,5));
+    LinkedList<QuestionDTO> topicList = new LinkedList<>();
+    setDTO(questionList,topicList);
+
+    paginationDTO.setData(topicList);
+    return paginationDTO;
+  }
+
+  /**
+   * 重复代码抽取
+   * @param list Question集合
+   * @param dtoList .
+   */
+  private void setDTO(List<Question> list,LinkedList<QuestionDTO> dtoList){
+    for (Question q : list) {
+      User user = userMapper.selectByPrimaryKey(q.getCreator());
+      QuestionDTO questionDTO = new QuestionDTO();
+      BeanUtils.copyProperties(q, questionDTO);
+      questionDTO.setUser(user);
+      dtoList.add(questionDTO);
+    }
+
+  }
+
+
+  /**
    * 部分分页重复代码的抽取
    * 思路:
    *   1.先计算总记录数,在计算总页数,设置当前页

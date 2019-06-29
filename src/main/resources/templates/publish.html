@@ -14,6 +14,7 @@
     <script src="/js/editormd.min.js" type="application/javascript"></script>
     <script src="/js/lib/marked.min.js" type="application/javascript"></script>
     <script src="/js/lib/prettify.min.js" type="application/javascript"></script>
+    <script src="/js/plugins/image-dialog/image-dialog.js" type="application/javascript"></script>
 </head>
 <body>
 
@@ -49,7 +50,10 @@
                             path: "/js/lib/",
                             delay: 0,
                             placeholder: "请输入问题描述....",
-                            watch: false
+                            watch: false,
+                            imageUpload: true,          // Enable/disable upload
+                            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                            imageUploadURL: "/file/upload",
 
 
                         });
