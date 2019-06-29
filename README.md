@@ -1,3 +1,8 @@
+## 在线文档
++ [https://www.showdoc.cc/majiangdoc?page_id=2362238912918825](https://www.showdoc.cc/majiangdoc?page_id=2362238912918825)
+
+
+
 ### 准备工作
 ```
 JDK >= 1.8 (推荐1.8版本)
@@ -89,7 +94,7 @@ majiang
 `access_token`|从github那里获取的token(String)
 
 ## 表设计
-+ user表/用户
+#### user表/用户
 字段|	属性|	描述
 :--------:|:----:|:-----
 id|	bigint|	主键自增,Long
@@ -100,7 +105,7 @@ token|	varchar36|	密钥,cookie访问,String
 gmt_create|	bigint|	创建时间,Long
 gmt_modified|	bigint|	修改时间,Long
 
-+ question表/问题
+#### question表/问题
 字段|	属性|	描述
 :--------:|:----:|:-----
 id|	bigint|	主键自增,Long
@@ -114,7 +119,7 @@ creator|bigint|提问题的人,Long
 gmt_create|	bigint|	创建时间,Long
 gmt_modified|	bigint|	修改时间,Long
 
-+ notification表/消息通知
+#### notification表/消息通知
 字段|	属性|	描述
 :--------:|:----:|:-----
 id|	bigint|	主键自增,Long
@@ -129,7 +134,7 @@ gmt_create|	bigint|	创建时间,Long
 gmt_modified|	bigint|	修改时间,Long
 
 
-+ comment/评论,提问表
+#### comment/评论,提问表
 字段|	属性|	描述
 :--------:|:----:|:-----
 id|	bigint|	主键自增,Long
@@ -145,9 +150,10 @@ gmt_modified|	bigint|	修改时间,Long
 
 ### 项目演示
 
-+ 入口: http://localhost:8080/smbms/
-+ 管理员账号:G0009263   密码:admin123/其它账号的密码都是123456 
-
++ URL: http://localhost:8887/ 
++ 账户1: 41381772 密码:41381772
++ 账户2: 41381773 密码:41381773
++ 账户3: 41381774 密码:41381774
 <table>
 <tr>
   <td><img src="./display/01.png" title="邮箱验证码" ></td>
