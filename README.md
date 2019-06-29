@@ -150,24 +150,24 @@ gmt_modified|	bigint|	修改时间,Long
 
 <table>
 <tr>
-  <td><img src="./display/01.png" title="登录" ></td>
+  <td><img src="./display/01.png" title="邮箱验证码" ></td>
 
-  <td><img src="./display/02.png" title="首页"></td>
+  <td><img src="./display/02.png" title="github授权代理"></td>
 </tr>
 <tr>
-  <td><img src="./display/03.png" title="订单管理"></td>
-  <td><img src="./display/04.png" title="订单管理"></td>
+  <td><img src="./display/03.png" title="首页"></td>
+  <td><img src="./display/04.png" title="发起问题"></td>
 </tr>
 <tr>
-  <td><img src="./display/05.png" title="订单管理"></td>
-  <td><img src="./display/06.png" title="供应商管理"></td>
+  <td><img src="./display/05.png" title="回复问题"></td>
+  <td><img src="./display/06.png" title="查看问题"></td>
 </tr>
 <tr>
-  <td><img src="./display/07.png" title="用户管理"></td>
+  <td><img src="./display/07.png" title="我的问题"></td>
   <td><img src="./display/08.png" title="用户管理"></td>
 </tr>
 <tr>
-  <td><img src="./display/09.png" title="用户管理"></td>
-  <td><img src="./display/10.png" title="用户管理"></td>
+  <td><img src="./display/09.png" title="图片上传"></td>
+  <td><img src="./display/10.png" title="文件结构"></td>
 </tr>
 </table>
