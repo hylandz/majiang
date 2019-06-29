@@ -151,7 +151,9 @@ gmt_modified|	bigint|	修改时间,Long
 ### 项目演示
 
 + URL: http://localhost:8887/ 
-
++ 账户1: 41381772 密码:41381772
++ 账户2: 41381773 密码:41381773
++ 账户3: 41381774 密码:41381774
 <table>
 <tr>
   <td><img src="./display/01.png" title="邮箱验证码" ></td>
