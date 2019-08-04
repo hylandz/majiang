@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8"/>
     <title>登录页面</title>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css"/>
-    <script type="application/javascript" src="/js/jquery-3.4.1.min.js"></script>
-    <script type="application/javascript" src="/js/bootstrap.min.js"></script>
-    <script type="application/javascript" src="/layer/layer.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.css" th:href="@{/css/bootstrap.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-theme.css}"/>
+    <script type="application/javascript" src="/static/js/jquery-3.4.1.min.js" th:src="@{/js/jquery-3.4.1.min.js}"></script>
+    <script type="application/javascript" src="/static/js/bootstrap.min.js" th:src="@{/js/bootstrap.min.js}"></script>
+    <script type="application/javascript" src="/static/layer/layer.js" th:src="@{/layer/layer.js}"></script>
     <style>
 
         .banner {
@@ -90,7 +90,7 @@
                                placeholder="请输入验证码">
                     </div>
                     <div class="col-sm-3">
-                        <a href="#"><img src="images/JETB.jpg" alt="unknown" width="85px" height="32px"/></a>
+                        <a href="#"><img src="/static/images/JETB.jpg" th:src="@{/images/JETB.jpg}"  alt="unknown" width="85px" height="32px"/></a>
                         <span style="font-size: 11px; margin-left: 10px;">
                             <a href="#">看不清?换一张 </a>
                         </span>
@@ -100,13 +100,13 @@
                 <!--注册-协议-->
                 <div class="form-group regProtocol" style="display: none;">
                     <div class="col-xs-offset-2 col-sm-4 checkbox">
-                            <label>
-                                <input type="checkbox" name="regProtocol" checked="checked">
-                                <span style="font-size: 10px;">
+                        <label>
+                            <input type="checkbox" name="regProtocol" checked="checked">
+                            <span style="font-size: 10px;">
                                     阅读并接受<a href="#">《用户协议》</a>及<a
-                                        href="#">《隐私权保护声明》</a>
+                                    href="#">《隐私权保护声明》</a>
                                 </span>
-                            </label>
+                        </label>
                     </div>
 
                 </div>
@@ -115,7 +115,8 @@
                 <div class="form-group has-success loginRemember">
                     <div class="col-xs-offset-2 col-sm-4 checkbox">
                         <label>
-                            <input type="checkbox" id="rem" name="rememberMe" checked="checked"> <span data-toggle="tooltip" title="记住我!" >记住我</span>
+                            <input type="checkbox" id="rem" name="rememberMe" checked="checked"> <span
+                                data-toggle="tooltip" title="记住我!">记住我</span>
                         </label>
                     </div>
 
@@ -127,25 +128,29 @@
                         </button>
                         <!-- 忘记密码与第三方登录 -->
                         <h6 class="bigBtnDown">
-                            <a th:href="@{/forgetPwd}" data-toggle="tooltip" data-placement="bottom" title="忘记密码!">忘记密码?</a>
-                            <span style="margin-left: 204px;">
-                                <a href="https://github.com/login/oauth/authorize?client_id=c4bb3fcaa494d4a6a120&redirect_uri=http://localhost:8887/callback&scope=user&state=1"
-                                   data-toggle="tooltip" data-placement="right" title="GitHub登录">使用GitHub登录</a>
-                            </span>
+                            <a th:href="@{/forgetPwd}" data-toggle="tooltip" data-placement="bottom"
+                               title="忘记密码!">忘记密码?</a>
                         </h6>
 
                     </div>
                 </div>
                 <!-- 信息提示-->
-                <!--<div class="form-group login-info">
-                    <label for="confirm-pwd" class="col-sm-2 control-label"></label>
+                <div class="form-group">
+                    <label for="other" class="col-sm-2 control-label"></label>
                     <div class="col-sm-5">
-                        <div id="loginAlert" class="alert alert-warning in">
-                            <a href="#" class="close" data-dismiss="alert">&times;</a>
-                            <span class="login-msg"></span>
+                        <div id="other" style="margin: 0 auto">
+                            <span style="margin:0px 20px 40px">
+                                <a href="https://github.com/login/oauth/authorize?client_id=c4bb3fcaa494d4a6a120&redirect_uri=http://localhost:8887/callback&scope=user&state=1" data-toggle="tooltip" data-placement="right" title="github">
+                                    <img src="/static/images/GitHub48x48.png" alt="not"
+                                         th:src="@{/images/GitHub48x48.png}"></a>
+                            </span>
+                            <span style="margin:0px 40px">
+                                <a href data-toggle="tooltip"data-placement="right"  title="码云"><img src="/static/images/gitee48x48.png" alt="not"
+                                                   th:src="@{/images/gitee48x48.png}"></a>
+                            </span>
                         </div>
                     </div>
-                </div>-->
+                </div>
 
             </form>
 
@@ -153,7 +158,6 @@
     </div>
 
 </div>
-<script src="/js/login.js"></script>
+<script src="/static/js/login.js" th:src="@{/js/login.js}"></script>
 </body>
-
 </html>

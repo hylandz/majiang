@@ -59,7 +59,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.4.199</version>
+            <version>1.4.196</version>
         </dependency>
         <!-- Eclipse插件,提供注解-->
         <dependency>
@@ -118,7 +118,7 @@
                     <dependency>
                         <groupId>com.h2database</groupId>
                         <artifactId>h2</artifactId>
-                        <version>1.4.199</version>
+                        <version>1.4.196</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -132,7 +132,7 @@
                     <dependency>
                         <groupId>com.h2database</groupId>
                         <artifactId>h2</artifactId>
-                        <version>1.4.199</version>
+                        <version>1.4.196</version>
                     </dependency>
                 </dependencies>
             </plugin>

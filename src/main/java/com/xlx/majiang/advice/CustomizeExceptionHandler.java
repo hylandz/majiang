@@ -4,8 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.xlx.majiang.dto.ResultDTO;
 import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.exception.CustomizeException;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -15,15 +15,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * 异常事务-通知
+ * 全局异常处理
  *
  * @author xielx on 2019/6/24
  */
-@Controller
+@ControllerAdvice
 public class CustomizeExceptionHandler {
 
   @ExceptionHandler(Exception.class)
-  ModelAndView handler(HttpServletRequest request, HttpServletResponse response, Throwable t, Model model) {
+  public ModelAndView customizeHandler(HttpServletRequest request, HttpServletResponse response, Throwable t, Model model) {
     String contentType = request.getContentType();
 
     if ("application/json".equals(contentType)) {  // 返回json

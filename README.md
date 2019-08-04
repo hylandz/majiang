@@ -72,7 +72,7 @@ majiang
 
 ##### 第二步: 初次会让你确认是否授权,是,然后会让你登录Github
 
-##### 第三步: 登录成功后,会返回你指定的redirect_uri,返回参数code,state
+##### 第三步: 登录成功后,会返回你指定的redirect_uri,携带参数code,state
 
 ##### 第四步: 继续向github请求获取token
   > POST:    https://github.com/login/oauth/access_token
@@ -177,5 +177,3 @@ gmt_modified|	bigint|	修改时间,Long
   <td><img src="./display/10.png" title="文件结构"></td>
 </tr>
 </table>
-
-## 感谢码匠的开源支持

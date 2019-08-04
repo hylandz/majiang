@@ -9,6 +9,7 @@ import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.model.User;
 import com.xlx.majiang.provider.GitHubProvider;
 import com.xlx.majiang.service.UserService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.mail.EmailException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ import java.util.UUID;
  * @author xielx on  2019/6/21
  * To change this template use File | Settings | Editor | File and Code Templates.
  */
+@Slf4j
 @Controller
 public class AuthorizeController {
 
@@ -59,7 +61,7 @@ public class AuthorizeController {
    * @param code
    * @param state
    * @param response
-   * @return
+   * @return sr
    */
   @GetMapping("/callback")
   public String callback(@RequestParam(name = "code") String code,
@@ -101,8 +103,7 @@ public class AuthorizeController {
   @ResponseBody
   @PostMapping("/getCode")
   public ResultDTO getEmailCode(@RequestParam(name = "emailName") String emailName, HttpServletRequest request){
-    System.out.println("邮箱:" + emailName);
-
+    log.info("收件人邮箱:[{}]",emailName);
 
     //生成随机验证码
     String code = EmailUtils.getRandomNumber();
@@ -115,7 +116,7 @@ public class AuthorizeController {
     HttpSession session = request.getSession();
     session.setAttribute(Constants.EMAIL_CODE,code);
     session.setAttribute("start",System.currentTimeMillis());
-    session.setMaxInactiveInterval(60);
+    session.setMaxInactiveInterval(120);//unit/second
     return ResultDTO.okOf();
   }
 
@@ -139,7 +140,8 @@ public class AuthorizeController {
     long start = (long) request.getSession().getAttribute("start");
 
     long result = System.currentTimeMillis() - start;
-    if (result > 60000 || !emailCode.equalsIgnoreCase(code)){
+    //2min内有效
+    if (result >= 120000 || !emailCode.equalsIgnoreCase(code)){
       return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_CODE_IS_NOT_AVAILABLE);
     }
 
@@ -158,7 +160,6 @@ public class AuthorizeController {
   @GetMapping("/logout")
   public String logout(HttpServletRequest request,HttpServletResponse response){
    // request.getSession().invalidate();
-    request.getSession().removeAttribute(Constants.USER_SESSION);
     request.getSession().removeAttribute(Constants.USER_SESSION);
     Cookie cookie = new Cookie("token",null);
     cookie.setMaxAge(0);

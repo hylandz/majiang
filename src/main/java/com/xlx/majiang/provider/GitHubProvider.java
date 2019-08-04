@@ -16,16 +16,16 @@ import java.io.IOException;
 @Component
 public class GitHubProvider {
 
-  /*
+  /**
    * 获取用于得到github用户信息的token
    * @param accessTokenDTO
-   * @return
+   * @return str
    */
-  public String getAccessToken(AccessTokenDTO accessTokenDTO) {
+  public static String getAccessToken(AccessTokenDTO accessTokenDTO) {
     MediaType mediaType = MediaType.get("application/json; charset=utf-8");
 
     OkHttpClient client = new OkHttpClient();
-
+    //POST
     RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));
     Request request = new Request.Builder()
             .url("https://github.com/login/oauth/access_token")
@@ -47,8 +47,9 @@ public class GitHubProvider {
    * @param accessToken 获取的token
    * @return
    */
-  public GitHubUser getGitHubUser(String accessToken) {
+  public static GitHubUser getGitHubUser(String accessToken) {
     OkHttpClient client = new OkHttpClient();
+    //GET
     Request request = new Request.Builder()
             .url("https://api.github.com/user?access_token=" + accessToken)
             .build();

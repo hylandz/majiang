@@ -19,8 +19,8 @@ public class AccessTokenDTO {
    * clientId,clientSecret
    *
    **/
-  private String client_id; // githu客户端id
-  private String client_secret; //githu客户端secret
+  private String client_id; // github客户端id
+  private String client_secret; //github客户端secret
   private String code; // 返回时github的返回值
   private String redirect_uri; //授权后的跳转的url
   private String state; // 随机字符串

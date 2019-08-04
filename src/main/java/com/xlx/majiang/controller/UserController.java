@@ -6,6 +6,8 @@ import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.model.User;
 import com.xlx.majiang.service.NotificationService;
 import com.xlx.majiang.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class UserController {
 
+  private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
   @Resource
   private UserService userService;
@@ -70,12 +73,8 @@ public class UserController {
                            HttpServletResponse response){
 
 
-    System.out.println("接收参数:" +username +","+ password + "," + captcha + "," + rememberMe);
+    logger.info("接收参数[:{},{},{}" ,username +","+ password + "," + captcha + "," + rememberMe);
     //检验参数
-    if (captcha == null || !"jetb".equalsIgnoreCase(captcha)) {
-      //model.addAttribute("error", "验证码错误");
-      return ResultDTO.errorOf(CustomizeErrorCodeEnum.CAPTCHA_WRONG);
-    }
     if (username == null || username == "") {
       //model.addAttribute("error", "用户名不能为空");
       return ResultDTO.errorOf(CustomizeErrorCodeEnum.ACCOUNT_IS_NULL);
@@ -85,6 +84,10 @@ public class UserController {
       return ResultDTO.errorOf(CustomizeErrorCodeEnum.CREDENTIALS_IS_NULL);
     }
 
+    if (captcha == null || !"jetb".equalsIgnoreCase(captcha)) {
+      //model.addAttribute("error", "验证码错误");
+      return ResultDTO.errorOf(CustomizeErrorCodeEnum.CAPTCHA_WRONG);
+    }
 
     User user =userService.findUserByPwd(password);
     System.out.println(user);

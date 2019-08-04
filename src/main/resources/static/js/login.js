@@ -13,20 +13,22 @@ $(function(){
     remember = $("#rem");
     captchaCode = $('#verifyCode');
 
-    username.on("focus",function () {
+    username.on("click",function () {
             layer.tips('用户名为您登录的账号','#username');
     }).on("blur",function () {
         if (username.val() == null ||username.val().length == 0){
             layer.tips('用户名不能为空','#username');
+            this.focus();
         }
     });
 
 
-    pwd.on("focus",function () {
+    pwd.on("click",function () {
         layer.tips('数字和字母组合,至少6位数','#password');
     }).on("blur",function () {
         if (pwd.val() == null ||pwd.val().length <= 5){
             layer.tips('密码格式不正确','#password');
+            this.focus();
         }
     });
 
@@ -35,6 +37,7 @@ $(function(){
     captchaCode.on("blur",function () {
         if (captchaCode.val() == null ||(captchaCode.val()).length == 0){
             layer.tips('验证码不为空','#verifyCode',{tips:2});
+            this.focus();
         }
     });
 

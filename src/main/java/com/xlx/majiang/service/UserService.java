@@ -16,8 +16,21 @@ import java.util.List;
 @Service
 public class UserService {
 
+
   @Resource
   private UserMapper userMapper;
+
+  public static void main(String[] args){
+    Object o=new Object(){
+      //重写了equals(),不管参数是什么，都是返回true
+      public boolean equals(Object obj){
+        return true;
+      }
+    };
+    System.out.println(o.equals("Fred"));
+  }
+
+
 
   /**
    * 插入:
@@ -28,6 +41,7 @@ public class UserService {
    * @return boolean
    */
   public boolean createOrUpdate(User user){
+
     UserExample userExample = new UserExample();
     // 加入查询条件accountId
     userExample.createCriteria().andAccountIdEqualTo(user.getAccountId());

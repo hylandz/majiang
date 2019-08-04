@@ -1,5 +1,6 @@
 package com.xlx.majiang.Util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
@@ -12,6 +13,7 @@ import java.util.Random;
  *
  * @author xielx on 2019/6/26
  */
+@Slf4j
 public class EmailUtils {
 
   /**
@@ -71,10 +73,10 @@ public class EmailUtils {
     //邮件主题
     email.setSubject("密码重置:");
     //邮件内容
-    email.setMsg("尊敬的用户:您好!\n 您的验证码为:" + verifyCode + "\n" + "(有效期为一分钟)");
+    email.setMsg("尊敬的用户:您好!\n 您的验证码为:" + verifyCode + "\n" + "(有效期为2分钟)");
     email.send();
     long end = System.currentTimeMillis();
-    System.out.println("耗时=" + (end-begin));
+    log.info("发送邮件耗时:[{}]" + (end - begin));
 
   }
 
