@@ -11,7 +11,7 @@ import lombok.Data;
  */
 @Data
 @AllArgsConstructor
-public class AccessTokenDTO {
+public class AccessTokenDTO2 {
 
   /**
    * 参数书写格式必须符合GitHub认证要求,
@@ -20,13 +20,13 @@ public class AccessTokenDTO {
    *
    **/
   //码云
-  //private static final String grant_type="authorization_code";
+  private String grant_type;
 
-  private String client_id; // github客户端id
-  private String client_secret; //github客户端secret
   private String code; // 返回时github的返回值
+  private String client_id; // github客户端id
   private String redirect_uri; //授权后的跳转的url
-  private String state; // 随机字符串
+  private String client_secret; //github客户端secret
+  //private String state; // 随机字符串
 
 
 

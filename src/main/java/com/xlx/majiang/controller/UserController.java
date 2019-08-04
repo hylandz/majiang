@@ -1,17 +1,18 @@
 package com.xlx.majiang.controller;
 
 import com.xlx.majiang.cache.Constants;
+import com.xlx.majiang.dto.LoginDTO;
 import com.xlx.majiang.dto.ResultDTO;
 import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.model.User;
 import com.xlx.majiang.service.NotificationService;
 import com.xlx.majiang.service.UserService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -46,7 +47,6 @@ public class UserController {
 
   /**
    * 跳转忘记密码页面
-   * @returnc .
    */
   @GetMapping("/forgetPwd")
   public String forgetPassword(){
@@ -55,45 +55,34 @@ public class UserController {
 
   /**
    * 登录验证
-   * @param username 用户名
-   * @param password 密码
-   * @param captcha 验证码
-   * @param rememberMe 记住我
    * @param request req
    * @param response res
    * @return dto
    */
   @ResponseBody
   @PostMapping("/login")
-  public ResultDTO doLogin(@RequestParam(name = "username") String username,
-                           @RequestParam(name = "password") String password,
-                           @RequestParam(name = "captcha",required = false) String captcha,
-                           @RequestParam(name="rememberMe") boolean rememberMe,
-                           HttpServletRequest request,
-                           HttpServletResponse response){
+  public ResultDTO doLogin(LoginDTO loginDTO, HttpServletRequest request, HttpServletResponse response){
 
 
-    logger.info("接收参数[:{},{},{}" ,username +","+ password + "," + captcha + "," + rememberMe);
+    logger.info("接收参数:[{}]",loginDTO);
     //检验参数
-    if (username == null || username == "") {
+    if (loginDTO.getUsername() == null) {
       //model.addAttribute("error", "用户名不能为空");
       return ResultDTO.errorOf(CustomizeErrorCodeEnum.ACCOUNT_IS_NULL);
     }
-    if (password == null || password == "") {
+    if (StringUtils.isEmpty(loginDTO.getPassword())) {
       //model.addAttribute("error", "密码不能为空");
       return ResultDTO.errorOf(CustomizeErrorCodeEnum.CREDENTIALS_IS_NULL);
     }
 
-    if (captcha == null || !"jetb".equalsIgnoreCase(captcha)) {
+    if (loginDTO.getCaptcha() == null || !"jetb".equalsIgnoreCase(loginDTO.getCaptcha())) {
       //model.addAttribute("error", "验证码错误");
       return ResultDTO.errorOf(CustomizeErrorCodeEnum.CAPTCHA_WRONG);
     }
 
-    User user =userService.findUserByPwd(password);
-    System.out.println(user);
-    System.out.println("===========记住我" + rememberMe);
+    User user =userService.findUserByPwd(loginDTO.getUsername());
     if (user != null){
-      if(rememberMe){
+      if(loginDTO.getRememberMe()){
         //记住我
         Cookie cookie = new Cookie("token", user.getToken());
         cookie.setMaxAge(7*24*60*60);

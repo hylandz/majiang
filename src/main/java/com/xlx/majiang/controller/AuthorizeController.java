@@ -12,7 +12,6 @@ import com.xlx.majiang.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.mail.EmailException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,20 +47,22 @@ public class AuthorizeController {
   private String fromEmail;
   @Value("${email.authorized.code}")
   private String authCode;
+
   @Resource
   private GitHubProvider gitHubProvider;
 
-  @Autowired
+  @Resource
   private UserService userService;
+
 
 
 
   /**
    *  github认证后,获取github用户信息
-   * @param code
-   * @param state
-   * @param response
-   * @return sr
+   * @param code .
+   * @param state .
+   * @param response .
+   * @return str
    */
   @GetMapping("/callback")
   public String callback(@RequestParam(name = "code") String code,
@@ -93,6 +94,12 @@ public class AuthorizeController {
       return "redirect:/";
     }
   }
+
+
+
+
+
+
 
   /**
    * 获取验证码
@@ -153,8 +160,8 @@ public class AuthorizeController {
 
   /**
    * 注销
-   * @param request
-   * @param response
+   * @param request .
+   * @param response .
    * @return .
    */
   @GetMapping("/logout")
