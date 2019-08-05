@@ -6,7 +6,7 @@ import com.xlx.majiang.exception.CustomizeException;
 import com.xlx.majiang.model.User;
 import com.xlx.majiang.provider.GiteeProvider;
 import com.xlx.majiang.service.UserService;
-import com.xlx.majiang.Util.HttpPrintUtil;
+import com.xlx.majiang.util.HttpPrintUtil;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Value;
