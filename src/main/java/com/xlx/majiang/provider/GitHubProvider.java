@@ -50,10 +50,10 @@ public class GitHubProvider {
     }
   }
 
-  /*
+  /**
    * 获取github用户信息
    * @param accessToken 获取的token
-   * @return
+   * @return .
    */
   public  GitHubUser getGitHubUser(String accessToken) {
     OkHttpClient client = new OkHttpClient();

@@ -35,6 +35,7 @@ public class CustomizeExceptionHandler {
         resultDTO = ResultDTO.errorOf(CustomizeErrorCodeEnum.SYS_ERROR);
       }
 
+
       //设置响应体
       try {
         response.setContentType("application/json");
@@ -49,11 +50,7 @@ public class CustomizeExceptionHandler {
       return null;
 
     } else { //
-      if (t instanceof CustomizeException) {
-        model.addAttribute("message", t.getMessage());
-      } else {
-        model.addAttribute("message", CustomizeErrorCodeEnum.SYS_ERROR.getMessage());
-      }
+      model.addAttribute("message", t.getMessage());
       return new ModelAndView("error");
     }
 

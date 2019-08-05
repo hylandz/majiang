@@ -20,17 +20,6 @@ public class UserService {
   @Resource
   private UserMapper userMapper;
 
-  public static void main(String[] args){
-    Object o=new Object(){
-      //重写了equals(),不管参数是什么，都是返回true
-      public boolean equals(Object obj){
-        return true;
-      }
-    };
-    System.out.println(o.equals("Fred"));
-  }
-
-
 
   /**
    * 插入:

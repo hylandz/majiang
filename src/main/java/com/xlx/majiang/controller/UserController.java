@@ -105,4 +105,20 @@ public class UserController {
 
   }
 
+  /**
+   * 注销
+   * @param request .
+   * @param response .
+   * @return .
+   */
+  @GetMapping("/logout")
+  public String logout(HttpServletRequest request,HttpServletResponse response){
+    // request.getSession().invalidate();
+    request.getSession().removeAttribute(Constants.USER_SESSION);
+    Cookie cookie = new Cookie("token",null);
+    cookie.setMaxAge(0);
+    response.addCookie(cookie);
+    return "redirect:/";
+  }
+
 }
