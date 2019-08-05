@@ -174,6 +174,6 @@ gmt_modified|	bigint|	修改时间,Long
 </tr>
 <tr>
   <td><img src="./display/09.png" title="图片上传"></td>
-  <td><img src="./display/10.png" title="文件结构"></td>
+  <td><img src="./display/10.png" title="GithubOAuth2"></td>
 </tr>
 </table>
