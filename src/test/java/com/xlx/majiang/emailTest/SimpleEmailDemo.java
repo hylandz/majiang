@@ -1,6 +1,6 @@
 package com.xlx.majiang.emailTest;
 
-import com.xlx.majiang.util.EmailUtils;
+import com.xlx.majiang.common.util.EmailUtils;
 
 /**
  * 简单邮件

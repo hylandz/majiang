@@ -2453,7 +2453,7 @@
   // contain multiple lines when collapsed ranges are present.)
   function mapFromLineView(lineView, line, lineN) {
     if (lineView.line == line)
-      return {map: lineView.measure.map, cache: lineView.measure.cache};
+      return {map: lineView.measure.map, cache: com.xlx.majiang.common.cache};
     for (var i = 0; i < lineView.rest.length; i++)
       if (lineView.rest[i] == line)
         return {map: lineView.measure.maps[i], cache: lineView.measure.caches[i]};
@@ -2518,8 +2518,8 @@
   function measureCharPrepared(cm, prepared, ch, bias, varHeight) {
     if (prepared.before) ch = -1;
     var key = ch + (bias || ""), found;
-    if (prepared.cache.hasOwnProperty(key)) {
-      found = prepared.cache[key];
+    if (com.xlx.majiang.common.cache.hasOwnProperty(key)) {
+      found = com.xlx.majiang.common.cache[key];
     } else {
       if (!prepared.rect)
         prepared.rect = prepared.view.text.getBoundingClientRect();
@@ -2528,7 +2528,7 @@
         prepared.hasHeights = true;
       }
       found = measureCharInner(cm, prepared, ch, bias);
-      if (!found.bogus) prepared.cache[key] = found;
+      if (!found.bogus) com.xlx.majiang.common.cache[key] = found;
     }
     return {left: found.left, right: found.right,
             top: varHeight ? found.rtop : found.top,

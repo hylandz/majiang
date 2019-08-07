@@ -1,4 +1,4 @@
-package com.xlx.majiang.cache;
+package com.xlx.majiang.common.cache;
 
 /**
  * 常量

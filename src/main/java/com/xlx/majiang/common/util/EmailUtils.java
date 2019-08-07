@@ -1,4 +1,4 @@
-package com.xlx.majiang.util;
+package com.xlx.majiang.common.util;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.mail.DefaultAuthenticator;

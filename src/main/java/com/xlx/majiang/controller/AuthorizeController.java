@@ -1,7 +1,7 @@
 package com.xlx.majiang.controller;
 
-import com.xlx.majiang.util.EmailUtils;
-import com.xlx.majiang.cache.Constants;
+import com.xlx.majiang.common.util.EmailUtils;
+import com.xlx.majiang.common.cache.Constants;
 import com.xlx.majiang.dto.AccessTokenDTO;
 import com.xlx.majiang.dto.GitHubUser;
 import com.xlx.majiang.dto.ResultDTO;

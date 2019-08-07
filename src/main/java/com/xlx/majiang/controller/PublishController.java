@@ -1,14 +1,13 @@
 package com.xlx.majiang.controller;
 
-import com.xlx.majiang.cache.Constants;
-import com.xlx.majiang.cache.TagCache;
+import com.xlx.majiang.common.cache.Constants;
+import com.xlx.majiang.common.cache.TagCache;
 import com.xlx.majiang.dto.QuestionDTO;
 import com.xlx.majiang.model.Question;
 import com.xlx.majiang.model.User;
 import com.xlx.majiang.service.QuestionService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

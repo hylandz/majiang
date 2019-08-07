@@ -1,4 +1,4 @@
-package com.xlx.majiang.cache;
+package com.xlx.majiang.common.cache;
 
 import com.xlx.majiang.dto.TagDTO;
 import org.apache.commons.lang3.StringUtils;

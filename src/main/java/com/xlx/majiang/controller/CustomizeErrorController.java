@@ -1,6 +1,6 @@
 package com.xlx.majiang.controller;
 
-import com.xlx.majiang.cache.Constants;
+import com.xlx.majiang.common.cache.Constants;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;

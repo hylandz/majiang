@@ -1,4 +1,4 @@
-package com.xlx.majiang.advice;
+package com.xlx.majiang.common.advice;
 
 import com.alibaba.fastjson.JSON;
 import com.xlx.majiang.dto.ResultDTO;

@@ -1,6 +1,6 @@
-package com.xlx.majiang.interceptor;
+package com.xlx.majiang.common.interceptor;
 
-import com.xlx.majiang.cache.Constants;
+import com.xlx.majiang.common.cache.Constants;
 import com.xlx.majiang.mapper.UserMapper;
 import com.xlx.majiang.model.User;
 import com.xlx.majiang.model.UserExample;

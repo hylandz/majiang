@@ -1,6 +1,6 @@
 package com.xlx.majiang.controller;
 
-import com.xlx.majiang.cache.Constants;
+import com.xlx.majiang.common.cache.Constants;
 import com.xlx.majiang.dto.LoginDTO;
 import com.xlx.majiang.dto.ResultDTO;
 import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
