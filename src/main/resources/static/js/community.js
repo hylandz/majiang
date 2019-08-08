@@ -154,6 +154,6 @@ function selectTag(e) {
 }
 
 
-function upVote() {
+function upVote(obj) {
 
 }

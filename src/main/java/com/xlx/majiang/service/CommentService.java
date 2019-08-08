@@ -58,12 +58,12 @@ public class CommentService {
    */
   @Transactional
   public void insert (Comment comment, User user){
-    //处理该评论的问题不存在情况
+    //该评论的问题不存在情况
     if (comment.getParentId() == null || comment.getParentId() == 0){
       throw  new CustomizeException(CustomizeErrorCodeEnum.TARGET_PARAM_NOT_FOUND);
     }
 
-    // 处理评论/回复类型不存在情况
+    // 评论/回复类型不存在情况
     if (comment.getType() == null || !CommentTypeEnum.isExists(comment.getType())){
       throw  new CustomizeException(CustomizeErrorCodeEnum.TYPE_PARAM_WRONG);
     }
@@ -155,9 +155,8 @@ public class CommentService {
     List<User> userList = userMapper.selectByExample(userExample);
     Map<Long,User> userMap = userList.stream().collect(Collectors.toMap(user ->user.getId(), user -> user));
 
-    /*
-     * CommentDTO = Comment对象(Comment对象集) + 对应的User对象(Comment对象集里commentator(userId))
-     */
+    /**CommentDTO = Comment对象(Comment对象集) + 对应的User对象(Comment对象集里commentator(userId))*/
+
 
     List<CommentDTO> commentDTOList = commentList.stream().map(comment -> {
       CommentDTO commentDTO = new CommentDTO();
@@ -191,6 +190,7 @@ public class CommentService {
   private void createNotify(Comment comment, Long receiver, String notifierName, String outerTitle, NotificationTypeEnum notificationType, Long outerId) {
     Notification notification = new Notification();
 
+    //创建时间
     notification.setGmtCreate(System.currentTimeMillis());
     //设置通知类型,回复了评论/回复了问题
     notification.setType(notificationType.getType());
@@ -200,9 +200,9 @@ public class CommentService {
     notification.setNotifier(comment.getCommentator());
     //通知状态首次创建都是未读0
     notification.setStatus(NotificationStatusEnum.UNREAD.getStatus());
-    //通知接收者(评论的被回复者)
+    //通知接收者(被评论方)
     notification.setReceiver(receiver);
-    //通知发送者(评论的回复者)
+    //通知发送者(评论方)
     notification.setNotifierName(notifierName);
     //问题的标题
     notification.setOuterTitle(outerTitle);

@@ -34,7 +34,7 @@ import java.util.UUID;
  */
 @Slf4j
 @Controller
-public class AuthorizeController {
+public class GithubController {
 
   @Value("${github.client.id}")
   private String clientId;

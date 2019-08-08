@@ -145,7 +145,7 @@ public class QuestionService {
   }
 
   /**
-   * 查询相关问题
+   * 右侧页面相关问题的显示
    * 思路:
    * 当点击查看某个具体问题时,如Q1"为什么离职?"
    * 以该问题的dto作参,使用该dto的id,tag查询
@@ -159,12 +159,13 @@ public class QuestionService {
       return new ArrayList<>();
     }
 
-    //切割 如 a,b,c,d
+    //将字符标签切割成数组,以逗号(,)切割
     String[] tagArray = StringUtils.split(queryDTO.getTag(), ",");
-    //将参数转换为sql查询的参数(正则) 如 a|b|c|d,
+    //数组转变成指定格式的字符
     String regex = Arrays.stream(tagArray).collect(Collectors.joining("|"));
     Question question = new Question();
     question.setId(queryDTO.getId());
+    //将参数转换为sql查询的参数(正则) 如 a|b|c|d,
     question.setTag(regex);
     List<Question> questionList = questionExtraMapper.selectRelated(question);
 
