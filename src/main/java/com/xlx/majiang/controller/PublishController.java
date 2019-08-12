@@ -1,7 +1,7 @@
 package com.xlx.majiang.controller;
 
-import com.xlx.majiang.common.cache.Constants;
-import com.xlx.majiang.common.cache.TagCache;
+import com.xlx.majiang.common.constant.Constants;
+import com.xlx.majiang.tag.TagMenu;
 import com.xlx.majiang.dto.QuestionDTO;
 import com.xlx.majiang.model.Question;
 import com.xlx.majiang.model.User;
@@ -36,7 +36,7 @@ public class PublishController {
    */
   @GetMapping("/publish")
   public String publish(Model model){
-    model.addAttribute("tags", TagCache.list());
+    model.addAttribute("tags", TagMenu.list());
     return "publish";
   }
 
@@ -55,7 +55,7 @@ public class PublishController {
     model.addAttribute("tag", questionDTO.getTag());
     model.addAttribute("id", questionDTO.getId());
     model.addAttribute("edit", "编辑");//改变按钮名称
-    model.addAttribute("tags", TagCache.list());
+    model.addAttribute("tags", TagMenu.list());
     return "publish";
   }
 
@@ -85,7 +85,7 @@ public class PublishController {
     model.addAttribute("title", title);
     model.addAttribute("description", description);
     model.addAttribute("tag", tag);
-    model.addAttribute("tags", TagCache.list());
+    model.addAttribute("tags", TagMenu.list());
 
     //校验问题发布参数
     if (title == null || title == "") {
@@ -102,7 +102,7 @@ public class PublishController {
     }
 
     //校验tag
-    String invalid = TagCache.filterInvalid(tag);
+    String invalid = TagMenu.filterInvalid(tag);
     if (StringUtils.isNotBlank(invalid)){
       model.addAttribute("error","非法输入标签:" + invalid);
       return "publish";

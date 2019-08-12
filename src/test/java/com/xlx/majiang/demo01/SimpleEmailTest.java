@@ -1,4 +1,4 @@
-package com.xlx.majiang.emailTest;
+package com.xlx.majiang.demo01;
 
 import com.xlx.majiang.common.util.EmailUtils;
 
@@ -7,7 +7,7 @@ import com.xlx.majiang.common.util.EmailUtils;
  *
  * @author xielx on 2019/6/27
  */
-public class SimpleEmailDemo {
+public class SimpleEmailTest {
 
 
   public static void main(String[] args) {

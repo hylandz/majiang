@@ -1,4 +1,4 @@
-package com.xlx.majiang.common.tag;
+package com.xlx.majiang.tag;
 
 import com.xlx.majiang.dto.HotTagDTO;
 import lombok.Data;

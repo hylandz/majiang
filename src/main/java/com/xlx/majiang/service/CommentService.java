@@ -1,9 +1,9 @@
 package com.xlx.majiang.service;
 
 import com.xlx.majiang.dto.CommentDTO;
-import com.xlx.majiang.enums.CommentTypeEnum;
-import com.xlx.majiang.enums.NotificationStatusEnum;
-import com.xlx.majiang.enums.NotificationTypeEnum;
+import com.xlx.majiang.common.enums.CommentTypeEnum;
+import com.xlx.majiang.common.enums.NotificationStatusEnum;
+import com.xlx.majiang.common.enums.NotificationTypeEnum;
 import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.exception.CustomizeException;
 import com.xlx.majiang.mapper.*;
@@ -188,6 +188,10 @@ public class CommentService {
    * @param outerId 问题id
    */
   private void createNotify(Comment comment, Long receiver, String notifierName, String outerTitle, NotificationTypeEnum notificationType, Long outerId) {
+   if (receiver == comment.getCommentator()){
+     return;
+   }
+
     Notification notification = new Notification();
 
     //创建时间

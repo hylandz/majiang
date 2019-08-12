@@ -2449,11 +2449,11 @@
   }
 
   // Find a line map (mapping character offsets to text nodes) and a
-  // measurement cache for the given line number. (A line view might
+  // measurement tag for the given line number. (A line view might
   // contain multiple lines when collapsed ranges are present.)
   function mapFromLineView(lineView, line, lineN) {
     if (lineView.line == line)
-      return {map: lineView.measure.map, cache: com.xlx.majiang.common.cache};
+      return {map: lineView.measure.map, cache: com.xlx.majiang.common.tag};
     for (var i = 0; i < lineView.rest.length; i++)
       if (lineView.rest[i] == line)
         return {map: lineView.measure.maps[i], cache: lineView.measure.caches[i]};
@@ -2514,12 +2514,12 @@
   }
 
   // Given a prepared measurement object, measures the position of an
-  // actual character (or fetches it from the cache).
+  // actual character (or fetches it from the tag).
   function measureCharPrepared(cm, prepared, ch, bias, varHeight) {
     if (prepared.before) ch = -1;
     var key = ch + (bias || ""), found;
-    if (com.xlx.majiang.common.cache.hasOwnProperty(key)) {
-      found = com.xlx.majiang.common.cache[key];
+    if (com.xlx.majiang.common.tag.hasOwnProperty(key)) {
+      found = com.xlx.majiang.common.tag[key];
     } else {
       if (!prepared.rect)
         prepared.rect = prepared.view.text.getBoundingClientRect();
@@ -2528,7 +2528,7 @@
         prepared.hasHeights = true;
       }
       found = measureCharInner(cm, prepared, ch, bias);
-      if (!found.bogus) com.xlx.majiang.common.cache[key] = found;
+      if (!found.bogus) com.xlx.majiang.common.tag[key] = found;
     }
     return {left: found.left, right: found.right,
             top: varHeight ? found.rtop : found.top,
@@ -6738,7 +6738,7 @@
       if (builder.map.length == 0)
         builder.map.push(0, 0, builder.content.appendChild(zeroWidthElement(cm.display.measure)));
 
-      // Store the map and a cache object for the current logical line
+      // Store the map and a tag object for the current logical line
       if (i == 0) {
         lineView.measure.map = builder.map;
         lineView.measure.cache = {};
@@ -7623,7 +7623,7 @@
     return h;
   }
 
-  // Get the bidi ordering for the given line (and cache it). Returns
+  // Get the bidi ordering for the given line (and tag it). Returns
   // false for lines that are fully left-to-right, and an array of
   // BidiSpan objects otherwise.
   function getOrder(line) {

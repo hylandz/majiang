@@ -367,4 +367,26 @@
       order by ${orderByClause}
     </if>
   </select>
+  <!--带条件统计记录数-->
+  <select id="selectCount" parameterType="com.xlx.majiang.dto.QuestionQueryDTO" resultType="java.lang.Integer">
+    select count(1) from QUESTION
+    <where>
+      <if test="search != null and search != ''">
+        TITLE regexp #{search}
+      </if>
+    </where>
+  </select>
+
+  <!--带条件查询记录-->
+  <select id="selectBySearch" parameterType="com.xlx.majiang.dto.QuestionQueryDTO" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from QUESTION
+      <where>
+        <if test="search != null and search != ''">
+          title regexp #{search}
+        </if>
+      </where>
+    order by gmt_create desc  limit #{offset,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+  </select>
 </mapper>

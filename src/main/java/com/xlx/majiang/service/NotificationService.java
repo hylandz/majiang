@@ -2,8 +2,8 @@ package com.xlx.majiang.service;
 
 import com.xlx.majiang.dto.NotificationDTO;
 import com.xlx.majiang.dto.PaginationDTO;
-import com.xlx.majiang.enums.NotificationStatusEnum;
-import com.xlx.majiang.enums.NotificationTypeEnum;
+import com.xlx.majiang.common.enums.NotificationStatusEnum;
+import com.xlx.majiang.common.enums.NotificationTypeEnum;
 import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.exception.CustomizeException;
 import com.xlx.majiang.mapper.NotificationMapper;

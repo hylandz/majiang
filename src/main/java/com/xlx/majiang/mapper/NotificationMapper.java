@@ -1,4 +1,4 @@
-package com.xlx.majiang.demo01.mapper;
+package com.xlx.majiang.mapper;
 
 import com.xlx.majiang.model.Notification;
 import com.xlx.majiang.model.NotificationExample;

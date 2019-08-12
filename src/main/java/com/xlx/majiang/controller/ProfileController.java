@@ -1,6 +1,6 @@
 package com.xlx.majiang.controller;
 
-import com.xlx.majiang.common.cache.Constants;
+import com.xlx.majiang.common.constant.Constants;
 import com.xlx.majiang.dto.PaginationDTO;
 import com.xlx.majiang.model.Question;
 import com.xlx.majiang.model.User;
@@ -66,7 +66,7 @@ public class ProfileController {
       model.addAttribute("pagination",paginationDTO);
     }
 
-    return "profile";
+    return "notification";
 
   }
 }

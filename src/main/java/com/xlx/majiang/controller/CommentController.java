@@ -1,10 +1,10 @@
 package com.xlx.majiang.controller;
 
-import com.xlx.majiang.common.cache.Constants;
+import com.xlx.majiang.common.constant.Constants;
 import com.xlx.majiang.dto.CommentCreateDTO;
 import com.xlx.majiang.dto.CommentDTO;
 import com.xlx.majiang.dto.ResultDTO;
-import com.xlx.majiang.enums.CommentTypeEnum;
+import com.xlx.majiang.common.enums.CommentTypeEnum;
 import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.model.Comment;
 import com.xlx.majiang.model.User;

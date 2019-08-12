@@ -2,7 +2,7 @@ package com.xlx.majiang.controller;
 
 import com.xlx.majiang.dto.CommentDTO;
 import com.xlx.majiang.dto.QuestionDTO;
-import com.xlx.majiang.enums.CommentTypeEnum;
+import com.xlx.majiang.common.enums.CommentTypeEnum;
 import com.xlx.majiang.service.CommentService;
 import com.xlx.majiang.service.QuestionService;
 import org.springframework.stereotype.Controller;

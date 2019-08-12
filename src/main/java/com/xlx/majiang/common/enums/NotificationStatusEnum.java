@@ -1,4 +1,4 @@
-package com.xlx.majiang.demo01.enums;
+package com.xlx.majiang.common.enums;
 
 /**
  * 消息状态枚举

@@ -7,10 +7,9 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="/css/community.css">
     <link rel="stylesheet" type="text/css" href="/css/editormd.min.css">
-
     <script src="/js/jquery-3.4.1.min.js" type="application/javascript"></script>
     <script src="/js/bootstrap.min.js" type="application/javascript"></script>
-    <script src="/js/community.js" type="application/javascript"></script>
+
     <script src="/js/editormd.min.js" type="application/javascript"></script>
     <script src="/js/lib/marked.min.js" type="application/javascript"></script>
     <script src="/js/lib/prettify.min.js" type="application/javascript"></script>
@@ -40,9 +39,10 @@
                     <textarea name="description" id="description" th:text="${description}" class="form-control"
                               style="display:none;"
                               cols="30"
-                              rows="10"></textarea>
+                              rows="10">
+                    </textarea>
                 </div>
-                <script type="text/javascript">
+                <script type="text/javascript" th:inline="javascript">
                     $(function () {
                         var editor = editormd("question-editor", {
                             width: "100%",
@@ -59,6 +59,7 @@
                         });
                     });
                 </script>
+
                 <div class="form-group">
                     <label for="tag">添加标签:</label>
                     <input type="text" class="form-control" th:value="${tag}" id="tag" name="tag"
@@ -118,5 +119,9 @@
         </div>
     </div>
 </div>
+<!--版权页脚-->
+<div th:replace="~{footer :: #copy}"/>
+
+<script src="/js/community.js" type="application/javascript"></script>
 </body>
 </html>

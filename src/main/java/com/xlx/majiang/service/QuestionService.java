@@ -2,6 +2,7 @@ package com.xlx.majiang.service;
 
 import com.xlx.majiang.dto.PaginationDTO;
 import com.xlx.majiang.dto.QuestionDTO;
+import com.xlx.majiang.dto.QuestionQueryDTO;
 import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.exception.CustomizeException;
 import com.xlx.majiang.mapper.QuestionExtraMapper;
@@ -56,6 +57,55 @@ public class QuestionService {
   }
 
   /**
+   * 带条件分页
+   * @param page 当前页
+   * @param size 笔数
+   * @param search 查询条件
+   * @return .
+   */
+  public PaginationDTO<QuestionDTO> list(Integer page, Integer size,String search) {
+
+    PaginationDTO<QuestionDTO> paginationDTO = new PaginationDTO<>();
+    //总记录数
+    int totalCount = questionMapper.selectCount(search);
+    //总页数
+    int totalPage = (totalCount + size - 1) / size;
+
+    //设置当前页
+    if (page < 1) {
+      page = 1;
+    }
+
+    if (page > totalPage) {
+      page = totalPage;
+    }
+
+    //设置分页顺序
+    paginationDTO.setPagination(page,totalPage);
+
+    int offset = (offset = (page - 1) * size) > 0 ? offset : 0;
+
+    QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO(offset,size,search);
+
+
+    //分页数据
+    List<Question> questionList =  questionMapper.selectBySearch(questionQueryDTO);
+
+    //
+    List<QuestionDTO> questionDTOList = new LinkedList<>();
+
+    //
+    initQuestionDTOList(questionList,questionDTOList);
+
+    paginationDTO.setData(questionDTOList);
+    return paginationDTO;
+  }
+
+
+
+
+
+  /**
    * 指定用户的Question分页
    * @param userId 用户id
    * @param page   pageSize
@@ -81,7 +131,7 @@ public class QuestionService {
    * 根据问题的id判断:
    * 1.id==null,是新增操作
    * 2.id!=null,是修操作
-   * @param question
+   * @param question .
    */
   public void createOrUpdate(Question question) {
     if (question.getId() == null) {
@@ -183,7 +233,7 @@ public class QuestionService {
    * 获取热门话题
    * @return .
    */
-  public PaginationDTO<QuestionDTO> getTopQuestion(){
+  public PaginationDTO<QuestionDTO> getHotQuestion(){
     PaginationDTO<QuestionDTO> paginationDTO = new PaginationDTO<>();
     QuestionExample questionExample = new QuestionExample();
     questionExample.setOrderByClause("comment_count desc");
@@ -253,15 +303,26 @@ public class QuestionService {
     LinkedList<QuestionDTO> questionDTOList = new LinkedList<>();
 
     // 设置每个QuestionDTO的User对象
-    for (Question question : questionList) {
+    initQuestionDTOList(questionList,questionDTOList);
+
+    paginationDTO.setData(questionDTOList);
+    return paginationDTO;
+  }
+
+
+  /**
+   * QuestionDTOList实例化
+   * @param list1 Question集合
+   * @param list2 QuestionDTO集合
+   */
+  private  void initQuestionDTOList(List<Question> list1,List<QuestionDTO> list2){
+    for (Question question : list1) {
       User user = userMapper.selectByPrimaryKey(question.getCreator());
       QuestionDTO questionDTO = new QuestionDTO();
       BeanUtils.copyProperties(question, questionDTO);
       questionDTO.setUser(user);
-      questionDTOList.add(questionDTO);
+      list2.add(questionDTO);
     }
 
-    paginationDTO.setData(questionDTOList);
-    return paginationDTO;
   }
 }

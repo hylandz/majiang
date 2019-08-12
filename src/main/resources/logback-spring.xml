@@ -9,7 +9,9 @@
      -->
 
     <!--彩色输出-->
-    <substitutionProperty name="log.pattern" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(---){faint} %clr(%-80.80logger{79}){cyan} %clr(:){faint} %m%n%wEx"/>
+    <substitutionProperty name="log.pattern" value="%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(%5p) %clr(---){faint} %clr(%-80.80logger{50
+
+    }){cyan} %clr(:){faint} %m%n%wEx"/>
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
     <conversionRule conversionWord="wex" converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
     <conversionRule conversionWord="wEx" converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
@@ -31,7 +33,7 @@
     <!--按时间记录日志:info-->
     <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--日志文件名称-->
-        <file>${log.path}/system-info.log</file>
+        <file>${log.path}/info/system-info.log</file>
         <!--设置以时间记录-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--修改日志文件名: 文件名+时间,%i:i为变量-->
@@ -61,7 +63,7 @@
     <!--按时间记录日志:error-->
     <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--日志文件名称-->
-        <file>${log.path}/system-error.log</file>
+        <file>${log.path}/error/system-error.log</file>
         <!--设置以时间记录-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--修改日志文件名: 文件名+时间,%i:i为变量-->

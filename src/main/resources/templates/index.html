@@ -2,8 +2,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>spring-boot学习</title>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="google-site-verification" content="QGf2OqDw91EjWtNE07HoLJi0x0G2rIYylk6jn6JEoEQ" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-89103576-8"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-89103576-8');
+    </script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
     <link rel="stylesheet" type="text/css" href="css/community.css">
     <script src="js/jquery-3.4.1.min.js" type="application/javascript"></script>
@@ -45,6 +55,7 @@
                             th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
                 </div>
             </div>
+            <!--分页-->
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     <li th:if="${pagination.showFirstPage}">
@@ -75,30 +86,24 @@
                 </ul>
             </nav>
         </div>
+        <!--右侧-->
         <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
-            <h3><span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>  热门话题</h3>
-            <hr>
-
-            <div class="media topic" th:each="question : ${topic.data}">
-                <div class="media-right">
-                    <a href="#">
-                        <img class="media-object img-rounded" th:width="28px" th:height="28px"
-                             th:src="${question.user.avatarUrl}" th:alt="no">
-                    </a>
-                </div>
-                <div class="media-body topic-body">
-                    <h4 class="media-heading">
-                        <a th:href="@{'/question/'+ ${question.id}}" th:text="${question.title}"></a>
-                    </h4>
-                    <span th:text="${question.description}" ></span> <br>
-                    <span class="topic-desc"> <span
-                            th:text="${question.viewCount}"></span> 次浏览 • <span
-                            th:text="${#dates.format(question.gmtCreate,'yyyy-MM-dd HH:mm')}"></span></span>
-                </div>
+            <div th:insert="~{advertisement :: side}"></div>
+            <!--相关问题-->
+            <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <h4>热门标签</h4>
+                <ul class="question-related">
+                    <li th:each="tag : ${tags}">
+                        <a th:href="@{/(page=1,search=${search},tag=${tag})}" th:text="${tag}"></a>
+                    </li>
+                </ul>
             </div>
-
         </div>
+
     </div>
 </div>
+<!--版权页脚-->
+<div th:replace="~{footer :: #copyright}"></div>
 </body>
 </html>

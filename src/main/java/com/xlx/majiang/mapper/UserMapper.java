@@ -1,4 +1,4 @@
-package com.xlx.majiang.demo01.mapper;
+package com.xlx.majiang.mapper;
 
 import com.xlx.majiang.model.User;
 import com.xlx.majiang.model.UserExample;

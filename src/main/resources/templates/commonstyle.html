@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="common_head(title)">
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title th:replace="${title}">共同资源片段</title>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/community.css">
 </head>
 <body>
-$END$
+
+
 </body>
 </html>
