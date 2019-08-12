@@ -1,4 +1,4 @@
-package com.xlx.majiang.enums;
+package com.xlx.majiang.demo01.enums;
 
 /**
  * 评论类型枚举:

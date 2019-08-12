@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>视频详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" type="text/css" href="css/community.css">
+    <script src="js/jquery-3.4.1.min.js" type="application/javascript"></script>
+    <script src="js/bootstrap.min.js" type="application/javascript"></script>
+</head>
+<body>
+
+<div th:insert="~{navigation :: nav}"></div>
+<div class="container-fluid main">
+    <div class="row">
+        <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+            <h4>视频选集</h4>
+            <ul class="video-details">
+                <li>
+                    <a href="" >P1 开篇介绍</a>
+                </li>
+                <li>
+                    <a href="" >P2 视频列表页面</a>
+                </li>
+                <li>
+                    <a href="" >P3 视频详情页面</a>
+                </li>
+                <li>
+                    <a href="" >P4 细化详情页面</a>
+                </li>
+                <li>
+                    <a href="" >P5 引入Git开发分支页面</a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 30px">
+                <iframe src="//player.bilibili.com/player.html?aid=50200264&cid=104142392&page=1" scrolling="no" border="0"
+                frameborder="no" framespacing="0" allowfullscreen="true" style="with:100%;min-height: 450px">
+                </iframe>
+            </div>
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"></div>
+        </div>
+    </div>
+</div>
+<!--版权页脚-->
+<div th:replace="~{footer :: #copy}"></div>
+</body>
+</html>

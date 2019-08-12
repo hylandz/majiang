@@ -12,11 +12,11 @@ import java.util.Date;
  * @author xielx on 2019/8/7
  */
 //@Component
-public class ScheduledTasks {
+public class HotTagTasks {
 
-	private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
+	private static final Logger log = LoggerFactory.getLogger(HotTagTasks.class);
 
-	private static final SimpleDateFormat dateFormate = new SimpleDateFormat("HH:mm:ss");
+	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
 	/**
 	 * 上一次开始执行时间点之后5秒再执行
@@ -24,6 +24,6 @@ public class ScheduledTasks {
 	//@Scheduled(fixedRate = 10000)
 	//@Scheduled(cron = "0 0 6,19 * * *")
 	public void reportedCurrentTime(){
-		log.info("The time is now {}",dateFormate.format(new Date()));
+		log.info("The time is now {}",dateFormat.format(new Date()));
 	}
 }

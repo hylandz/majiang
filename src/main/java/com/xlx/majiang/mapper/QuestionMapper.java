@@ -1,13 +1,18 @@
-package com.xlx.majiang.mapper;
+package com.xlx.majiang.demo01.mapper;
 
+import com.xlx.majiang.dto.QuestionQueryDTO;
 import com.xlx.majiang.model.Question;
 import com.xlx.majiang.model.QuestionExample;
-import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 
+import java.util.List;
+
 public interface QuestionMapper {
     long countByExample(QuestionExample example);
+
+    //
+    int selectCount(@Param("search") String search);
 
     int deleteByExample(QuestionExample example);
 
@@ -24,6 +29,9 @@ public interface QuestionMapper {
     List<Question> selectByExampleWithRowbounds(QuestionExample example, RowBounds rowBounds);
 
     List<Question> selectByExample(QuestionExample example);
+
+    //
+    List<Question> selectBySearch(QuestionQueryDTO questionQueryDTO);
 
     Question selectByPrimaryKey(Long id);
 

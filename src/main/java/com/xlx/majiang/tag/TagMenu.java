@@ -1,4 +1,4 @@
-package com.xlx.majiang.common.cache;
+package com.xlx.majiang.common.tag;
 
 import com.xlx.majiang.dto.TagDTO;
 import org.apache.commons.lang3.StringUtils;
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  *
  * @author xielx on 2019/6/24
  */
-public class TagCache {
+public class TagMenu {
 
   /**
    * TagDTO
@@ -22,10 +22,10 @@ public class TagCache {
   public static List<TagDTO> list(){
 
     List<TagDTO>  tagDTOList = new LinkedList<>();
-    TagDTO programer = new TagDTO();
-    programer.setCategoryName("开发语言");
-    programer.setTags(Arrays.asList("javascript", "PHP", "CSS", "HTML", "HTML5", "Java", "Node.js", "Python", "C++", "C", "goLang", "objective-C", "typescript", "shell", "swift", "C#", "sass", "Ruby", "Bash", "less", "Asp.Net", "lua", "Scala", "coffeeScript", "actionScript", "Rust", "erLang", "Perl"));
-    tagDTOList.add(programer);
+    TagDTO programmer = new TagDTO();
+    programmer.setCategoryName("开发语言");
+    programmer.setTags(Arrays.asList("javascript", "PHP", "CSS", "HTML", "HTML5", "Java", "Node.js", "Python", "C++", "C", "goLang", "objective-C", "typescript", "shell", "swift", "C#", "sass", "Ruby", "Bash", "less", "Asp.Net", "lua", "Scala", "coffeeScript", "actionScript", "Rust", "erLang", "Perl"));
+    tagDTOList.add(programmer);
 
 
     TagDTO framework = new TagDTO();
