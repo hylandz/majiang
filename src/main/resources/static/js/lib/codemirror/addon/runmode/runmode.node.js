@@ -117,4 +117,4 @@ exports.runMode = function(string, modespec, callback, options) {
   }
 };
 
-com.xlx.majiang.common.tag[require.resolve("../../lib/codemirror")] = com.xlx.majiang.common.tag[require.resolve("./runmode.node")];
+require.cache[require.resolve("../../lib/codemirror")] = require.cache[require.resolve("./runmode.node")];
