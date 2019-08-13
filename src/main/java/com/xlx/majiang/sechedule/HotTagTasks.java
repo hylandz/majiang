@@ -1,7 +1,7 @@
 package com.xlx.majiang.sechedule;
 
 import com.xlx.majiang.tag.HotTag;
-import com.xlx.majiang.mapper.QuestionMapper;
+import com.xlx.majiang.dao.QuestionMapper;
 import com.xlx.majiang.model.Question;
 import com.xlx.majiang.model.QuestionExample;
 import org.apache.commons.lang3.StringUtils;
@@ -52,11 +52,9 @@ public class HotTagTasks {
 				for (String tag : tagArray){
 					Integer priority = priorityMap.get(tag);
 					if (priority != null){
-						priority = 5 + priority + question.getCommentCount();
-						priorityMap.put(tag,priority);
+						priorityMap.put(tag,5 + priority + question.getCommentCount());
 					}else {
-						priority = 5 + priority;
-						priorityMap.put(tag,priority);
+						priorityMap.put(tag,5 + question.getCommentCount());
 					}
 				}
 			}

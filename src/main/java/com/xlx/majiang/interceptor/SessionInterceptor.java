@@ -1,7 +1,7 @@
 package com.xlx.majiang.interceptor;
 
 import com.xlx.majiang.common.constant.Constants;
-import com.xlx.majiang.mapper.UserMapper;
+import com.xlx.majiang.dao.UserMapper;
 import com.xlx.majiang.model.User;
 import com.xlx.majiang.model.UserExample;
 import com.xlx.majiang.service.NotificationService;

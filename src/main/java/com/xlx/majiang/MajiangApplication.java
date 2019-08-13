@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
-@MapperScan("com.xlx.majiang.mapper")
+@MapperScan("com.xlx.majiang.dao")
 @EnableScheduling
 public class MajiangApplication {
 

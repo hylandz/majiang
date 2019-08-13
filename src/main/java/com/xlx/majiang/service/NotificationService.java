@@ -6,7 +6,7 @@ import com.xlx.majiang.common.enums.NotificationStatusEnum;
 import com.xlx.majiang.common.enums.NotificationTypeEnum;
 import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.exception.CustomizeException;
-import com.xlx.majiang.mapper.NotificationMapper;
+import com.xlx.majiang.dao.NotificationMapper;
 import com.xlx.majiang.model.Notification;
 import com.xlx.majiang.model.NotificationExample;
 import com.xlx.majiang.model.User;

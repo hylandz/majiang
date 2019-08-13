@@ -1,4 +1,4 @@
-package com.xlx.majiang.mapper;
+package com.xlx.majiang.dao;
 
 import com.xlx.majiang.dto.QuestionQueryDTO;
 import com.xlx.majiang.model.Question;
@@ -12,7 +12,7 @@ public interface QuestionMapper {
     long countByExample(QuestionExample example);
 
     //
-    int selectCount(@Param("search") String search);
+    int selectCount(QuestionQueryDTO questionQueryDTO);
 
     int deleteByExample(QuestionExample example);
 

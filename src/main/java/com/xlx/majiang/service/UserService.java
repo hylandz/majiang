@@ -1,6 +1,6 @@
 package com.xlx.majiang.service;
 
-import com.xlx.majiang.mapper.UserMapper;
+import com.xlx.majiang.dao.UserMapper;
 import com.xlx.majiang.model.User;
 import com.xlx.majiang.model.UserExample;
 import org.springframework.stereotype.Service;

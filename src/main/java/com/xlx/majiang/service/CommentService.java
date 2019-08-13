@@ -6,7 +6,7 @@ import com.xlx.majiang.common.enums.NotificationStatusEnum;
 import com.xlx.majiang.common.enums.NotificationTypeEnum;
 import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.exception.CustomizeException;
-import com.xlx.majiang.mapper.*;
+import com.xlx.majiang.dao.*;
 import com.xlx.majiang.model.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;

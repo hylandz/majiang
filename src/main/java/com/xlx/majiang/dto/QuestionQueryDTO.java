@@ -13,11 +13,7 @@ public class QuestionQueryDTO {
 	private Integer offset;
 	private Integer size;
 	private String search;
+	private String tag;
 
 
-	public QuestionQueryDTO(Integer offset, Integer size, String search) {
-		this.offset = offset;
-		this.size = size;
-		this.search = search;
-	}
 }

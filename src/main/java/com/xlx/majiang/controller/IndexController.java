@@ -41,7 +41,8 @@ public class IndexController {
 
     log.info("查询参数:[{}]",search);
     List<String> tagList =  hotTagCache.getHotTagDTOList();
-    PaginationDTO paginationDTO = questionService.list(page, size,search);
+    log.info("热门标签:[{}]",tagList);
+    PaginationDTO paginationDTO = questionService.list(page, size,search,tag);
     PaginationDTO topic = questionService.getHotQuestion();
     model.addAttribute("pagination", paginationDTO);
     model.addAttribute("topic", topic);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xlx.majiang.mapper.QuestionExtraMapper">
+<mapper namespace="com.xlx.majiang.dao.QuestionExtraMapper">
     <resultMap id="BaseResultMap" type="com.xlx.majiang.model.Question">
         <id column="ID" jdbcType="INTEGER" property="id"/>
         <result column="TITLE" jdbcType="VARCHAR" property="title"/>
@@ -40,5 +40,6 @@
                 and tag regexp #{tag}
             </if>
         </where>
+        order by gmt_create desc limit 20
     </select>
 </mapper>

@@ -66,7 +66,7 @@
             targetPackage:接口所在包名
         	targetProject:接口所在项目路径
          -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xlx.majiang.mapper"
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.xlx.majiang.dao"
                              targetProject="src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
