@@ -156,9 +156,9 @@ gmt_modified|	bigint|	修改时间,Long
 + 账户3: 41381774 密码:41381774
 <table>
 <tr>
-  <td><img src="./display/01.png" title="邮箱验证码" ></td>
+  <td><img src="./display/01.png" title="登录" ></td>
 
-  <td><img src="./display/02.png" title="github授权代理"></td>
+  <td><img src="./display/02.png" title="邮箱验证"></td>
 </tr>
 <tr>
   <td><img src="./display/03.png" title="首页"></td>
@@ -166,11 +166,11 @@ gmt_modified|	bigint|	修改时间,Long
 </tr>
 <tr>
   <td><img src="./display/05.png" title="回复问题"></td>
-  <td><img src="./display/06.png" title="查看问题"></td>
+  <td><img src="./display/06.png" title="视频专区"></td>
 </tr>
 <tr>
-  <td><img src="./display/07.png" title="我的问题"></td>
-  <td><img src="./display/08.png" title="用户管理"></td>
+  <td><img src="./display/07.png" title="视频播放"></td>
+  <td><img src="./display/08.png" title="消息通知"></td>
 </tr>
 <tr>
   <td><img src="./display/09.png" title="图片上传"></td>
