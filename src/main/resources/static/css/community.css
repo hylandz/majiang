@@ -1,6 +1,8 @@
+
 body {
     background-color: #efefef;
 }
+
 
 .main {
     background-color: white;
@@ -11,23 +13,8 @@ body {
     float: right;
     margin-bottom: 15px;
 }
-
-.media-object {
-    width: 38px;
-    height: 38px;
-}
-
-.media-body {
-    padding-top: 10px;
-}
-
-a {
-    color: #155FAA;
-}
-
-a:hover {
-    color: #428BCA;
-    text-decoration: none;
+.side {
+    margin: 2px 0;
 }
 
 
@@ -36,20 +23,40 @@ a:hover {
     font-weight: normal;
     color: #999;
 }
-
-
-
-
-.media-heading a {
-    font-size: 14px;
+.nav-avatar img{
+    width: 22px;
+    height: 22px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
 }
-
+.nav-badges{
+    z-index: -1;
+    margin-top: -10px;
+    display: inline-block;
+    min-width: 10px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    background-color: #777;
+    border-radius: 10px;
+}
 .media-object {
-    width: 28px;
-    height: 28px;
-    margin-right: 7px;
+    width: 38px;
+    height: 38px;
 }
 
+.media-body {
+    padding-top: 10px;
+    text-decoration: none;
+}
+.media-heading a{
+    text-decoration: none;
+}
 .topic-body{
     padding-top: 5px;
 }
@@ -144,7 +151,6 @@ a:hover {
 }
 
 .menu .icon {
-
     font-size: 15px;
     cursor: pointer;
 }
@@ -172,7 +178,7 @@ a:hover {
 }
 footer {
     text-align: center;
-    color: #666;;
+    color: #666;
 }
 
 
@@ -184,10 +190,9 @@ footer {
     width: 50%;
     margin: 0px 20px 0px 80px;
 }
-h5{
+.video h5{
     margin-left: 80px;
 }
-
 .video-details{
     line-height: 20px;
     font-size: 12px;
