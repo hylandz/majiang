@@ -1,18 +1,23 @@
 package com.xlx.majiang.controller;
 
+import com.xlx.majiang.common.config.RedisUtil;
 import com.xlx.majiang.common.constant.Constants;
+import com.xlx.majiang.common.util.EmailUtils;
 import com.xlx.majiang.dto.LoginDTO;
 import com.xlx.majiang.dto.ResultDTO;
 import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.model.User;
+import com.xlx.majiang.service.MailService;
 import com.xlx.majiang.service.NotificationService;
 import com.xlx.majiang.service.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -28,13 +33,24 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class UserController {
 
-  private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+  @Value("${email.from}")
+  private String fromEmail;
+  @Value("${email.authorized.code}")
+  private String authCode;
+
+  @Value("${mail.fromMail.addr}")
+  private String from;
 
   @Resource
   private UserService userService;
 
   @Resource
   private NotificationService notificationService;
+
+  @Resource
+  private MailService mailService;
+
+  private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
   /**
    * 跳转登录页面
@@ -106,10 +122,56 @@ public class UserController {
   }
 
   /**
-   * 注销
-   * @param request .
-   * @param response .
+   * 获取验证码
+   * @param emailName 收件人邮箱
+   * @return dto
+   */
+  @ResponseBody
+  @PostMapping("/getCode")
+  public ResultDTO getEmailCode(@RequestParam(name = "emailName") String emailName){
+    logger.info("收件人邮箱:[{}]",emailName);
+
+    //生成随机验证码
+    String code = EmailUtils.getRandomNumber();
+    mailService.sendSimpleMail(from,emailName,code,authCode);
+    RedisUtil.setStringEx(Constants.EMAIL_CODE,code,60L);
+    logger.info("redis的 key----[{}]",RedisUtil.getStringEx(Constants.EMAIL_CODE));
+    return ResultDTO.okOf();
+  }
+
+  /**
+   * 验证码验证
+   * @param emailCode 接收的验证码
    * @return .
+   */
+  @ResponseBody
+  @PostMapping("/emailAuth")
+  public ResultDTO emailAuthorized(@RequestParam("emailCode") String emailCode){
+    logger.info("验证码:[{}]",emailCode);
+    //校验参数
+    if (StringUtils.isEmpty(emailCode)){
+      return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_CODE_IS_NULL);
+    }
+
+    Long ttl = RedisUtil.getStringTTL(Constants.EMAIL_CODE);
+    String code = RedisUtil.getStringEx(Constants.EMAIL_CODE);
+    //失效
+    if (ttl < 0 || code == null){
+      return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_CODE_IS_NOT_AVAILABLE);
+    }
+
+    if (emailCode .equals(code)){
+
+      return ResultDTO.okOf();
+    }
+
+    return null;
+  }
+
+
+
+  /**
+   * 注销
    */
   @GetMapping("/logout")
   public String logout(HttpServletRequest request,HttpServletResponse response){

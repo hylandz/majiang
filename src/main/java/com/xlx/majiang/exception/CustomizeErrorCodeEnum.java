@@ -25,7 +25,7 @@ public enum CustomizeErrorCodeEnum implements  ICustomizeErrorCode{
   EMAIL_IS_NULL(2014,"邮箱名称不能为空"),
   EMAIL_FORMAT_WRONG(2015,"邮箱格式错误"),
   EMAIL_CODE_IS_NULL(2016,"验证码不能为空"),
-  EMAIL_CODE_IS_NOT_AVAILABLE(2017,"验证错误");
+  EMAIL_CODE_IS_NOT_AVAILABLE(2017,"邮箱验证码错误");
 
   private Integer code;
 
