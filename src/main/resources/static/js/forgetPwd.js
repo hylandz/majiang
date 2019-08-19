@@ -2,7 +2,7 @@
  * 收件人邮箱检验
  */
 function emailCheck(obj) {
-    var regex = /^\w+@[a-zA-Z0-9]{2,10}(?:\.[a-z]{1,4}){1,3}$/;
+    const regex = /^\w+@[a-zA-Z0-9]{2,10}(?:\.[a-z]{1,4}){1,3}$/;
     if (obj.val() == null || obj.val().length == 0) {
         obj.parent().attr("class", "col-sm-3 has-error");
         layer.msg('邮箱不为空', {
@@ -63,16 +63,17 @@ function invokeShowTime(obj) {
  * 获取验证码
  */
 function getCode(obj) {
-    var emailName = $("#emailName");
-    var check = emailCheck(emailName);
+    var receiveMail = $("#receiveMail");
+    var check = emailCheck(receiveMail);
 
     if (check) {
         //layer.msg("邮件已发送,请及时查收");
         //invokeShowTime(obj);
 
-        $.ajax('getCode', {
+        $.ajax({
+            url:'getCode',
             data: {
-                emailName: emailName.val()
+                receiveMail: receiveMail.val()
             },
             dataType: 'json', //服务器返回json格式数据
             type: 'post', //HTTP请求类型
@@ -92,9 +93,9 @@ function getCode(obj) {
                     layer.msg("邮件发送失败");
                 }
             },
-            error: function (error) {
+            error: function () {
                 layer.closeAll('loading');
-                layer.msg(error.responseText);
+                layer.msg("请求失败");
 
             }
         });
@@ -109,7 +110,8 @@ function verifyEmailCode() {
     var emailCode = $("#emailCode");
     var check = codeCheck(emailCode);
     if (check) {
-        $.ajax('emailAuth', {
+        $.ajax({
+            url:'emailAuth',
             data: {
                 emailCode: emailCode.val()
             },

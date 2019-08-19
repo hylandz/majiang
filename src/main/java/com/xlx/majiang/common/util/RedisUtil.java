@@ -1,4 +1,4 @@
-package com.xlx.majiang.common.config;
+package com.xlx.majiang.common.util;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -33,7 +33,7 @@ public class RedisUtil {
 	 * @param k key
 	 * @return str
 	 */
-	public static String getStringEx(String k){
+	public static String getStringValue(String k){
 		ValueOperations<String, String> operations =  stringRedisTemplate.opsForValue();
 		return operations.get(k);
 	}

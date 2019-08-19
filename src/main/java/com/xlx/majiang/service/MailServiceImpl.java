@@ -1,5 +1,7 @@
 package com.xlx.majiang.service;
 
+import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
+import com.xlx.majiang.exception.CustomizeException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.FileSystemResource;
@@ -18,14 +20,14 @@ import java.io.File;
  * 邮件
  *
  * @author xielx on 2019/8/14
+ *
  */
 @Service
-public class MailService implements IMailService {
-	private static final Logger logger = LoggerFactory.getLogger(MailService.class);
+public class MailServiceImpl implements IMailService {
+	private static final Logger logger = LoggerFactory.getLogger(MailServiceImpl.class);
 
 	@Resource
 	private JavaMailSender javaMailSender;
-
 
 	@Override
 	public Long sendSimpleMail(String from,String to, String subject, String content) {
@@ -41,6 +43,7 @@ public class MailService implements IMailService {
 			javaMailSender.send(message);
 		}catch (MailException e){
 			logger.error("邮件发送异常:[{}]",e.getMessage());
+			throw new CustomizeException(CustomizeErrorCodeEnum.EMAIL_SEND_FAILED);
 		}
 		return (System.currentTimeMillis() - start);
 
@@ -59,6 +62,7 @@ public class MailService implements IMailService {
 			javaMailSender.send(mimeMessage);
 		} catch (MessagingException e) {
 			logger.error("发送html邮件时发生异常:[{}]",e.getMessage());
+			throw new CustomizeException(CustomizeErrorCodeEnum.EMAIL_SEND_FAILED);
 		}
 		long end = System.currentTimeMillis();
 		return (end - start);
@@ -94,6 +98,9 @@ public class MailService implements IMailService {
 			javaMailSender.send(message);
 		} catch (MessagingException e) {
 			logger.error("发送附件邮件异常:[{}]",e.getMessage());
+			return 0L;
+		}catch (Exception ex){
+			logger.error("其他异常:{}",ex.getMessage());
 		}
 
 		long end = System.currentTimeMillis();
@@ -127,6 +134,7 @@ public class MailService implements IMailService {
 			javaMailSender.send(message);
 		} catch (MessagingException e) {
 			logger.error("发送图片邮件异常:[{}]",e.getMessage());
+			throw new CustomizeException(CustomizeErrorCodeEnum.EMAIL_SEND_FAILED);
 		}
 		long end = System.currentTimeMillis();
 		return (end - start);

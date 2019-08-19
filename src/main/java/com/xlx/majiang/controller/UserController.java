@@ -1,13 +1,13 @@
 package com.xlx.majiang.controller;
 
-import com.xlx.majiang.common.config.RedisUtil;
+import com.xlx.majiang.common.util.RedisUtil;
 import com.xlx.majiang.common.constant.Constants;
 import com.xlx.majiang.common.util.EmailUtils;
 import com.xlx.majiang.dto.LoginDTO;
 import com.xlx.majiang.dto.ResultDTO;
 import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.model.User;
-import com.xlx.majiang.service.MailService;
+import com.xlx.majiang.service.IMailService;
 import com.xlx.majiang.service.NotificationService;
 import com.xlx.majiang.service.UserService;
 import org.apache.commons.lang3.StringUtils;
@@ -33,9 +33,7 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class UserController {
 
-  @Value("${email.from}")
-  private String fromEmail;
-  @Value("${email.authorized.code}")
+  @Value("${spring.mail.password}")
   private String authCode;
 
   @Value("${mail.fromMail.addr}")
@@ -48,7 +46,7 @@ public class UserController {
   private NotificationService notificationService;
 
   @Resource
-  private MailService mailService;
+  private IMailService iMailService;
 
   private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -122,21 +120,25 @@ public class UserController {
   }
 
   /**
-   * 获取验证码
-   * @param emailName 收件人邮箱
+   * 发送邮箱验证码
+   * @param receiveMail 收件人邮箱
    * @return dto
    */
   @ResponseBody
   @PostMapping("/getCode")
-  public ResultDTO getEmailCode(@RequestParam(name = "emailName") String emailName){
-    logger.info("收件人邮箱:[{}]",emailName);
+  public ResultDTO getEmailCode(@RequestParam(name = "receiveMail") String receiveMail){
+    logger.info("收件人邮箱:[{}]",receiveMail);
 
     //生成随机验证码
     String code = EmailUtils.getRandomNumber();
-    mailService.sendSimpleMail(from,emailName,code,authCode);
-    RedisUtil.setStringEx(Constants.EMAIL_CODE,code,60L);
-    logger.info("redis的 key----[{}]",RedisUtil.getStringEx(Constants.EMAIL_CODE));
-    return ResultDTO.okOf();
+    String content = "尊敬的先生/女士:\n您好,验证密码:" + code + ",有效期限:1分钟";
+    Long time =  iMailService.sendSimpleMail(from,receiveMail,"验证",content);
+    if (time != null && time > 0){
+      RedisUtil.setStringEx(Constants.EMAIL_CODE,code,60L);
+      logger.info("redis的 key----[{}]",RedisUtil.getStringValue(Constants.EMAIL_CODE));
+      return ResultDTO.okOf();
+    }
+    return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_SEND_FAILED);
   }
 
   /**
@@ -154,7 +156,9 @@ public class UserController {
     }
 
     Long ttl = RedisUtil.getStringTTL(Constants.EMAIL_CODE);
-    String code = RedisUtil.getStringEx(Constants.EMAIL_CODE);
+    String code = RedisUtil.getStringValue(Constants.EMAIL_CODE);
+
+    logger.info("ttl=[{}],code=[{}]",ttl,code);
     //失效
     if (ttl < 0 || code == null){
       return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_CODE_IS_NOT_AVAILABLE);
