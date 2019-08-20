@@ -4,12 +4,15 @@ import lombok.Data;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.io.Serializable;
+
 /**
  * 实体类:User-用户
  * @author xielx
  */
 @Data
-public class User {
+public class User implements Serializable {
+
     private Long id;// 主键
 
     private String accountId; // 第三方账户id

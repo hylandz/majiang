@@ -1,7 +1,8 @@
-package com.xlx.majiang.common.util;
+package com.xlx.majiang.service;
 
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
@@ -11,10 +12,11 @@ import java.util.concurrent.TimeUnit;
  *
  * @author xielx on 2019/8/14
  */
-public class RedisUtil {
+@Service
+public class RedisService {
 
 	@Resource
-	private static StringRedisTemplate stringRedisTemplate;
+	private  StringRedisTemplate stringRedisTemplate;
 
 
 	/**
@@ -23,7 +25,7 @@ public class RedisUtil {
 	 * @param v value
 	 * @param seconds 有效期:秒
 	 */
-	public static void setStringEx(String k,String v,Long seconds){
+	public  void setStringEx(String k,String v,Long seconds){
 		ValueOperations<String, String> operations =  stringRedisTemplate.opsForValue();
 		operations.set(k,v,seconds, TimeUnit.SECONDS);
 	}
@@ -33,7 +35,7 @@ public class RedisUtil {
 	 * @param k key
 	 * @return str
 	 */
-	public static String getStringValue(String k){
+	public  String getStringValue(String k){
 		ValueOperations<String, String> operations =  stringRedisTemplate.opsForValue();
 		return operations.get(k);
 	}
@@ -43,7 +45,7 @@ public class RedisUtil {
 	 * @param str key
 	 * @return long
 	 */
-	public static Long getStringTTL(String str){
+	public  Long getStringTTL(String str){
 		return stringRedisTemplate.getExpire(str);
 	}
 }

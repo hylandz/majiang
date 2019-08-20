@@ -3,10 +3,12 @@ package com.xlx.majiang.model;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.io.Serializable;
+
 /**
  * 实体类:Question-问题
  */
-public class Question {
+public class Question implements Serializable {
     private Long id; //主键
 
     private String title; // 问题标题

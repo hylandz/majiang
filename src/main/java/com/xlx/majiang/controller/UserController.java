@@ -1,6 +1,6 @@
 package com.xlx.majiang.controller;
 
-import com.xlx.majiang.common.util.RedisUtil;
+import com.xlx.majiang.service.RedisService;
 import com.xlx.majiang.common.constant.Constants;
 import com.xlx.majiang.common.util.EmailUtils;
 import com.xlx.majiang.dto.LoginDTO;
@@ -47,6 +47,9 @@ public class UserController {
 
   @Resource
   private IMailService iMailService;
+
+  @Resource
+  private RedisService redisService;
 
   private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
@@ -132,13 +135,15 @@ public class UserController {
     //生成随机验证码
     String code = EmailUtils.getRandomNumber();
     String content = "尊敬的先生/女士:\n您好,验证密码:" + code + ",有效期限:1分钟";
-    Long time =  iMailService.sendSimpleMail(from,receiveMail,"验证",content);
-    if (time != null && time > 0){
-      RedisUtil.setStringEx(Constants.EMAIL_CODE,code,60L);
-      logger.info("redis的 key----[{}]",RedisUtil.getStringValue(Constants.EMAIL_CODE));
+    Long ttl =  iMailService.sendSimpleMail(from,receiveMail,"验证",content);
+    if (ttl != null && ttl > 0){
+      redisService.setStringEx(Constants.EMAIL_CODE,code,60L);
+      logger.info("redis的 key----[{}]", redisService.getStringValue(Constants.EMAIL_CODE));
       return ResultDTO.okOf();
+    }else {
+
+      return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_SEND_FAILED);
     }
-    return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_SEND_FAILED);
   }
 
   /**
@@ -155,8 +160,8 @@ public class UserController {
       return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_CODE_IS_NULL);
     }
 
-    Long ttl = RedisUtil.getStringTTL(Constants.EMAIL_CODE);
-    String code = RedisUtil.getStringValue(Constants.EMAIL_CODE);
+    Long ttl = redisService.getStringTTL(Constants.EMAIL_CODE);
+    String code = redisService.getStringValue(Constants.EMAIL_CODE);
 
     logger.info("ttl=[{}],code=[{}]",ttl,code);
     //失效
@@ -169,7 +174,7 @@ public class UserController {
       return ResultDTO.okOf();
     }
 
-    return null;
+    return ResultDTO.errorOf(CustomizeErrorCodeEnum.CAPTCHA_WRONG);
   }
 
 

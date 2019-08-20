@@ -3,8 +3,11 @@ package com.xlx.majiang.common.config;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.interceptor.KeyGenerator;
-import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer;
+import org.springframework.data.redis.serializer.RedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import java.lang.reflect.Method;
 
@@ -13,7 +16,7 @@ import java.lang.reflect.Method;
  *
  * @author xielx on 2019/8/19
  */
-@Configuration
+//@Configuration
 public class RedisConfig {
 
 	@Value("${spring.redis.host}")
@@ -64,13 +67,45 @@ public class RedisConfig {
 	 * @param redisTemplate
 	 * @return
 	 */
-	public CacheManager cacheManager(RedisTemplate redisTemplate){
+	public CacheManager cacheManager(RedisTemplate<?,?> redisTemplate){
 		return null;
 	}
 
 	/**
-	 * redis的模板RedisTemplate
+	 * redis的模板RedisTemplate:
+	 * key值序列化/反序列化:使用RedisSerializer
+	 * value值序列化/反序列化:使用默认的JDK
 	 */
+	public RedisTemplate<?,?> redisTemplate(RedisConnectionFactory connectionFactory){
+		RedisTemplate<?,?> redisTemplate = new RedisTemplate<>();
+		redisTemplate.setConnectionFactory(connectionFactory);
+
+		//使用StringRedisSerializer来序列化和反序列化redis的key值
+		RedisSerializer<String> redisSerializer = new StringRedisSerializer();
+		//key
+		redisTemplate.setKeySerializer(redisSerializer);
+		redisTemplate.setHashKeySerializer(redisSerializer);
+
+		//使用JdkSerializationRedisSerializer来序列化和反序列化redis的value值
+		JdkSerializationRedisSerializer jdkSerializer = new JdkSerializationRedisSerializer();
+
+		//使用Jackson2JsonRedisSerializer来序列化和反序列化redis的value值
+		//Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
+		//?
+		//ObjectMapper objectMapper = new ObjectMapper();
+		//objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
+		//final类型是无法序列化
+		//objectMapper.enableDefaultTyping(ObjectMapper.DefaultTyping.NON_FINAL);
+		//jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
+
+		//value
+		redisTemplate.setValueSerializer(jdkSerializer);
+		redisTemplate.setHashValueSerializer(jdkSerializer);
+
+		redisTemplate.afterPropertiesSet();
+		return redisTemplate;
+
+	}
 
 	/**
 	 * redis的连接JedisConnectionFactory
