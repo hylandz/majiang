@@ -3,6 +3,8 @@ package com.xlx.majiang.model;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.io.Serializable;
+
 /**
  * 消息通知
  * 用户A:发布问题Q1"离职后来怎样?"
@@ -10,7 +12,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
  * 用户A看见B的回答,回复到,"滚"(同时,通知B:用户A回复了你的评论)
  *
  */
-public class Notification {
+public class Notification implements Serializable {
     private Long id; // 主键
 
     private Long notifier; //通知人(外键,User表id)

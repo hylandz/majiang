@@ -43,6 +43,13 @@
             <artifactId>spring-context-support</artifactId>
             <version>RELEASE</version>
         </dependency>
+
+        <!--spring-boot的aop-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
         <!-- jdbc-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

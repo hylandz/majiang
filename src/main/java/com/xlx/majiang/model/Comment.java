@@ -3,10 +3,12 @@ package com.xlx.majiang.model;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.io.Serializable;
+
 /**
  * 评论类:针对问题所引起的各个用户回答或评论
  */
-public class Comment {
+public class Comment implements Serializable {
   private Long id;
 
   private Long parentId; //问题id

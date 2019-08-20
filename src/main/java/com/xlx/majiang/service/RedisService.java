@@ -48,4 +48,5 @@ public class RedisService {
 	public  Long getStringTTL(String str){
 		return stringRedisTemplate.getExpire(str);
 	}
+
 }
