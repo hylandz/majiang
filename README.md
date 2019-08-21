@@ -12,22 +12,23 @@ IntelliJ IDEA 2019.1.2
 ```
 ### 使用技术
 1.前端
-  + Bootstrap
-  + Editor.md
-  + Layer
-  + Thymeleaf
+  + `Bootstrap`
+  + `Editor.md`
+  + `Layer`
+  + `Thymeleaf`
 
 
 2.后台
-  + SpringBoot
-  + SpringMVC
-  + Mybatis
-  + Maven
-  + Github OAuth
-  + OKHttp3
-  + LomBok
-  + H2 database
-  + Flayway
+  + `SpringBoot`
+  + `SpringMVC`
+  + `Mybatis`
+  + `Maven`
+  + `Redis`
+  + `Github OAuth2`
+  + `OKHttp3`
+  + `LomBok`
+  + `H2 database`
+  + `Flayway`
 
 ## 文件结构
 ```
