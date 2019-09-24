@@ -37,17 +37,17 @@ public class IndexController {
                       @RequestParam(name = "size", defaultValue = "5") Integer size,
                       @RequestParam(name = "search",required = false) String search,
                       @RequestParam(name = "tag",required = false) String tag,
+                      @RequestParam(name = "sort",required = false) String sort,
                       Model model) {
 
-    log.info("查询参数:[{}]",search);
     List<String> tagList =  hotTagCache.getHotTagDTOList();
-    log.info("热门标签:[{}]",tagList);
-    PaginationDTO paginationDTO = questionService.list(page, size,search,tag);
+    PaginationDTO paginationDTO = questionService.list(page, size,search,tag,sort);
     PaginationDTO topic = questionService.getHotQuestion();
     model.addAttribute("pagination", paginationDTO);
     model.addAttribute("topic", topic);
     model.addAttribute("search", search);
     model.addAttribute("tags", tagList);
+    model.addAttribute("sort", sort);
 
     return "index";
   }

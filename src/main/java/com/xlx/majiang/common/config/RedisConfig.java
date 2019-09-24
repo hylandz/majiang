@@ -9,8 +9,6 @@ import org.springframework.data.redis.serializer.JdkSerializationRedisSerializer
 import org.springframework.data.redis.serializer.RedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
-import java.lang.reflect.Method;
-
 /**
  * redis配置
  *
@@ -46,7 +44,7 @@ public class RedisConfig {
 	 * @return
 	 */
 	public KeyGenerator keyGenerator(){
-		return new KeyGenerator() {
+		/*return new KeyGenerator() {
 			@Override
 			public Object generate(Object o, Method method, Object... objects) {
 				StringBuilder builder = new StringBuilder();
@@ -58,7 +56,20 @@ public class RedisConfig {
 
 				return builder.toString();
 			}
+		};*/
+		
+		//lambda表达式
+		return (obj,method,params) -> {
+			StringBuilder builder = new StringBuilder();
+			builder.append(obj.getClass().getName())
+							.append(method.getName());
+			for (Object object : params) {
+				builder.append(object.toString());
+			}
+			
+			return builder.toString();
 		};
+		
 	}
 
 

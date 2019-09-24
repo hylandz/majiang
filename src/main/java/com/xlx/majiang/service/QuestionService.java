@@ -64,7 +64,7 @@ public class QuestionService {
 	 * @param search 查询条件
 	 * @return .
 	 */
-	public PaginationDTO<QuestionDTO> list(Integer page, Integer size, String search, String tag) {
+	public PaginationDTO<QuestionDTO> list(Integer page, Integer size, String search, String tag,String sort) {
 
 
 		/*if (StringUtils.isNotBlank(search)) {
@@ -74,10 +74,11 @@ public class QuestionService {
 
 
 		PaginationDTO<QuestionDTO> paginationDTO = new PaginationDTO<>();
+		//查询对象
 		QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
 		questionQueryDTO.setSearch(search);
 		questionQueryDTO.setTag(tag);
-
+		questionQueryDTO.setSort(sort);
 		//总记录数
 		int totalCount = questionMapper.selectCount(questionQueryDTO);
 		//总页数
@@ -105,7 +106,7 @@ public class QuestionService {
 		//
 		List<QuestionDTO> questionDTOList = new LinkedList<>();
 
-		//
+		//封装questionDTO
 		initQuestionDTOList(questionList, questionDTOList);
 
 		paginationDTO.setData(questionDTOList);

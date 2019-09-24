@@ -381,7 +381,13 @@
                 TITLE regexp #{search}
             </if>
             <if test="tag != null and tag != ''">
-                tag regexp #{tag}
+                and tag regexp #{tag}
+            </if>
+            <if test="sort != null and sort == 'zero'">
+                and comment_count = 0
+            </if>
+            <if test="time != null and time != ''">
+                and gmt_create = #{time}
             </if>
         </where>
     </select>
@@ -396,9 +402,31 @@
                 title regexp #{search}
             </if>
             <if test="tag != null and tag != ''">
-                tag regexp #{tag}
+                and tag regexp #{tag}
+            </if>
+            <if test="sort != null and sort == 'zero'">
+                and comment_count = 0
+            </if>
+            <if test="time != null and time != ''">
+                and gmt_create = #{time}
             </if>
         </where>
-        order by gmt_create desc limit #{offset,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
+
+        <choose>
+            <when test="sort != null and sort != '' and sort=='new'">
+                order by gmt_create desc
+            </when>
+
+            <when test="sort != null and sort != '' and sort=='zero'">
+                order by gmt_create desc
+            </when>
+            <when test="sort != null and sort != '' and (sort == 'hotest' || sort == 'hot7' || sort == 'hot30')">
+                order by comment_count desc
+            </when>
+            <otherwise>
+                order by gmt_create desc
+            </otherwise>
+        </choose>
+        limit #{offset,jdbcType=INTEGER},#{size,jdbcType=INTEGER}
     </select>
 </mapper>

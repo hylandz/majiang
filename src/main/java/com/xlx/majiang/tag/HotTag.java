@@ -51,6 +51,7 @@ public class HotTag {
 		HotTagDTO poll = priorityQueue.poll();
 		while (poll != null){
 			tagList.add(0,poll.getTagName());
+			//获取但不移除头
 			poll = priorityQueue.poll();
 		}
 

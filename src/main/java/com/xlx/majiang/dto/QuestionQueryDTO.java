@@ -2,6 +2,8 @@ package com.xlx.majiang.dto;
 
 import lombok.Data;
 
+import java.util.Date;
+
 /**
  * 搜索问题
  *
@@ -15,5 +17,15 @@ public class QuestionQueryDTO {
 	private String search;
 	private String tag;
 
+	/**
+	 * 创建时间
+	 */
+	private Date time;
+	
+	/**
+	 * 分类
+	 */
+	private String sort;
+	
 
 }
