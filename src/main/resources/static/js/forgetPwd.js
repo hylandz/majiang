@@ -82,7 +82,7 @@ function getCode(obj) {
                 layer.msg('loading.....', {icon: 16, shade: 0.01});
             },
             success: function (data) {
-                if (data.code == 200) {
+                if (data.code === 200) {
                     layer.closeAll('loading');
                     //layer.msg(JSON.stringify(data));
                     layer.msg("邮件已发送,请及时查收");
@@ -119,7 +119,7 @@ function verifyEmailCode() {
             type: 'post', //HTTP请求类型
             timeout: 10000, //超时时间设置为10秒；
             success: function (response) {
-                if (response.code == 200) {
+                if (response.code === 200) {
                     layer.msg(JSON.stringify(response));
 
                 } else {
@@ -143,7 +143,7 @@ function verifyEmailCode() {
  */
 function codeCheck(obj) {
 
-    if (obj.val() == null || obj.val().length == 0) {
+    if (obj.val() == null || obj.val().length === 0) {
         obj.parent().attr("class", "col-sm-3 has-error");
         layer.msg('验证码不为空', {
             icon: 5,
