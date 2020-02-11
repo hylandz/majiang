@@ -13,5 +13,5 @@ public class LoginDTO {
 	private String username;
 	private String password;
 	private Boolean rememberMe;
-	private String captcha;
+	private String imageCode;
 }

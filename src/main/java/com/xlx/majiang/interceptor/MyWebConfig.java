@@ -1,6 +1,9 @@
 package com.xlx.majiang.interceptor;
 
+import com.xlx.majiang.common.validate.image.ImageCodeFilter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -13,29 +16,24 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 //@EnableWebMvc
-public class WebConfig implements WebMvcConfigurer{
+public class MyWebConfig implements WebMvcConfigurer{
+  
   @Autowired
   private SessionInterceptor sessionInterceptor;
-
-  /*@Override
-  public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    registry.addResourceHandler("/","/static/");
-  }*/
 
   @Override
   public void addInterceptors(InterceptorRegistry registry) {
      InterceptorRegistration registration = registry.addInterceptor(sessionInterceptor);
      //拦截所有,会排除默认的static resources
     registration.excludePathPatterns("/static/**").addPathPatterns("/**");
-
-    //不拦截
-    /*registration.excludePathPatterns("/");
-    registration.excludePathPatterns("/login");
-    registration.excludePathPatterns("/css/**");
-    registration.excludePathPatterns("/fonts/**");
-    registration.excludePathPatterns("/img/**");
-    registration.excludePathPatterns("/js/**");
-    registration.excludePathPatterns("/layer/**");
-    registration.excludePathPatterns("https://github.com/**");*/
   }
+  
+  @Bean
+  public FilterRegistrationBean<ImageCodeFilter> imageCodeFilterRegistrationBean(){
+    FilterRegistrationBean<ImageCodeFilter> registrationBean = new FilterRegistrationBean<>();
+    registrationBean.setFilter(new ImageCodeFilter());
+    registrationBean.addUrlPatterns("/login");
+    return registrationBean;
+  }
+  
 }

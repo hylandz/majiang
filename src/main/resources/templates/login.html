@@ -85,14 +85,14 @@
                 </div>
                 <!--验证码-->
                 <div class="form-group">
-                    <label for="verifyCode" class="col-sm-2 control-label">验证码</label>
+                    <label for="imageCode" class="col-sm-2 control-label">验证码</label>
                     <div class="col-sm-2">
-                        <input type="text" class="form-control" id="verifyCode" name="captcha" value="JETB"
+                        <input type="text" class="form-control" id="imageCode" name="imageCode"
                                placeholder="请输入验证码">
                     </div>
                     <div class="col-sm-3">
-                        <a href="#"><img src="/static/images/JETB.jpg" th:src="@{/images/JETB.jpg}" alt="unknown"
-                                         width="85px" height="32px"/></a>
+                        <!--  width="85px" height="32px"-->
+                        <a href="#"><img th:src="@{/code/image}"/></a>
                         <span style="font-size: 11px; margin-left: 10px;">
                             <a href="#">看不清?换一张 </a>
                         </span>
@@ -123,7 +123,7 @@
                     </div>
 
                 </div>
-                <!--表单按钮-->
+                <!--按钮-->
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
                         <button type="button" id="btnBig" class="btn btn-primary btnLogin" onclick="login()">登录
@@ -163,6 +163,6 @@
     </div>
 
 </div>
-<script src="/static/js/login.js" th:src="@{/js/login.js}"></script>
+<script  th:src="@{/js/login.js}"></script>
 </body>
 </html>

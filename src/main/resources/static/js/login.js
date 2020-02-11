@@ -2,7 +2,7 @@ var username = null;
 var pwd = null;
 //var confirm_password = null;
 var remember = null;
-var captchaCode = null;
+var imageCode = null;
 //var phone = null;
 $(function(){
 
@@ -11,7 +11,7 @@ $(function(){
     username = $('#username');
     pwd = $('#password');
     remember = $("#rem");
-    captchaCode = $('#verifyCode');
+    imageCode = $('#imageCode');
 
     username.on("click",function () {
             layer.tips('用户名为您登录的账号','#username');
@@ -34,19 +34,14 @@ $(function(){
 
 
 
-    captchaCode.on("blur",function () {
-        if (captchaCode.val() == null ||(captchaCode.val()).length == 0){
+    imageCode.on("blur",function () {
+        if (imageCode.val() == null ||(imageCode.val()).length == 0){
             layer.tips('验证码不为空','#verifyCode',{tips:2});
             this.focus();
         }
     });
 
-
-
-
-
-
-})
+});
 
 
 
@@ -58,14 +53,11 @@ $(function(){
  * 登录
  */
 function login() {
-
-
-
     $.ajax('login', {
         data: {
             username: username.val(),
             password: pwd.val(),
-            captcha: captchaCode.val(),
+            imageCode: imageCode.val(),
             rememberMe: remember.is(':checked')
         },
         dataType: 'json',//服务器返回json格式数据

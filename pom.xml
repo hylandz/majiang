@@ -41,8 +41,9 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context-support</artifactId>
-            <version>RELEASE</version>
+            <version>5.2.3.RELEASE</version>
         </dependency>
+
 
         <!--spring-boot的aop-->
         <dependency>
@@ -116,7 +117,7 @@
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
-            <version>RELEASE</version>
+            <version>1.6.2</version>
         </dependency>
 
         <!-- Thymeleaf -->

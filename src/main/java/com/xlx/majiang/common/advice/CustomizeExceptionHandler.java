@@ -4,9 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.xlx.majiang.dto.ResultDTO;
 import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.exception.CustomizeException;
+import com.xlx.majiang.exception.ValidateCodeException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,9 +22,18 @@ import java.io.PrintWriter;
  *
  * @author xielx on 2019/6/24
  */
-@ControllerAdvice
+@Slf4j
+@ControllerAdvice(basePackages = "com.xlx.majiang")
 public class CustomizeExceptionHandler {
 
+  @ExceptionHandler(ValidateCodeException.class)
+  @ResponseBody
+  public ResultDTO handlerValidateCodeException(ValidateCodeException e){
+    log.error("捕获ValidateCodeException异常:{}",e.getMessage());
+    return ResultDTO.errorOf(1010,e.getMessage());
+  }
+  
+  
   @ExceptionHandler(Exception.class)
   public ModelAndView customizeHandler(HttpServletRequest request, HttpServletResponse response, Throwable t, Model model) {
     String contentType = request.getContentType();

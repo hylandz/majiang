@@ -12,8 +12,8 @@ public class CustomizeException extends RuntimeException{
   private Integer code;
   //信息
   private String message;
-
-
+  
+  
   public CustomizeException(ICustomizeErrorCode errorCode) {
     this.code = errorCode.getCode();
     this.message = errorCode.getMessage();
@@ -34,6 +34,7 @@ public class CustomizeException extends RuntimeException{
 
   public CustomizeException(String message){
     super(message);
+    this.message = message;
   }
 }
 
