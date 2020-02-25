@@ -3,34 +3,32 @@
 
 
 
-### 一、准备工作
+## 一、准备工作
 ```
 JDK >= 1.8 (推荐1.8版本)
 Mysql >= 5.5.0 (推荐5.7版本)
 Maven >= 3.0
 IntelliJ IDEA 2019.1.2
 ```
-### 使用技术
-1.前端
-  + `Bootstrap`
-  + `Editor.md`
-  + `Layer`
-  + `Thymeleaf`
+## 二、使用技术
+### 2.1 前端
++ `Bootstrap`
++ `Editor.md`
++ `Layer`
++ `Thymeleaf`
+### 2.2后台
++ `SpringBoot`
++ `SpringMVC`
++ `Mybatis`
++ `Maven`
++ `Redis`
++ `Github OAuth2`
++ `OKHttp3`
++ `LomBok`
++ `H2 database`
++ `Flayway`
 
-
-2.后台
-  + `SpringBoot`
-  + `SpringMVC`
-  + `Mybatis`
-  + `Maven`
-  + `Redis`
-  + `Github OAuth2`
-  + `OKHttp3`
-  + `LomBok`
-  + `H2 database`
-  + `Flayway`
-
-## 文件结构
+## 三、文件结构
 ```
 majiang
 ├── com.xlx.majiang
@@ -59,8 +57,8 @@ majiang
 |-------其他
 ```
 
-## GitHub oauth2认证的过程
-##### 第一步: 点击第三方登录,认证
+## 四、 GitHub oauth2认证的过程
+### 第一步: 点击第三方登录,认证
   > GET:    https://github.com/login/oauth/authorize?
 
 需要参数 | 描述
@@ -71,11 +69,11 @@ majiang
 `state`|随机字符串(String)
 
 
-##### 第二步: 初次会让你确认是否授权,是,然后会让你登录Github
+### 第二步: 初次会让你确认是否授权,是,然后会让你登录Github
 
-##### 第三步: 登录成功后,会返回你指定的redirect_uri,携带参数code,state
+### 第三步: 登录成功后,会返回你指定的redirect_uri,携带参数code,state
 
-##### 第四步: 继续向github请求获取token
+### 第四步: 继续向github请求获取token
   > POST:    https://github.com/login/oauth/access_token
 
 需要参数 | 描述
@@ -87,15 +85,15 @@ majiang
 `state`|随机字符串(String)
 `code`|返回的code(String)
 
-##### 第五步: 获取token后,用于请求获取GitHub的用户信息
+### 第五步: 获取token后,用于请求获取GitHub的用户信息
   > GET:    https://api.github.com/user?
 
 需要参数 | 描述
 ----|:-----
 `access_token`|从github那里获取的token(String)
 
-## 表设计
-#### user表/用户
+## 五、表设计
+### 5.1  user表/用户
 字段|	属性|	描述
 :--------:|:----:|:-----
 id|	bigint|	主键自增,Long
@@ -106,7 +104,7 @@ token|	varchar36|	密钥,cookie访问,String
 gmt_create|	bigint|	创建时间,Long
 gmt_modified|	bigint|	修改时间,Long
 
-#### question表/问题
+### 5.2 question表/问题
 字段|	属性|	描述
 :--------:|:----:|:-----
 id|	bigint|	主键自增,Long
@@ -120,7 +118,7 @@ creator|bigint|提问题的人,Long
 gmt_create|	bigint|	创建时间,Long
 gmt_modified|	bigint|	修改时间,Long
 
-#### notification表/消息通知
+### 5.3 notification表/消息通知
 字段|	属性|	描述
 :--------:|:----:|:-----
 id|	bigint|	主键自增,Long
@@ -135,7 +133,7 @@ gmt_create|	bigint|	创建时间,Long
 gmt_modified|	bigint|	修改时间,Long
 
 
-#### comment/评论,提问表
+### 5.4comment/评论,提问表
 字段|	属性|	描述
 :--------:|:----:|:-----
 id|	bigint|	主键自增,Long
@@ -149,7 +147,7 @@ gmt_create|	bigint|	创建时间,Long
 gmt_modified|	bigint|	修改时间,Long
 
 
-### 项目演示
+## 六、 项目演示
 
 + URL: http://localhost:8887/ 
 + 账户1: 41381772 密码:41381772
@@ -178,5 +176,6 @@ gmt_modified|	bigint|	修改时间,Long
   <td><img src="./display/10.png" title="GithubOAuth2"></td>
 </tr>
 </table>
-## Contributor
+
+## 七、 Contributor
 @猕猴桃
