@@ -32,7 +32,8 @@ public class ImageCodeFilter extends OncePerRequestFilter {
                 validate(new ServletWebRequest(request));
             }catch (ValidateCodeException e){
                 log.error("校验验证图片码异常:[{}]",e.getMessage());
-                
+                // 需要处理捕获的异常,跳转
+                request.getRequestDispatcher("/login.html").forward(request,response);
                 return;
             }
             

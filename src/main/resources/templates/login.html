@@ -92,9 +92,9 @@
                     </div>
                     <div class="col-sm-3">
                         <!--  width="85px" height="32px"-->
-                        <a href="#"><img th:src="@{/code/image}"/></a>
+                        <img class="img-captcha" src="/code/image"/>
                         <span style="font-size: 11px; margin-left: 10px;">
-                            <a href="#">看不清?换一张 </a>
+                            <a class="next-pic" href="javascript:;">看不清?换一张 </a>
                         </span>
                     </div>
 
@@ -164,5 +164,12 @@
 
 </div>
 <script  th:src="@{/js/login.js}"></script>
+<script th:inline="javascript">
+    $(function () {
+        $(".next-pic").click(function () {
+            $(".img-captcha").attr("src","/code/image");
+        });
+    })
+</script>
 </body>
 </html>
