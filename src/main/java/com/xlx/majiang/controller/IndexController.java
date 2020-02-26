@@ -51,8 +51,15 @@ public class IndexController {
 
     return "index";
   }
-
-
-
+  
+  
+  /**
+   * 特价书店
+   * @return html
+   */
+  @GetMapping("/sellBook")
+    public String specialBookSell(){
+      return "book_sell";
+    }
 
 }

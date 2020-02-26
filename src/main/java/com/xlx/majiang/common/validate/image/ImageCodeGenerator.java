@@ -14,6 +14,7 @@ import java.util.Random;
  */
 public class ImageCodeGenerator implements ValidateGenerator {
     
+    
     @Override
     public ImageCode generate(ServletWebRequest servletWebRequest) {
         int width = 85;

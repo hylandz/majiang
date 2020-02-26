@@ -32,7 +32,7 @@ public class MyWebConfig implements WebMvcConfigurer{
   public FilterRegistrationBean<ImageCodeFilter> imageCodeFilterRegistrationBean(){
     FilterRegistrationBean<ImageCodeFilter> registrationBean = new FilterRegistrationBean<>();
     registrationBean.setFilter(new ImageCodeFilter());
-    registrationBean.addUrlPatterns("/login");
+    registrationBean.addUrlPatterns("/code/image");
     return registrationBean;
   }
   

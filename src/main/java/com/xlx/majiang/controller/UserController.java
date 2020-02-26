@@ -88,6 +88,7 @@ public class UserController {
    * @throws IOException
    */
   @GetMapping("/code/image")
+  @ResponseBody
   public void createImageCode(HttpServletRequest request, HttpServletResponse response) throws IOException {
     ImageCode imageCode = imageCodeGenerator.generate(new ServletWebRequest(request));
     logger.info("图片验证码:[{}]", imageCode.getCode());
@@ -97,14 +98,71 @@ public class UserController {
     
     
     /**
+     * 发送邮箱验证码
+     *
+     * @param receiveMail 收件人邮箱
+     * @return dto
+     */
+    @PostMapping("/getCode")
+    @ResponseBody
+    public ResultDTO getEmailCode(@RequestParam(name = "receiveMail") String receiveMail) {
+        logger.info("收件人邮箱:[{}]", receiveMail);
+        
+        //生成随机验证码
+        String code = EmailUtils.getRandomNumber();
+        String content = "尊敬的先生/女士:\n您好,验证密码:" + code + ",有效期限:1分钟";
+        Long ttl = iMailService.sendSimpleMail(from, receiveMail, "验证", content);
+        if (ttl != null && ttl > 0) {
+            redisService.setStringEx(Constants.EMAIL_CODE, code, 60L);
+            logger.info("redis的 key----[{}]", redisService.getStringValue(Constants.EMAIL_CODE));
+            return ResultDTO.okOf();
+        } else {
+            
+            return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_SEND_FAILED);
+        }
+    }
+    
+    /**
+     * 验证码验证
+     *
+     * @param emailCode 接收的验证码
+     * @return .
+     */
+    @PostMapping("/emailAuth")
+    @ResponseBody
+    public ResultDTO emailAuthorized(@RequestParam("emailCode") String emailCode) {
+        logger.info("验证码:[{}]", emailCode);
+        //校验参数
+        if (StringUtils.isEmpty(emailCode)) {
+            return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_CODE_IS_NULL);
+        }
+        
+        Long ttl = redisService.getStringTTL(Constants.EMAIL_CODE);
+        String code = redisService.getStringValue(Constants.EMAIL_CODE);
+        
+        logger.info("ttl=[{}],code=[{}]", ttl, code);
+        //失效
+        if (ttl < 0 || code == null) {
+            return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_CODE_IS_NOT_AVAILABLE);
+        }
+        
+        if (emailCode.equals(code)) {
+            
+            return ResultDTO.okOf();
+        }
+        
+        return ResultDTO.errorOf(CustomizeErrorCodeEnum.CAPTCHA_WRONG);
+    }
+    
+    /**
      * 登录验证
      *
      * @param request  req
      * @param response res
      * @return dto
      */
-    @ResponseBody
     @PostMapping("/login")
+    @ResponseBody
     public ResultDTO doLogin(LoginDTO loginDTO, HttpServletRequest request, HttpServletResponse response) {
         
         
@@ -147,63 +205,6 @@ public class UserController {
         //model.addAttribute("error","用户名或密码错误");
         return ResultDTO.errorOf(CustomizeErrorCodeEnum.UNAUTHENTICATED);
         
-    }
-    
-    /**
-     * 发送邮箱验证码
-     *
-     * @param receiveMail 收件人邮箱
-     * @return dto
-     */
-    @ResponseBody
-    @PostMapping("/getCode")
-    public ResultDTO getEmailCode(@RequestParam(name = "receiveMail") String receiveMail) {
-        logger.info("收件人邮箱:[{}]", receiveMail);
-        
-        //生成随机验证码
-        String code = EmailUtils.getRandomNumber();
-        String content = "尊敬的先生/女士:\n您好,验证密码:" + code + ",有效期限:1分钟";
-        Long ttl = iMailService.sendSimpleMail(from, receiveMail, "验证", content);
-        if (ttl != null && ttl > 0) {
-            redisService.setStringEx(Constants.EMAIL_CODE, code, 60L);
-            logger.info("redis的 key----[{}]", redisService.getStringValue(Constants.EMAIL_CODE));
-            return ResultDTO.okOf();
-        } else {
-            
-            return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_SEND_FAILED);
-        }
-    }
-    
-    /**
-     * 验证码验证
-     *
-     * @param emailCode 接收的验证码
-     * @return .
-     */
-    @ResponseBody
-    @PostMapping("/emailAuth")
-    public ResultDTO emailAuthorized(@RequestParam("emailCode") String emailCode) {
-        logger.info("验证码:[{}]", emailCode);
-        //校验参数
-        if (StringUtils.isEmpty(emailCode)) {
-            return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_CODE_IS_NULL);
-        }
-        
-        Long ttl = redisService.getStringTTL(Constants.EMAIL_CODE);
-        String code = redisService.getStringValue(Constants.EMAIL_CODE);
-        
-        logger.info("ttl=[{}],code=[{}]", ttl, code);
-        //失效
-        if (ttl < 0 || code == null) {
-            return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_CODE_IS_NOT_AVAILABLE);
-        }
-        
-        if (emailCode.equals(code)) {
-            
-            return ResultDTO.okOf();
-        }
-        
-        return ResultDTO.errorOf(CustomizeErrorCodeEnum.CAPTCHA_WRONG);
     }
     
     
