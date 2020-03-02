@@ -1,8 +1,8 @@
-var username = null;
-var pwd = null;
+let username = null;
+let pwd = null;
 //var confirm_password = null;
-var remember = null;
-var imageCode = null;
+let remember = null;
+let imageCode = null;
 //var phone = null;
 $(function () {
 
@@ -90,36 +90,17 @@ function login() {
             });
         }
     });
-};
-
-/**
- * 切换为登录页面
- */
-function doLoginNow() {
-    //window.location.href='login.html';
-    $(".regPhone").css("display", "none");
-    $(".regConfirm").css("display", "none");
-    $(".regProtocol").css("display", "none");
-    $(".loginRemember").css("display", "block");
-    $(".titleLogin").css("display", "block");
-    $(".titleReg").css("display", "none");
-    $("#btnBig").attr("class", "btn btn-primary btnLogin")
-    $("#btnBig").text("登录");
-    $('.bigBtnDown').css("display", "block")
 }
 
 /**
- * 切换为注册页面
+ * 登录页面,注册页面切换
  */
-function doRegister() {
-    //window.location.href='login.html';
-    $(".regPhone").css("display", "block");
-    $(".regConfirm").css("display", "block");
-    $(".regProtocol").css("display", "block");
-    $(".loginRemember").css("display", "none");
-    $(".titleLogin").css("display", "none");
-    $(".titleReg").css("display", "block");
-    $("#btnBig").attr("class", "btn btn-primary btnRegister")
-    $("#btnBig").text("注册");
-    $('.bigBtnDown').css("display", "none")
+function doOptions(obj) {
+    const  attr = $(obj).attr("class");
+    if (attr.indexOf('btnLog') !== -1){
+        window.location.href='/login';
+    }else {
+        window.location.href='/register';
+    }
 }
+

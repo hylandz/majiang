@@ -63,23 +63,7 @@ public class UserController {
     
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     
-    /**
-     * 跳转登录页面
-     *
-     * @return .
-     */
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
     
-    /**
-     * 跳转忘记密码页面
-     */
-    @GetMapping("/forgetPwd")
-    public String forgetPassword() {
-        return "forgetPwd";
-    }
   
   /**
    * 生成图片验证码

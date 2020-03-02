@@ -9,6 +9,28 @@
 </head>
 <body>
 
+<!--  第三方登录-->
+<div class="form-group" th:fragment="third_way">
+    <label for="other" class="col-sm-2 control-label"></label>
+    <div class="col-sm-5">
+        <div id="other" style="margin: 0 auto">
+            <!--Github-->
+            <span style="margin:0px 20px 40px">
+                <a th:href="@{https://github.com/login/oauth/authorize(client_id='c4bb3fcaa494d4a6a120',redirect_uri=${#httpServletRequest.getServletContext().getAttribute('githubUri')},scope='user',state=1)}"
+                   data-toggle="tooltip" data-placement="right" title="GitHub登录">
+                    <img src="/static/images/GitHub48x48.png" alt="not" th:src="@{/images/GitHub48x48.png}" />
+                </a>
+            </span>
+            <!--码云-->
+            <span style="margin:0px 40px">
+                <a th:href="@{https://gitee.com/oauth/authorize(client_id='38683ceca6a16edb1e8790730805c72f4e9f83e06b0c41215da28d5a056ff03f',redirect_uri=${#httpServletRequest.getServletContext().getAttribute('giteeUri')},response_type='code')}"
+                   data-toggle="tooltip" data-placement="right" title="码云登录">
+                    <img src="/static/images/gitee48x48.png" alt="not" th:src="@{/images/gitee48x48.png}">
+                </a>
+            </span>
+        </div>
+    </div>
+</div></div>
 
 </body>
 </html>
