@@ -156,23 +156,25 @@ gmt_modified|	bigint|	修改时间,Long
 <table>
 <tr>
   <td><img src="./display/01.png" title="登录" ></td>
-
   <td><img src="./display/02.png" title="邮箱验证"></td>
 </tr>
 <tr>
   <td><img src="./display/03.png" title="首页"></td>
+  <td><img src="./display/11.png" title="用户注册"></td>
+</tr>
+<tr>
   <td><img src="./display/04.png" title="发起问题"></td>
-</tr>
-<tr>
   <td><img src="./display/05.png" title="回复问题"></td>
+</tr>
+<tr>
   <td><img src="./display/06.png" title="视频专区"></td>
-</tr>
-<tr>
   <td><img src="./display/07.png" title="视频播放"></td>
-  <td><img src="./display/08.png" title="消息通知"></td>
 </tr>
 <tr>
+  <td><img src="./display/08.png" title="消息通知"></td>
   <td><img src="./display/09.png" title="图片上传"></td>
+</tr>
+<tr>
   <td><img src="./display/10.png" title="GithubOAuth2"></td>
 </tr>
 </table>
