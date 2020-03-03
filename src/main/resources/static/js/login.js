@@ -50,16 +50,16 @@ $(function () {
     });
 
 
-    /**
-     * 看不清,换一张
-     */
-
-    function changeImageCode(){
-        const image_url = document.getElementById("img-captcha");
-        image_url.attr("src","/code/image");
-    }
 });
 
+/**
+ * 看不清,换一张
+ */
+
+function changeImageCode(){
+    const image_url = document.getElementById("img-captcha");
+    image_url.attr("src","/code/image");
+}
 
 /**
  * 登录
@@ -90,6 +90,24 @@ function login() {
             });
         }
     });
+}
+
+/**
+ * 用户注册
+ */
+function registerUser() {
+        $.post("/user/register", JSON.stringify({
+            username: username.val(),
+            password: pwd.val(),
+            imageCode: imageCode.val(),
+        }), function (r,s) {
+            if (s === 'success'){
+                alert("注册成功")
+                window.location.href="/login";
+            }else {
+                alert('error:' + s);
+            }
+        });
 }
 
 /**

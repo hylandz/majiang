@@ -1,23 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+<head th:replace="common :: common_head(~{::title})">
     <title>注册</title>
-
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-theme.css}"/>
-    <script type="application/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    <script type="application/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-    <script type="application/javascript" th:src="@{/layer/layer.js}"></script>
-    <style>
-        .banner {
-            color: #666;
-        }
-
-        #btnBig {
-            width: 349px;
-        }
-    </style>
 </head>
 <body>
 <div class="container" style="width: 60%;">
@@ -50,7 +34,7 @@
                     </div>
                 </div>
                 <!-- 注册-手机号 -->
-                <div class="form-group regPhone" style="display: none;">
+                <div class="form-group regPhone">
                     <label for="phone" class="col-sm-2 control-label">手机号</label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control" id="phone" name="phone"
@@ -83,7 +67,7 @@
                     </div>
                     <div class="col-sm-3">
                         <!--  width="85px" height="32px"-->
-                        <img class="img-captcha" id="img-captcha" th:src="@{/code/image}"/>
+                        <img class="img-captcha" id="img-captcha" src="/code/image" alt=""/>
                         <span style="font-size: 11px; margin-left: 10px;">
                             <a class="next-pic" th:href="@{/code/image}">看不清?换一张 </a>
                         </span>
@@ -107,8 +91,7 @@
                 <!--按钮-->
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button type="button" id="btnBig" class="btn btn-primary btnLogin" onclick="login()">注册
-                        </button>
+                        <button  id="btnBig" class="btn btn-primary btnRegister" onclick="registerUser()">注册</button>
                     </div>
                 </div>
                 <!--  第三方登录-->
@@ -117,7 +100,6 @@
 
         </div>
     </div>
-
 </div>
 <script  th:src="@{/js/login.js}"></script>
 </body>

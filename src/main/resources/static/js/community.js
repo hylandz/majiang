@@ -41,10 +41,10 @@ function comment2target(targetId, type, content) {
             "type": type
         }),
         success: function (response) {
-            if (response.code == 200) {
+            if (response.code === 200) {
                 window.location.reload();
             } else {
-                if (response.code == 2003) {//
+                if (response.code === 2003) {//
                     var isAccepted = confirm(response.message);
                     if (isAccepted) {
                         window.open("/login","_self");

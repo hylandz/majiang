@@ -6,6 +6,7 @@ import com.xlx.majiang.common.util.EmailUtils;
 import com.xlx.majiang.common.validate.ValidateGenerator;
 import com.xlx.majiang.common.validate.image.ImageCode;
 import com.xlx.majiang.dto.LoginDTO;
+import com.xlx.majiang.dto.RegisterDTO;
 import com.xlx.majiang.dto.ResultDTO;
 import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.model.User;
@@ -174,16 +175,13 @@ public class UserController {
                 cookie.setMaxAge(7 * 24 * 60 * 60);
                 cookie.setPath("/");
                 response.addCookie(cookie);
-                
-                return ResultDTO.okOf();
             } else {
                 //不记住
                 request.getSession().setAttribute(Constants.USER_SESSION, user);
                 Long unReadCount = notificationService.unReadCount(user.getId());
                 request.getSession().setAttribute(Constants.UN_READ_COUNT, unReadCount);
-                return ResultDTO.okOf();
             }
-            
+            return ResultDTO.okOf();
         }
         
         //model.addAttribute("error","用户名或密码错误");
@@ -192,6 +190,16 @@ public class UserController {
     }
     
     
+    /**
+     * 用户注册
+     * @return
+     */
+    @PostMapping("/user/register")
+    @ResponseBody
+    public ResultDTO doRegister(RegisterDTO registerDTO){
+        logger.info("前台注册参数:{}",registerDTO);
+        return ResultDTO.oKOf(registerDTO);
+    }
     
     /**
      * 注销

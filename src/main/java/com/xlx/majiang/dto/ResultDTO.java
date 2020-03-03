@@ -68,6 +68,15 @@ public class ResultDTO<T> {
   public static ResultDTO okOf() {
     return new ResultDTO(200, "请求成功", null);
   }
+  
+  /**
+   * 成功,显示自定义提示信息
+   * @param message 自定义信息
+   * @return dto
+   */
+  public static ResultDTO okOf(String message) {
+    return new ResultDTO(200, message, null);
+  }
 
   /**
    * 成功-传参

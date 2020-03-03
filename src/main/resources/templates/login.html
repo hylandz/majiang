@@ -1,23 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8"/>
+<head th:replace="common :: common_head(~{::title})">
     <title>登录页面</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-theme.css}"/>
-    <script type="application/javascript" th:src="@{/js/jquery-3.4.1.min.js}"></script>
-    <script type="application/javascript" th:src="@{/js/bootstrap.min.js}"></script>
-    <script type="application/javascript" th:src="@{/layer/layer.js}"></script>
-    <style>
-
-        .banner {
-            color: #666;
-        }
-
-        #btnBig {
-            width: 349px;
-        }
-    </style>
 </head>
 <body>
 <div class="container" style="width: 60%;">
