@@ -16,7 +16,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * ProfileController
+ * 通知模块
  *
  * @author xielx on 2019/6/24
  */

@@ -114,7 +114,7 @@ comment_count|int10|评论数量,String
 view_count|int10|浏览数量,Integer
 like_count|int10|点赞数量,Integer
 tag|varchar256|标签,(标签样式),String
-creator|bigint|提问题的人,Long
+creator|bigint|创建/发出问题的人,Long
 gmt_create|	bigint|	创建时间,Long
 gmt_modified|	bigint|	修改时间,Long
 
@@ -171,10 +171,11 @@ gmt_modified|	bigint|	修改时间,Long
   <td><img src="./display/07.png" title="视频播放"></td>
 </tr>
 <tr>
-  <td><img src="./display/08.png" title="消息通知"></td>
-  <td><img src="./display/09.png" title="图片上传"></td>
+  <td><img src="./display/08.png" title="消息通知1"></td>
+  <td><img src="./display/12.png" title="消息通知2"></td>
 </tr>
 <tr>
+ <td><img src="./display/09.png" title="图片上传"></td>
   <td><img src="./display/10.png" title="GithubOAuth2"></td>
 </tr>
 </table>

@@ -63,7 +63,7 @@ public class CustomizeExceptionHandler {
 
     } else { //
       model.addAttribute("message", t.getMessage());
-      return new ModelAndView("error");
+      return new ModelAndView("error/error");
     }
 
   }

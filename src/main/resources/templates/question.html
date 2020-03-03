@@ -135,7 +135,7 @@
                         </div>
                     </div>
                     <input type="hidden" id="question_id" th:value="${question.id}">
-                    <textarea class="form-control comment" rows="6" id="comment_content" th:if="${session.user != null}"></textarea>
+                    <textarea class="form-control comment" rows="6" id="comment_content" th:if="${session.user != null}" placeholder="我来说几句...."></textarea>
                     <textarea class="form-control comment" rows="6" id="comment_content2" th:if="${session.user == null}" placeholder="请 登录 后发表内容"></textarea>
                     <button type="button" class="btn btn-success btn-comment" th:if="${session.user != null}" onclick="post()">回答</button>
                     <button type="button" class="btn btn-success btn-comment" th:if="${session.user == null}" disabled >回答</button>

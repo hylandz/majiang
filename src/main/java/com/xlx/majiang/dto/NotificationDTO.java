@@ -5,7 +5,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * NotificationDTO
+ * NotificationDTO = Notification + NotificationTypeEnum.typeName
  *
  * @author xielx on 2019/6/23
  */

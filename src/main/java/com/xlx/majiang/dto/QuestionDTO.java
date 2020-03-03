@@ -6,7 +6,7 @@ import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 /**
- * question
+ * QuestionDTO = question + user
  *
  * @author xielx on 2019/6/23
  */

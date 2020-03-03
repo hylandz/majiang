@@ -20,7 +20,7 @@ public class CustomizeErrorController implements ErrorController {
 
   @Override
   public String getErrorPath() {
-    return "error";
+    return "error/error";
   }
 
   /**
@@ -31,7 +31,7 @@ public class CustomizeErrorController implements ErrorController {
    * @return mav
    */
   public ModelAndView errorHTML(HttpServletRequest request){
-    ModelAndView modelAndView = new ModelAndView("error");
+    ModelAndView modelAndView = new ModelAndView("error/error");
     HttpStatus httpStatus = getStatus(request);
 
     // 4xx

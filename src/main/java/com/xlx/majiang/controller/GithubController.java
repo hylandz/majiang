@@ -45,7 +45,7 @@ public class GithubController {
 
 
   /**
-   *  github认证后,获取github用户信息
+   *  github认证后,进行回调uri
    * @param code .
    * @param state .
    * @param response .
@@ -58,7 +58,9 @@ public class GithubController {
 
     AccessTokenDTO accessTokenDTO = new AccessTokenDTO(clientId,clientSecret,code,redirectUri,state);
 
+    // 经过授权,获取access_token
     String  accessToken = gitHubProvider.getAccessToken(accessTokenDTO);
+    // 根据提供的access_token获取用户信息
     GitHubUser gitHubUser = gitHubProvider.getGitHubUser(accessToken);
     if(gitHubUser != null && gitHubUser.getId() != null){
       User user = new User();
@@ -74,12 +76,11 @@ public class GithubController {
 
       //添加cookie
       response.addCookie(new Cookie("token",token));
-
-      return "redirect:/";
+  
     }else {
       //登录失败,重写登录
-      return "redirect:/";
     }
+    return "redirect:/";
   }
 
 
