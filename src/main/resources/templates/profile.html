@@ -1,10 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="common :: common_head(~{::title})">
     <title>修改资料</title>
 </head>
 <body>
-<h1>待开发</h1>
+<div th:insert="~{navigation :: nav}"></div>
+<div class="table-responsive" >
+    <table class="table table-bordered table-hover dt_tab">
+        <thead>
+        <tr>
+            <th>序号</th>
+            <th>账户id</th>
+            <th>昵称</th>
+            <th>个性签名</th>
+            <th>头像</th>
+            <th>创建时间</th>
+            <th>修改时间</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody id="tbody" th:object="${user}">
+        <tr>
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.accountId}"></td>
+            <td th:text="${user.name}"></td>
+            <td th:text="${user.bio}"></td>
+            <td>
+                <img src="${user.avatarUrl}" alt="error">
+            </td>
+            <td th:text="${#dates.format(user.gmtCreate,'yyyy-MM-dd')}"></td>
+            <td th:text="${#dates.format(user.gmtModified,'yyyy-MM-dd')}"></td>
+            <td>
+                <button type="button" class="btn btn-success btnEditor" name="edit" >编辑</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

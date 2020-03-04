@@ -91,6 +91,7 @@ public class IndexController {
     public String forgetPassword() {
         return "forgetPwd";
     }
+    
 }
 
 

@@ -77,8 +77,15 @@ public class UserService {
 
     return userList.get(0);
   }
-
-
+  
+  /**
+   * 主键查询用户信息
+   * @param id 主键
+   * @return User
+   */
+  public User getUserById(Long id){
+    return userMapper.selectByPrimaryKey(id);
+  }
 
 
 }
