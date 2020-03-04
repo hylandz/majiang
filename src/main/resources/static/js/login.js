@@ -56,9 +56,8 @@ $(function () {
  * 看不清,换一张
  */
 
-function changeImageCode(){
-    const image_url = document.getElementById("img-captcha");
-    image_url.attr("src","/code/image");
+function reloadCode(){
+    $("#img-captcha").attr("src","/code/image?data=" + new Date() + "");
 }
 
 /**
