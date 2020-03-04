@@ -30,3 +30,5 @@ build/
 .vscode/
 /src/main/resources/templates/application.properties
 /.mvn
+/Fix.md
+/Fix.md

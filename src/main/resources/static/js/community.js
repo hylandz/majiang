@@ -3,7 +3,7 @@
  */
 
 /**
- * 提交问题回答
+ * 提交问题回答,type=1
  */
 function post() {
     var questionId = $("#question_id").val();
@@ -13,7 +13,7 @@ function post() {
 }
 
 /**
- * 提交评论2
+ * 提交评论,type=2
  * @param e
  */
 function comment(e) {
@@ -24,7 +24,12 @@ function comment(e) {
 }
 
 
-
+/**
+ * 回答提交
+ * @param targetId 问题?评论
+ * @param type 回答问题1,回复评论2
+ * @param content 回复内容
+ */
 function comment2target(targetId, type, content) {
     if (!content) {
         alert("不能回复空内容~~~");

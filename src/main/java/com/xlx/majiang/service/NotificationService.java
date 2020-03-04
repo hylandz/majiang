@@ -58,7 +58,7 @@ public class NotificationService {
     paginationDTO.setPagination(page,totalPage);
     //NotificationExample example = new NotificationExample();
 
-    notificationExample.setOrderByClause("gmt_create desc");
+    notificationExample.setOrderByClause("gmt_modified desc");
     List<Notification> notificationList = notificationMapper.selectByExampleWithRowbounds(notificationExample,new RowBounds(offSet,size));
 
     if (notificationList.size() == 0){
@@ -97,7 +97,7 @@ public class NotificationService {
    * 读取通知:
    *  由未读消息点击读取时的操作
    * @param id 通知id
-   * @param user 用户
+   * @param user 当前登录用户
    * @return dto
    */
   public NotificationDTO read(Long id, User user){

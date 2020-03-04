@@ -27,8 +27,9 @@ public class CommentController {
 
   @Resource
   private CommentService commentService;
-
-
+  
+  
+  
   /**
    * 回复评论/问题
    * `@RequestBody`注解:当前端contentType:application/json使用
@@ -36,22 +37,22 @@ public class CommentController {
    * @param request re
    * @return dto
    */
-  @ResponseBody
   @RequestMapping(value = "/comment",method = RequestMethod.POST)
+  @ResponseBody
   public ResultDTO comment(@RequestBody CommentCreateDTO commentCreateDTO, HttpServletRequest request){
-
-
+    
+    
     User user = (User) request.getSession().getAttribute(Constants.USER_SESSION);
     if (user == null){
       return ResultDTO.errorOf(CustomizeErrorCodeEnum.NOT_LOGIN);
     }
-
+    
     if(commentCreateDTO == null || StringUtils.isBlank(commentCreateDTO.getContent())){
       return ResultDTO.errorOf(CustomizeErrorCodeEnum.CONTENTS_IS_EMPTY);
     }
-
+    
     Comment comment = new Comment();
-
+    
     comment.setParentId(commentCreateDTO.getParentId());
     comment.setContent(commentCreateDTO.getContent());
     comment.setType(commentCreateDTO.getType());
@@ -60,14 +61,13 @@ public class CommentController {
     comment.setCommentator(user.getId());
     comment.setLikeCount(0);
     comment.setCommentCount(0);
-
+    
     commentService.insert(comment,user);
     return  ResultDTO.okOf();
   }
 
-
   /**
-   * 展开二级列表时,显示二级列表的评论数据
+   * 显示问题的评论数据
    * @param id 问题回答的id
    * @return
    */

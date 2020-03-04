@@ -137,7 +137,7 @@ gmt_modified|	bigint|	修改时间,Long
 字段|	属性|	描述
 :--------:|:----:|:-----
 id|	bigint|	主键自增,Long
-parent_id|bigint|问题/一级评论id,Long
+parent_id|bigint|答问题,parent_id=该问题id,评论答的问题,parent_id=回答的问题的主键id,`只能对某个问题的回答做出一级评论,不能针对个人评论层层递进`
 type|int10|类型,Integer`回答该问题1或评论该问题的回答2`
 commentator|bigint|用户id,Long`谁回答?,谁评论的?`
 comment|varchar1024|回答内容,String`评论内容`
