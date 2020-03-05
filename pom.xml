@@ -83,6 +83,21 @@
             <version>1.4.196</version>
         </dependency>
 
+        <!--hibernate 校验, 引入spring-boot-starter-web的jar包可省略-->
+        <dependency>
+            <groupId>org.hibernate.validator</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>6.1.0.Final</version>
+        </dependency>
+
+        <!--统一表达式语言 JSR341-->
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>3.0.1-b11</version>
+        </dependency>
+
+
         <!--mysql-->
         <!--<dependency>
             <groupId>mysql</groupId>

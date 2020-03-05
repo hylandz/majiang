@@ -1,7 +1,8 @@
-package com.xlx.majiang.service;
+package com.xlx.majiang.service.impl;
 
 import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
 import com.xlx.majiang.exception.CustomizeException;
+import com.xlx.majiang.service.IMailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.FileSystemResource;

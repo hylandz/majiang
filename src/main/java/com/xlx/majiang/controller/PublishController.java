@@ -70,7 +70,7 @@ public class PublishController {
    * @return String
    */
   @PostMapping("/publish")
-  public String doPublish(@RequestParam(name = "title",required = false) String title,
+  public String doPublish(@RequestParam(name = "title",required = false)  String title,
                           @RequestParam(name = "description",required = false) String description,
                           @RequestParam(name = "tag",required = false) String tag,
                           @RequestParam(name = "id",required = false) Long id,
@@ -88,7 +88,7 @@ public class PublishController {
     model.addAttribute("tags", TagMenu.list());
 
     //校验问题发布参数
-    if (title == null || title == "") {
+    /*if (title == null || title == "") {
       model.addAttribute("error", "标题不能为空");
       return "publish";
     }
@@ -99,7 +99,7 @@ public class PublishController {
     if (tag == null || tag == "") {
       model.addAttribute("error", "标签不能为空");
       return "publish";
-    }
+    }*/
 
     //校验tag
     String invalid = TagMenu.filterInvalid(tag);

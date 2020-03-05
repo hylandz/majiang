@@ -15,8 +15,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
@@ -29,6 +31,7 @@ import java.util.stream.Collectors;
  * @author xielx on 2019/6/23
  */
 @Service
+@Validated
 public class QuestionService {
 
 
@@ -144,7 +147,7 @@ public class QuestionService {
 	 *
 	 * @param question .
 	 */
-	public void createOrUpdate(Question question) {
+	public void createOrUpdate(@Valid Question question) {
 		if (question.getId() == null) {
 			//新增
 			question.setGmtCreate(System.currentTimeMillis());

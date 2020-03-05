@@ -59,6 +59,10 @@ public class ResultDTO<T> {
   public static ResultDTO errorOf(CustomizeErrorCodeEnum errorCodeEnum) {
     return errorOf(errorCodeEnum.getCode(), errorCodeEnum.getMessage());
   }
+  
+  public static <T> ResultDTO errorOf(CustomizeErrorCodeEnum errorCodeEnum,T t) {
+    return new ResultDTO(errorCodeEnum.getCode(), errorCodeEnum.getMessage(),t);
+  }
 
   /**
    * 成功-默认
