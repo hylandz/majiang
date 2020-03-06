@@ -180,6 +180,10 @@ gmt_modified|	bigint|	修改时间,Long
   <td><img src="./display/10.png" title="GithubOAuth2"></td>
 </tr>
 <tr>
+ <td><img src="./display/swagger.png" title="swagger"></td>
+  <td><img src="./display/swagger2.png" title="swagger2"></td>
+</tr>
+<tr>
 </table>
 
 
