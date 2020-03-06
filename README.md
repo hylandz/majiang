@@ -27,6 +27,7 @@ IntelliJ IDEA 2019.1.2
 + `LomBok`
 + `H2 database`
 + `Flayway`
++ `swagger`
 
 ## 三、文件结构
 ```
@@ -178,7 +179,10 @@ gmt_modified|	bigint|	修改时间,Long
  <td><img src="./display/09.png" title="图片上传"></td>
   <td><img src="./display/10.png" title="GithubOAuth2"></td>
 </tr>
+<tr>
 </table>
+
+
 
 ## 七、 Contributor
 [@猕猴桃](https://github.com/XielinX)

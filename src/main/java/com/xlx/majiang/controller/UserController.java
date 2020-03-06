@@ -14,6 +14,7 @@ import com.xlx.majiang.service.IMailService;
 import com.xlx.majiang.service.NotificationService;
 import com.xlx.majiang.service.RedisService;
 import com.xlx.majiang.service.UserService;
+import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -100,6 +101,7 @@ public class UserController {
      */
     @PostMapping("/getCode")
     @ResponseBody
+    @ApiOperation(value = "接收的邮箱")
     public ResultDTO getEmailCode(@RequestParam(name = "receiveMail") String receiveMail) {
         logger.info("收件人邮箱:[{}]", receiveMail);
         
