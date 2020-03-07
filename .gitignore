@@ -32,3 +32,4 @@ build/
 /.mvn
 /Fix.md
 /Fix.md
+/src/main/resources/application.properties
