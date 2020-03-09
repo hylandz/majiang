@@ -1,4 +1,4 @@
-package com.xlx.majiang.model;
+package com.xlx.majiang.entity;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

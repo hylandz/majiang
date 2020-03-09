@@ -1,7 +1,7 @@
 package com.xlx.majiang.dao;
 
-import com.xlx.majiang.model.User;
-import com.xlx.majiang.model.UserExample;
+import com.xlx.majiang.entity.User;
+import com.xlx.majiang.entity.UserExample;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 

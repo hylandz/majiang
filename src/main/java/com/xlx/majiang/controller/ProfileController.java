@@ -2,8 +2,8 @@ package com.xlx.majiang.controller;
 
 import com.xlx.majiang.common.constant.Constants;
 import com.xlx.majiang.dto.PaginationDTO;
-import com.xlx.majiang.model.Question;
-import com.xlx.majiang.model.User;
+import com.xlx.majiang.entity.Question;
+import com.xlx.majiang.entity.User;
 import com.xlx.majiang.service.NotificationService;
 import com.xlx.majiang.service.QuestionService;
 import com.xlx.majiang.service.UserService;

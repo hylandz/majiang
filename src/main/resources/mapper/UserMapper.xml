@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xlx.majiang.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.xlx.majiang.model.User">
+  <resultMap id="BaseResultMap" type="com.xlx.majiang.entity.User">
     <id column="ID" jdbcType="BIGINT" property="id" />
     <result column="ACCOUNT_ID" jdbcType="VARCHAR" property="accountId" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
@@ -72,7 +72,7 @@
   <sql id="Base_Column_List">
     ID, ACCOUNT_ID, NAME, TOKEN, GMT_CREATE, GMT_MODIFIED, BIO, AVATAR_URL
   </sql>
-  <select id="selectByExample" parameterType="com.xlx.majiang.model.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.xlx.majiang.entity.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -96,13 +96,13 @@
     delete from USER
     where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.xlx.majiang.model.UserExample">
+  <delete id="deleteByExample" parameterType="com.xlx.majiang.entity.UserExample">
     delete from USER
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.xlx.majiang.model.User">
+  <insert id="insert" parameterType="com.xlx.majiang.entity.User">
     insert into USER (ID, ACCOUNT_ID, NAME, 
       TOKEN, GMT_CREATE, GMT_MODIFIED, 
       BIO, AVATAR_URL)
@@ -110,7 +110,7 @@
       #{token,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=BIGINT}, #{gmtModified,jdbcType=BIGINT}, 
       #{bio,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="com.xlx.majiang.model.User">
+  <insert id="insertSelective" parameterType="com.xlx.majiang.entity.User">
     insert into USER
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -165,7 +165,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.xlx.majiang.model.UserExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.xlx.majiang.entity.UserExample" resultType="java.lang.Long">
     select count(*) from USER
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -217,7 +217,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xlx.majiang.model.User">
+  <update id="updateByPrimaryKeySelective" parameterType="com.xlx.majiang.entity.User">
     update USER
     <set>
       <if test="accountId != null">
@@ -244,7 +244,7 @@
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.xlx.majiang.model.User">
+  <update id="updateByPrimaryKey" parameterType="com.xlx.majiang.entity.User">
     update USER
     set ACCOUNT_ID = #{accountId,jdbcType=VARCHAR},
       NAME = #{name,jdbcType=VARCHAR},
@@ -255,7 +255,7 @@
       AVATAR_URL = #{avatarUrl,jdbcType=VARCHAR}
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.xlx.majiang.model.UserExample" resultMap="BaseResultMap">
+  <select id="selectByExampleWithRowbounds" parameterType="com.xlx.majiang.entity.UserExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct

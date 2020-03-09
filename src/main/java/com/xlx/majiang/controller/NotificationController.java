@@ -3,7 +3,7 @@ package com.xlx.majiang.controller;
 import com.xlx.majiang.common.constant.Constants;
 import com.xlx.majiang.dto.NotificationDTO;
 import com.xlx.majiang.common.enums.NotificationTypeEnum;
-import com.xlx.majiang.model.User;
+import com.xlx.majiang.entity.User;
 import com.xlx.majiang.service.NotificationService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

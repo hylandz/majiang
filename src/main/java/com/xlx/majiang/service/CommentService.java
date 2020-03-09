@@ -4,10 +4,10 @@ import com.xlx.majiang.dto.CommentDTO;
 import com.xlx.majiang.common.enums.CommentTypeEnum;
 import com.xlx.majiang.common.enums.NotificationStatusEnum;
 import com.xlx.majiang.common.enums.NotificationTypeEnum;
-import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
+import com.xlx.majiang.enums.ErrorCodeEnum;
 import com.xlx.majiang.exception.CustomizeException;
 import com.xlx.majiang.dao.*;
-import com.xlx.majiang.model.*;
+import com.xlx.majiang.entity.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,12 +60,12 @@ public class CommentService {
     public void insert(Comment comment, User user) {
         //该评论的问题不存在情况
         if (comment.getParentId() == null || comment.getParentId() == 0) {
-            throw new CustomizeException(CustomizeErrorCodeEnum.TARGET_PARAM_NOT_FOUND);
+            throw new CustomizeException(ErrorCodeEnum.TARGET_PARAM_NOT_FOUND);
         }
         
         // 评论/回复类型不存在情况
         if (comment.getType() == null || !CommentTypeEnum.isExists(comment.getType())) {
-            throw new CustomizeException(CustomizeErrorCodeEnum.TYPE_PARAM_WRONG);
+            throw new CustomizeException(ErrorCodeEnum.TYPE_PARAM_WRONG);
         }
         
         /*===================是回复评论的'COMMENT(2)'类型=========================*/
@@ -73,13 +73,13 @@ public class CommentService {
             //获取
             Comment dbComment = commentMapper.selectByPrimaryKey(comment.getParentId());
             if (dbComment == null) {
-                throw new CustomizeException(CustomizeErrorCodeEnum.COMMENT_NOT_FOUND);
+                throw new CustomizeException(ErrorCodeEnum.COMMENT_NOT_FOUND);
             }
             
             //判断关于该评论的问题存在?
             Question dbQuestion = questionMapper.selectByPrimaryKey(dbComment.getParentId());
             if (dbQuestion == null) {
-                throw new CustomizeException(CustomizeErrorCodeEnum.QUESTION_NOT_FOUND);
+                throw new CustomizeException(ErrorCodeEnum.QUESTION_NOT_FOUND);
             }
             
             // 都存在,回复评论
@@ -101,7 +101,7 @@ public class CommentService {
             //获取问题
             Question dbQuestion = questionMapper.selectByPrimaryKey(comment.getParentId());
             if (dbQuestion == null) {
-                throw new CustomizeException(CustomizeErrorCodeEnum.QUESTION_NOT_FOUND);
+                throw new CustomizeException(ErrorCodeEnum.QUESTION_NOT_FOUND);
             }
             
             // 插入回答

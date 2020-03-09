@@ -1,4 +1,4 @@
-package com.xlx.majiang.model;
+package com.xlx.majiang.entity;
 
 import java.util.ArrayList;
 import java.util.List;

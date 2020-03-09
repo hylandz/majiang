@@ -1,6 +1,6 @@
 package com.xlx.majiang.dto;
 
-import com.xlx.majiang.model.User;
+import com.xlx.majiang.entity.User;
 import lombok.Data;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;

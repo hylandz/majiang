@@ -1,6 +1,6 @@
 package com.xlx.majiang.dto;
 
-import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
+import com.xlx.majiang.enums.ErrorCodeEnum;
 import com.xlx.majiang.exception.CustomizeException;
 import lombok.Data;
 
@@ -56,11 +56,11 @@ public class ResultDTO<T> {
    * @param errorCodeEnum 枚举,不需要自定义了
    * @return
    */
-  public static ResultDTO errorOf(CustomizeErrorCodeEnum errorCodeEnum) {
+  public static ResultDTO errorOf(ErrorCodeEnum errorCodeEnum) {
     return errorOf(errorCodeEnum.getCode(), errorCodeEnum.getMessage());
   }
   
-  public static <T> ResultDTO errorOf(CustomizeErrorCodeEnum errorCodeEnum,T t) {
+  public static <T> ResultDTO errorOf(ErrorCodeEnum errorCodeEnum, T t) {
     return new ResultDTO(errorCodeEnum.getCode(), errorCodeEnum.getMessage(),t);
   }
 

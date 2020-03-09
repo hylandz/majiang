@@ -2,8 +2,8 @@ package com.xlx.majiang.sechedule;
 
 import com.xlx.majiang.tag.HotTag;
 import com.xlx.majiang.dao.QuestionMapper;
-import com.xlx.majiang.model.Question;
-import com.xlx.majiang.model.QuestionExample;
+import com.xlx.majiang.entity.Question;
+import com.xlx.majiang.entity.QuestionExample;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.slf4j.Logger;

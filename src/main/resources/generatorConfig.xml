@@ -39,7 +39,7 @@
 	    	targetPackage:pojo类所在的包全名
 	    	targetProject:pojo类所在项目下的路径
 	    -->
-        <javaModelGenerator targetPackage="com.xlx.majiang.model" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.xlx.majiang.entity" targetProject="src/main/java">
             <!-- 是否允许子包,targetPackage.xxx.xx -->
             <property name="enableSubPackages" value="true"/>
             <!-- 是否对类CHAR类型的列进行trim操作 -->

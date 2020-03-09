@@ -1,5 +1,7 @@
 package com.xlx.majiang.exception;
 
+import com.xlx.majiang.enums.ErrorCodeEnum;
+
 /**
  * 运行时异常的实例类:
  * 捕捉运行时的异常
@@ -14,7 +16,7 @@ public class CustomizeException extends RuntimeException{
   private String message;
   
   
-  public CustomizeException(ICustomizeErrorCode errorCode) {
+  public CustomizeException(ErrorCodeEnum errorCode) {
     this.code = errorCode.getCode();
     this.message = errorCode.getMessage();
   }

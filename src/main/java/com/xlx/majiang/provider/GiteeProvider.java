@@ -2,15 +2,15 @@ package com.xlx.majiang.provider;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.xlx.majiang.dto.AccessTokenDTO2;
-import com.xlx.majiang.dto.GiteeUser;
+import com.xlx.majiang.dto.oauth.GiteeAccessTokenDTO;
+import com.xlx.majiang.entity.oauth.GiteeUser;
+import com.xlx.majiang.enums.ErrorCodeEnum;
+import com.xlx.majiang.exception.CustomizeException;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 码云
@@ -21,36 +21,38 @@ import java.util.Map;
 @Component
 public class GiteeProvider {
     
-    private final String OAUTH_TOKEN_API = "https://gitee.com/oauth/token";
-    private final String GET_USER_API = "https://gitee.com/api/v5/user?access_token=";
+    
     /**
      * 获取访问密钥
      *
      * @param accessTokenDTO obj
      * @return str
      */
-    public String getAccessToken(AccessTokenDTO2 accessTokenDTO) {
+    public String getAccessToken(GiteeAccessTokenDTO accessTokenDTO) {
         
-        //1.创建客户端
         OkHttpClient client = new OkHttpClient();
         
         //2.创建传参的请求体,及数据类型json
         MediaType mediaType = MediaType.get("application/json;charset=utf-8");
         RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));
-        
+        String access_token_api = "https://gitee.com/oauth/token";
         //3.POST请求
         Request request = new Request.Builder()
-                                  .url(OAUTH_TOKEN_API)
+                                  .url(access_token_api)
                                   .post(body)
                                   .build();
         
         //4.执行
         try (Response response = client.newCall(request).execute()) {
             //5.获取响应体内容
-            String str = response.body().string();
-            JSONObject object = JSONObject.parseObject(str);
-            //{"access_token":"99a0da14fad6c56ce73af1ffa03ec84f","token_type":"bearer","expires_in":86400,"refresh_token":"08406df58d370be6aaa9ba2810f5e10d1cf70169ed0f1a10e454cf9a349e21eb","scope":"user_info","created_at":1564944346}
-            return object.getString("access_token");
+            ResponseBody body1 = response.body();
+            String str;
+            if (body1 != null){
+                str = body1.string();
+                JSONObject object = JSONObject.parseObject(str);
+                return object.getString("access_token");
+            }
+            return "";
         } catch (IOException e) {
             log.error("获取token失败:[{}]", e.getMessage());
             throw new ClassCastException(e.getMessage());
@@ -69,6 +71,7 @@ public class GiteeProvider {
         //1.创建客户端
         OkHttpClient client = new OkHttpClient();
         //2.创建GET请求
+        String GET_USER_API = "https://gitee.com/api/v5/user?access_token=";
         Request request = new Request.Builder()
                                   .url(GET_USER_API + access_token)
                                   .addHeader("Content-Type", "application/json;charset=UTF-8")
@@ -77,50 +80,16 @@ public class GiteeProvider {
         //3.执行请求
         try (Response response = client.newCall(request).execute()) {
             //4.响应内容
-            String str = response.body().string();
-            return JSON.parseObject(str, GiteeUser.class);
+            ResponseBody body = response.body();
+            String str;
+            if (body != null){
+                str = body.string();
+                return JSON.parseObject(str, GiteeUser.class);
+            }
+            return new GiteeUser();
         } catch (IOException e) {
             log.error("获取token失败:[{}]", e.getMessage());
-            throw new ClassCastException(e.getMessage());
+            throw new CustomizeException(ErrorCodeEnum.GET_USER_INFO_FAILED);
         }
-        
     }
-    
-    
-    /**
-     * 刷新token
-     *
-     * @param refreshToken fresh
-     * @return .
-     */
-    public String getRefreshToken(String refreshToken) {
-        
-        OkHttpClient client = new OkHttpClient();
-        MediaType mediaType = MediaType.get("application/json;charset=utf-8");
-        Map<String, String> param = new HashMap<>();
-        //uri参数
-        param.put("grantType", "refresh_token");
-        param.put("refreshToken", refreshToken);
-        
-        RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(param));
-        //POST请求
-        Request request = new Request.Builder()
-                                  .url(OAUTH_TOKEN_API)
-                                  .post(body)
-                                  .build();
-        try (Response response = client.newCall(request).execute()) {
-            String content = response.body().string();
-            //获取access_token
-            JSONObject object = JSONObject.parseObject(content);
-            String s = "access_token";
-            return object.getString(s);
-        } catch (IOException e) {
-            log.error("获取token失败:[{}]", e.getMessage());
-            throw new ClassCastException(e.getMessage());
-        }
-        
-        
-    }
-    
-    
 }

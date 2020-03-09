@@ -1,13 +1,14 @@
 package com.xlx.majiang.interceptor;
 
 import com.xlx.majiang.common.validate.image.ImageCodeFilter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import javax.annotation.Resource;
 
 /**
  * web拦截器
@@ -18,7 +19,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 //@EnableWebMvc
 public class MyWebConfig implements WebMvcConfigurer{
   
-  @Autowired
+  @Resource
   private SessionInterceptor sessionInterceptor;
 
   @Override

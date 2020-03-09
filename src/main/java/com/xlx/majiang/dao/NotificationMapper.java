@@ -1,7 +1,7 @@
 package com.xlx.majiang.dao;
 
-import com.xlx.majiang.model.Notification;
-import com.xlx.majiang.model.NotificationExample;
+import com.xlx.majiang.entity.Notification;
+import com.xlx.majiang.entity.NotificationExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;

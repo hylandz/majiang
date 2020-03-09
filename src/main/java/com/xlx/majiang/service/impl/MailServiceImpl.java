@@ -1,6 +1,6 @@
 package com.xlx.majiang.service.impl;
 
-import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
+import com.xlx.majiang.enums.ErrorCodeEnum;
 import com.xlx.majiang.exception.CustomizeException;
 import com.xlx.majiang.service.IMailService;
 import org.slf4j.Logger;
@@ -44,7 +44,7 @@ public class MailServiceImpl implements IMailService {
 			javaMailSender.send(message);
 		}catch (MailException e){
 			logger.error("邮件发送异常:[{}]",e.getMessage());
-			throw new CustomizeException(CustomizeErrorCodeEnum.EMAIL_SEND_FAILED);
+			throw new CustomizeException(ErrorCodeEnum.EMAIL_SEND_FAILED);
 		}
 		return (System.currentTimeMillis() - start);
 
@@ -63,7 +63,7 @@ public class MailServiceImpl implements IMailService {
 			javaMailSender.send(mimeMessage);
 		} catch (MessagingException e) {
 			logger.error("发送html邮件时发生异常:[{}]",e.getMessage());
-			throw new CustomizeException(CustomizeErrorCodeEnum.EMAIL_SEND_FAILED);
+			throw new CustomizeException(ErrorCodeEnum.EMAIL_SEND_FAILED);
 		}
 		long end = System.currentTimeMillis();
 		return (end - start);
@@ -135,7 +135,7 @@ public class MailServiceImpl implements IMailService {
 			javaMailSender.send(message);
 		} catch (MessagingException e) {
 			logger.error("发送图片邮件异常:[{}]",e.getMessage());
-			throw new CustomizeException(CustomizeErrorCodeEnum.EMAIL_SEND_FAILED);
+			throw new CustomizeException(ErrorCodeEnum.EMAIL_SEND_FAILED);
 		}
 		long end = System.currentTimeMillis();
 		return (end - start);

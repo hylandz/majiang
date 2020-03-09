@@ -3,8 +3,8 @@ package com.xlx.majiang.controller;
 import com.xlx.majiang.common.constant.Constants;
 import com.xlx.majiang.tag.TagMenu;
 import com.xlx.majiang.dto.QuestionDTO;
-import com.xlx.majiang.model.Question;
-import com.xlx.majiang.model.User;
+import com.xlx.majiang.entity.Question;
+import com.xlx.majiang.entity.User;
 import com.xlx.majiang.service.QuestionService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +44,7 @@ public class PublishController {
   /**
    * 点击问题编辑时数据呈现
    * @param id questionId
-   * @param model model
+   * @param model entity
    * @return String
    */
   @GetMapping("/publish/{id}")
@@ -89,15 +89,15 @@ public class PublishController {
 
     //校验问题发布参数
     /*if (title == null || title == "") {
-      model.addAttribute("error", "标题不能为空");
+      entity.addAttribute("error", "标题不能为空");
       return "publish";
     }
     if (description == null || description == "") {
-      model.addAttribute("error", "问题补充不能为空");
+      entity.addAttribute("error", "问题补充不能为空");
       return "publish";
     }
     if (tag == null || tag == "") {
-      model.addAttribute("error", "标签不能为空");
+      entity.addAttribute("error", "标签不能为空");
       return "publish";
     }*/
 

@@ -1,8 +1,8 @@
-package com.xlx.majiang.controller;
+package com.xlx.majiang.controller.oauth;
 
-import com.xlx.majiang.dto.AccessTokenDTO2;
-import com.xlx.majiang.dto.GiteeUser;
-import com.xlx.majiang.model.User;
+import com.xlx.majiang.dto.oauth.GiteeAccessTokenDTO;
+import com.xlx.majiang.entity.oauth.GiteeUser;
+import com.xlx.majiang.entity.User;
 import com.xlx.majiang.provider.GiteeProvider;
 import com.xlx.majiang.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -23,7 +23,7 @@ import java.util.UUID;
  */
 @Slf4j
 @Controller
-public class OSChinaController {
+public class GiteeController {
     
     @Value("${gitee.client.id}")
     private String clientId;
@@ -45,9 +45,13 @@ public class OSChinaController {
      * @return .
      */
     @GetMapping("/callbackToMY")
-    public String callbackToMY(@RequestParam(name = "code") String code, HttpServletResponse response) {
-        AccessTokenDTO2 tokenDTO = new AccessTokenDTO2("authorization_code", code, clientId, redirectUri, clientSecret);
-        
+    public String callbackToMY(@RequestParam(name = "code") String code,
+                               @RequestParam(name = "state") String state,
+                               HttpServletResponse response) {
+        log.info("code={}",code);
+        log.info("state={}",state);
+        GiteeAccessTokenDTO tokenDTO = new GiteeAccessTokenDTO(code, clientId, clientSecret,redirectUri,"authorization_code",state);
+    
         String accessToken = giteeProvider.getAccessToken(tokenDTO);
         log.info("token:[{}]", accessToken);
         
@@ -63,5 +67,13 @@ public class OSChinaController {
         }
         return "redirect:/";
         
+    }
+    
+    public String refreshToken() {
+        // refreshToken是从第一次获取accessToken中返回的
+        GiteeAccessTokenDTO refreshToken = new GiteeAccessTokenDTO(clientId, clientSecret, "refresh_token", "");
+        
+        final String accessToken = giteeProvider.getAccessToken(refreshToken);
+        return accessToken;
     }
 }

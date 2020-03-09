@@ -1,8 +1,8 @@
 package com.xlx.majiang.dao;
 
 import com.xlx.majiang.dto.QuestionQueryDTO;
-import com.xlx.majiang.model.Question;
-import com.xlx.majiang.model.QuestionExample;
+import com.xlx.majiang.entity.Question;
+import com.xlx.majiang.entity.QuestionExample;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 

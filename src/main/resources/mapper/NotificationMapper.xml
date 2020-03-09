@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.xlx.majiang.dao.NotificationMapper">
-  <resultMap id="BaseResultMap" type="com.xlx.majiang.model.Notification">
+  <resultMap id="BaseResultMap" type="com.xlx.majiang.entity.Notification">
     <id column="ID" jdbcType="BIGINT" property="id" />
     <result column="NOTIFIER" jdbcType="BIGINT" property="notifier" />
     <result column="RECEIVER" jdbcType="BIGINT" property="receiver" />
@@ -75,7 +75,7 @@
     ID, NOTIFIER, RECEIVER, OUTER_ID, TYPE, STATUS, NOTIFIER_NAME, OUTER_TITLE, GMT_CREATE, 
     GMT_MODIFIED
   </sql>
-  <select id="selectByExample" parameterType="com.xlx.majiang.model.NotificationExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.xlx.majiang.entity.NotificationExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
@@ -99,13 +99,13 @@
     delete from NOTIFICATION
     where ID = #{id,jdbcType=BIGINT}
   </delete>
-  <delete id="deleteByExample" parameterType="com.xlx.majiang.model.NotificationExample">
+  <delete id="deleteByExample" parameterType="com.xlx.majiang.entity.NotificationExample">
     delete from NOTIFICATION
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.xlx.majiang.model.Notification">
+  <insert id="insert" parameterType="com.xlx.majiang.entity.Notification">
     insert into NOTIFICATION (ID, NOTIFIER, RECEIVER, 
       OUTER_ID, TYPE, STATUS, 
       NOTIFIER_NAME, OUTER_TITLE, GMT_CREATE, 
@@ -115,7 +115,7 @@
       #{notifierName,jdbcType=VARCHAR}, #{outerTitle,jdbcType=VARCHAR}, #{gmtCreate,jdbcType=BIGINT}, 
       #{gmtModified,jdbcType=BIGINT})
   </insert>
-  <insert id="insertSelective" parameterType="com.xlx.majiang.model.Notification">
+  <insert id="insertSelective" parameterType="com.xlx.majiang.entity.Notification">
     insert into NOTIFICATION
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -182,7 +182,7 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.xlx.majiang.model.NotificationExample" resultType="java.lang.Long">
+  <select id="countByExample" parameterType="com.xlx.majiang.entity.NotificationExample" resultType="java.lang.Long">
     select count(*) from NOTIFICATION
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
@@ -242,7 +242,7 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.xlx.majiang.model.Notification">
+  <update id="updateByPrimaryKeySelective" parameterType="com.xlx.majiang.entity.Notification">
     update NOTIFICATION
     <set>
       <if test="notifier != null">
@@ -275,7 +275,7 @@
     </set>
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.xlx.majiang.model.Notification">
+  <update id="updateByPrimaryKey" parameterType="com.xlx.majiang.entity.Notification">
     update NOTIFICATION
     set NOTIFIER = #{notifier,jdbcType=BIGINT},
       RECEIVER = #{receiver,jdbcType=BIGINT},
@@ -288,7 +288,7 @@
       GMT_MODIFIED = #{gmtModified,jdbcType=BIGINT}
     where ID = #{id,jdbcType=BIGINT}
   </update>
-  <select id="selectByExampleWithRowbounds" parameterType="com.xlx.majiang.model.NotificationExample" resultMap="BaseResultMap">
+  <select id="selectByExampleWithRowbounds" parameterType="com.xlx.majiang.entity.NotificationExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct

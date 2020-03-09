@@ -3,14 +3,14 @@ package com.xlx.majiang.service;
 import com.xlx.majiang.dto.PaginationDTO;
 import com.xlx.majiang.dto.QuestionDTO;
 import com.xlx.majiang.dto.QuestionQueryDTO;
-import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
+import com.xlx.majiang.enums.ErrorCodeEnum;
 import com.xlx.majiang.exception.CustomizeException;
 import com.xlx.majiang.dao.QuestionExtraMapper;
 import com.xlx.majiang.dao.QuestionMapper;
 import com.xlx.majiang.dao.UserMapper;
-import com.xlx.majiang.model.Question;
-import com.xlx.majiang.model.QuestionExample;
-import com.xlx.majiang.model.User;
+import com.xlx.majiang.entity.Question;
+import com.xlx.majiang.entity.QuestionExample;
+import com.xlx.majiang.entity.User;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
@@ -169,7 +169,7 @@ public class QuestionService {
 
 			int n = questionMapper.updateByExampleSelective(updateQuestion, questionExample);
 			if (n != 1) {
-				throw new CustomizeException(CustomizeErrorCodeEnum.QUESTION_NOT_FOUND);
+				throw new CustomizeException(ErrorCodeEnum.QUESTION_NOT_FOUND);
 			}
 		}
 	}
@@ -184,7 +184,7 @@ public class QuestionService {
 	public QuestionDTO getQuestionById(Long qId) {
 		Question question = questionMapper.selectByPrimaryKey(qId);
 		if (question == null) {
-			throw new CustomizeException(CustomizeErrorCodeEnum.QUESTION_NOT_FOUND);
+			throw new CustomizeException(ErrorCodeEnum.QUESTION_NOT_FOUND);
 		}
 
 		QuestionDTO questionDTO = new QuestionDTO();

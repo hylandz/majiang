@@ -1,6 +1,6 @@
 package com.xlx.majiang.dao;
 
-import com.xlx.majiang.model.Comment;
+import com.xlx.majiang.entity.Comment;
 
 /**
  * @author: xielx on 2019/6/24

@@ -1,16 +1,16 @@
-package com.xlx.majiang.model;
+package com.xlx.majiang.entity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationExample {
+public class QuestionExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public NotificationExample() {
+    public QuestionExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -164,443 +164,383 @@ public class NotificationExample {
             return (Criteria) this;
         }
 
-        public Criteria andNotifierIsNull() {
-            addCriterion("NOTIFIER is null");
+        public Criteria andTitleIsNull() {
+            addCriterion("TITLE is null");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierIsNotNull() {
-            addCriterion("NOTIFIER is not null");
+        public Criteria andTitleIsNotNull() {
+            addCriterion("TITLE is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierEqualTo(Long value) {
-            addCriterion("NOTIFIER =", value, "notifier");
+        public Criteria andTitleEqualTo(String value) {
+            addCriterion("TITLE =", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierNotEqualTo(Long value) {
-            addCriterion("NOTIFIER <>", value, "notifier");
+        public Criteria andTitleNotEqualTo(String value) {
+            addCriterion("TITLE <>", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierGreaterThan(Long value) {
-            addCriterion("NOTIFIER >", value, "notifier");
+        public Criteria andTitleGreaterThan(String value) {
+            addCriterion("TITLE >", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierGreaterThanOrEqualTo(Long value) {
-            addCriterion("NOTIFIER >=", value, "notifier");
+        public Criteria andTitleGreaterThanOrEqualTo(String value) {
+            addCriterion("TITLE >=", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierLessThan(Long value) {
-            addCriterion("NOTIFIER <", value, "notifier");
+        public Criteria andTitleLessThan(String value) {
+            addCriterion("TITLE <", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierLessThanOrEqualTo(Long value) {
-            addCriterion("NOTIFIER <=", value, "notifier");
+        public Criteria andTitleLessThanOrEqualTo(String value) {
+            addCriterion("TITLE <=", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierIn(List<Long> values) {
-            addCriterion("NOTIFIER in", values, "notifier");
+        public Criteria andTitleLike(String value) {
+            addCriterion("TITLE like", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierNotIn(List<Long> values) {
-            addCriterion("NOTIFIER not in", values, "notifier");
+        public Criteria andTitleNotLike(String value) {
+            addCriterion("TITLE not like", value, "title");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierBetween(Long value1, Long value2) {
-            addCriterion("NOTIFIER between", value1, value2, "notifier");
+        public Criteria andTitleIn(List<String> values) {
+            addCriterion("TITLE in", values, "title");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierNotBetween(Long value1, Long value2) {
-            addCriterion("NOTIFIER not between", value1, value2, "notifier");
+        public Criteria andTitleNotIn(List<String> values) {
+            addCriterion("TITLE not in", values, "title");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverIsNull() {
-            addCriterion("RECEIVER is null");
+        public Criteria andTitleBetween(String value1, String value2) {
+            addCriterion("TITLE between", value1, value2, "title");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverIsNotNull() {
-            addCriterion("RECEIVER is not null");
+        public Criteria andTitleNotBetween(String value1, String value2) {
+            addCriterion("TITLE not between", value1, value2, "title");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverEqualTo(Long value) {
-            addCriterion("RECEIVER =", value, "receiver");
+        public Criteria andCommentCountIsNull() {
+            addCriterion("COMMENT_COUNT is null");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverNotEqualTo(Long value) {
-            addCriterion("RECEIVER <>", value, "receiver");
+        public Criteria andCommentCountIsNotNull() {
+            addCriterion("COMMENT_COUNT is not null");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverGreaterThan(Long value) {
-            addCriterion("RECEIVER >", value, "receiver");
+        public Criteria andCommentCountEqualTo(Integer value) {
+            addCriterion("COMMENT_COUNT =", value, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverGreaterThanOrEqualTo(Long value) {
-            addCriterion("RECEIVER >=", value, "receiver");
+        public Criteria andCommentCountNotEqualTo(Integer value) {
+            addCriterion("COMMENT_COUNT <>", value, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverLessThan(Long value) {
-            addCriterion("RECEIVER <", value, "receiver");
+        public Criteria andCommentCountGreaterThan(Integer value) {
+            addCriterion("COMMENT_COUNT >", value, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverLessThanOrEqualTo(Long value) {
-            addCriterion("RECEIVER <=", value, "receiver");
+        public Criteria andCommentCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("COMMENT_COUNT >=", value, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverIn(List<Long> values) {
-            addCriterion("RECEIVER in", values, "receiver");
+        public Criteria andCommentCountLessThan(Integer value) {
+            addCriterion("COMMENT_COUNT <", value, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverNotIn(List<Long> values) {
-            addCriterion("RECEIVER not in", values, "receiver");
+        public Criteria andCommentCountLessThanOrEqualTo(Integer value) {
+            addCriterion("COMMENT_COUNT <=", value, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverBetween(Long value1, Long value2) {
-            addCriterion("RECEIVER between", value1, value2, "receiver");
+        public Criteria andCommentCountIn(List<Integer> values) {
+            addCriterion("COMMENT_COUNT in", values, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andReceiverNotBetween(Long value1, Long value2) {
-            addCriterion("RECEIVER not between", value1, value2, "receiver");
+        public Criteria andCommentCountNotIn(List<Integer> values) {
+            addCriterion("COMMENT_COUNT not in", values, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andOuterIdIsNull() {
-            addCriterion("OUTER_ID is null");
+        public Criteria andCommentCountBetween(Integer value1, Integer value2) {
+            addCriterion("COMMENT_COUNT between", value1, value2, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andOuterIdIsNotNull() {
-            addCriterion("OUTER_ID is not null");
+        public Criteria andCommentCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("COMMENT_COUNT not between", value1, value2, "commentCount");
             return (Criteria) this;
         }
 
-        public Criteria andOuterIdEqualTo(Long value) {
-            addCriterion("OUTER_ID =", value, "outerId");
+        public Criteria andViewCountIsNull() {
+            addCriterion("VIEW_COUNT is null");
             return (Criteria) this;
         }
 
-        public Criteria andOuterIdNotEqualTo(Long value) {
-            addCriterion("OUTER_ID <>", value, "outerId");
+        public Criteria andViewCountIsNotNull() {
+            addCriterion("VIEW_COUNT is not null");
             return (Criteria) this;
         }
 
-        public Criteria andOuterIdGreaterThan(Long value) {
-            addCriterion("OUTER_ID >", value, "outerId");
+        public Criteria andViewCountEqualTo(Integer value) {
+            addCriterion("VIEW_COUNT =", value, "viewCount");
             return (Criteria) this;
         }
 
-        public Criteria andOuterIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("OUTER_ID >=", value, "outerId");
+        public Criteria andViewCountNotEqualTo(Integer value) {
+            addCriterion("VIEW_COUNT <>", value, "viewCount");
             return (Criteria) this;
         }
 
-        public Criteria andOuterIdLessThan(Long value) {
-            addCriterion("OUTER_ID <", value, "outerId");
+        public Criteria andViewCountGreaterThan(Integer value) {
+            addCriterion("VIEW_COUNT >", value, "viewCount");
             return (Criteria) this;
         }
 
-        public Criteria andOuterIdLessThanOrEqualTo(Long value) {
-            addCriterion("OUTER_ID <=", value, "outerId");
+        public Criteria andViewCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("VIEW_COUNT >=", value, "viewCount");
             return (Criteria) this;
         }
 
-        public Criteria andOuterIdIn(List<Long> values) {
-            addCriterion("OUTER_ID in", values, "outerId");
+        public Criteria andViewCountLessThan(Integer value) {
+            addCriterion("VIEW_COUNT <", value, "viewCount");
             return (Criteria) this;
         }
 
-        public Criteria andOuterIdNotIn(List<Long> values) {
-            addCriterion("OUTER_ID not in", values, "outerId");
+        public Criteria andViewCountLessThanOrEqualTo(Integer value) {
+            addCriterion("VIEW_COUNT <=", value, "viewCount");
             return (Criteria) this;
         }
 
-        public Criteria andOuterIdBetween(Long value1, Long value2) {
-            addCriterion("OUTER_ID between", value1, value2, "outerId");
+        public Criteria andViewCountIn(List<Integer> values) {
+            addCriterion("VIEW_COUNT in", values, "viewCount");
             return (Criteria) this;
         }
 
-        public Criteria andOuterIdNotBetween(Long value1, Long value2) {
-            addCriterion("OUTER_ID not between", value1, value2, "outerId");
+        public Criteria andViewCountNotIn(List<Integer> values) {
+            addCriterion("VIEW_COUNT not in", values, "viewCount");
             return (Criteria) this;
         }
 
-        public Criteria andTypeIsNull() {
-            addCriterion("TYPE is null");
+        public Criteria andViewCountBetween(Integer value1, Integer value2) {
+            addCriterion("VIEW_COUNT between", value1, value2, "viewCount");
             return (Criteria) this;
         }
 
-        public Criteria andTypeIsNotNull() {
-            addCriterion("TYPE is not null");
+        public Criteria andViewCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("VIEW_COUNT not between", value1, value2, "viewCount");
             return (Criteria) this;
         }
 
-        public Criteria andTypeEqualTo(Integer value) {
-            addCriterion("TYPE =", value, "type");
+        public Criteria andLikeCountIsNull() {
+            addCriterion("LIKE_COUNT is null");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotEqualTo(Integer value) {
-            addCriterion("TYPE <>", value, "type");
+        public Criteria andLikeCountIsNotNull() {
+            addCriterion("LIKE_COUNT is not null");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThan(Integer value) {
-            addCriterion("TYPE >", value, "type");
+        public Criteria andLikeCountEqualTo(Integer value) {
+            addCriterion("LIKE_COUNT =", value, "likeCount");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThanOrEqualTo(Integer value) {
-            addCriterion("TYPE >=", value, "type");
+        public Criteria andLikeCountNotEqualTo(Integer value) {
+            addCriterion("LIKE_COUNT <>", value, "likeCount");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThan(Integer value) {
-            addCriterion("TYPE <", value, "type");
+        public Criteria andLikeCountGreaterThan(Integer value) {
+            addCriterion("LIKE_COUNT >", value, "likeCount");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThanOrEqualTo(Integer value) {
-            addCriterion("TYPE <=", value, "type");
+        public Criteria andLikeCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("LIKE_COUNT >=", value, "likeCount");
             return (Criteria) this;
         }
 
-        public Criteria andTypeIn(List<Integer> values) {
-            addCriterion("TYPE in", values, "type");
+        public Criteria andLikeCountLessThan(Integer value) {
+            addCriterion("LIKE_COUNT <", value, "likeCount");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotIn(List<Integer> values) {
-            addCriterion("TYPE not in", values, "type");
+        public Criteria andLikeCountLessThanOrEqualTo(Integer value) {
+            addCriterion("LIKE_COUNT <=", value, "likeCount");
             return (Criteria) this;
         }
 
-        public Criteria andTypeBetween(Integer value1, Integer value2) {
-            addCriterion("TYPE between", value1, value2, "type");
+        public Criteria andLikeCountIn(List<Integer> values) {
+            addCriterion("LIKE_COUNT in", values, "likeCount");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotBetween(Integer value1, Integer value2) {
-            addCriterion("TYPE not between", value1, value2, "type");
+        public Criteria andLikeCountNotIn(List<Integer> values) {
+            addCriterion("LIKE_COUNT not in", values, "likeCount");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNull() {
-            addCriterion("STATUS is null");
+        public Criteria andLikeCountBetween(Integer value1, Integer value2) {
+            addCriterion("LIKE_COUNT between", value1, value2, "likeCount");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIsNotNull() {
-            addCriterion("STATUS is not null");
+        public Criteria andLikeCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("LIKE_COUNT not between", value1, value2, "likeCount");
             return (Criteria) this;
         }
 
-        public Criteria andStatusEqualTo(Integer value) {
-            addCriterion("STATUS =", value, "status");
+        public Criteria andTagIsNull() {
+            addCriterion("TAG is null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotEqualTo(Integer value) {
-            addCriterion("STATUS <>", value, "status");
+        public Criteria andTagIsNotNull() {
+            addCriterion("TAG is not null");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThan(Integer value) {
-            addCriterion("STATUS >", value, "status");
+        public Criteria andTagEqualTo(String value) {
+            addCriterion("TAG =", value, "tag");
             return (Criteria) this;
         }
 
-        public Criteria andStatusGreaterThanOrEqualTo(Integer value) {
-            addCriterion("STATUS >=", value, "status");
+        public Criteria andTagNotEqualTo(String value) {
+            addCriterion("TAG <>", value, "tag");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThan(Integer value) {
-            addCriterion("STATUS <", value, "status");
+        public Criteria andTagGreaterThan(String value) {
+            addCriterion("TAG >", value, "tag");
             return (Criteria) this;
         }
 
-        public Criteria andStatusLessThanOrEqualTo(Integer value) {
-            addCriterion("STATUS <=", value, "status");
+        public Criteria andTagGreaterThanOrEqualTo(String value) {
+            addCriterion("TAG >=", value, "tag");
             return (Criteria) this;
         }
 
-        public Criteria andStatusIn(List<Integer> values) {
-            addCriterion("STATUS in", values, "status");
+        public Criteria andTagLessThan(String value) {
+            addCriterion("TAG <", value, "tag");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotIn(List<Integer> values) {
-            addCriterion("STATUS not in", values, "status");
+        public Criteria andTagLessThanOrEqualTo(String value) {
+            addCriterion("TAG <=", value, "tag");
             return (Criteria) this;
         }
 
-        public Criteria andStatusBetween(Integer value1, Integer value2) {
-            addCriterion("STATUS between", value1, value2, "status");
+        public Criteria andTagLike(String value) {
+            addCriterion("TAG like", value, "tag");
             return (Criteria) this;
         }
 
-        public Criteria andStatusNotBetween(Integer value1, Integer value2) {
-            addCriterion("STATUS not between", value1, value2, "status");
+        public Criteria andTagNotLike(String value) {
+            addCriterion("TAG not like", value, "tag");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierNameIsNull() {
-            addCriterion("NOTIFIER_NAME is null");
+        public Criteria andTagIn(List<String> values) {
+            addCriterion("TAG in", values, "tag");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierNameIsNotNull() {
-            addCriterion("NOTIFIER_NAME is not null");
+        public Criteria andTagNotIn(List<String> values) {
+            addCriterion("TAG not in", values, "tag");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierNameEqualTo(String value) {
-            addCriterion("NOTIFIER_NAME =", value, "notifierName");
+        public Criteria andTagBetween(String value1, String value2) {
+            addCriterion("TAG between", value1, value2, "tag");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierNameNotEqualTo(String value) {
-            addCriterion("NOTIFIER_NAME <>", value, "notifierName");
+        public Criteria andTagNotBetween(String value1, String value2) {
+            addCriterion("TAG not between", value1, value2, "tag");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierNameGreaterThan(String value) {
-            addCriterion("NOTIFIER_NAME >", value, "notifierName");
+        public Criteria andCreatorIsNull() {
+            addCriterion("CREATOR is null");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierNameGreaterThanOrEqualTo(String value) {
-            addCriterion("NOTIFIER_NAME >=", value, "notifierName");
+        public Criteria andCreatorIsNotNull() {
+            addCriterion("CREATOR is not null");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierNameLessThan(String value) {
-            addCriterion("NOTIFIER_NAME <", value, "notifierName");
+        public Criteria andCreatorEqualTo(Long value) {
+            addCriterion("CREATOR =", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierNameLessThanOrEqualTo(String value) {
-            addCriterion("NOTIFIER_NAME <=", value, "notifierName");
+        public Criteria andCreatorNotEqualTo(Long value) {
+            addCriterion("CREATOR <>", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierNameLike(String value) {
-            addCriterion("NOTIFIER_NAME like", value, "notifierName");
+        public Criteria andCreatorGreaterThan(Long value) {
+            addCriterion("CREATOR >", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierNameNotLike(String value) {
-            addCriterion("NOTIFIER_NAME not like", value, "notifierName");
+        public Criteria andCreatorGreaterThanOrEqualTo(Long value) {
+            addCriterion("CREATOR >=", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierNameIn(List<String> values) {
-            addCriterion("NOTIFIER_NAME in", values, "notifierName");
+        public Criteria andCreatorLessThan(Long value) {
+            addCriterion("CREATOR <", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierNameNotIn(List<String> values) {
-            addCriterion("NOTIFIER_NAME not in", values, "notifierName");
+        public Criteria andCreatorLessThanOrEqualTo(Long value) {
+            addCriterion("CREATOR <=", value, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierNameBetween(String value1, String value2) {
-            addCriterion("NOTIFIER_NAME between", value1, value2, "notifierName");
+        public Criteria andCreatorIn(List<Long> values) {
+            addCriterion("CREATOR in", values, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andNotifierNameNotBetween(String value1, String value2) {
-            addCriterion("NOTIFIER_NAME not between", value1, value2, "notifierName");
+        public Criteria andCreatorNotIn(List<Long> values) {
+            addCriterion("CREATOR not in", values, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andOuterTitleIsNull() {
-            addCriterion("OUTER_TITLE is null");
+        public Criteria andCreatorBetween(Long value1, Long value2) {
+            addCriterion("CREATOR between", value1, value2, "creator");
             return (Criteria) this;
         }
 
-        public Criteria andOuterTitleIsNotNull() {
-            addCriterion("OUTER_TITLE is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andOuterTitleEqualTo(String value) {
-            addCriterion("OUTER_TITLE =", value, "outerTitle");
-            return (Criteria) this;
-        }
-
-        public Criteria andOuterTitleNotEqualTo(String value) {
-            addCriterion("OUTER_TITLE <>", value, "outerTitle");
-            return (Criteria) this;
-        }
-
-        public Criteria andOuterTitleGreaterThan(String value) {
-            addCriterion("OUTER_TITLE >", value, "outerTitle");
-            return (Criteria) this;
-        }
-
-        public Criteria andOuterTitleGreaterThanOrEqualTo(String value) {
-            addCriterion("OUTER_TITLE >=", value, "outerTitle");
-            return (Criteria) this;
-        }
-
-        public Criteria andOuterTitleLessThan(String value) {
-            addCriterion("OUTER_TITLE <", value, "outerTitle");
-            return (Criteria) this;
-        }
-
-        public Criteria andOuterTitleLessThanOrEqualTo(String value) {
-            addCriterion("OUTER_TITLE <=", value, "outerTitle");
-            return (Criteria) this;
-        }
-
-        public Criteria andOuterTitleLike(String value) {
-            addCriterion("OUTER_TITLE like", value, "outerTitle");
-            return (Criteria) this;
-        }
-
-        public Criteria andOuterTitleNotLike(String value) {
-            addCriterion("OUTER_TITLE not like", value, "outerTitle");
-            return (Criteria) this;
-        }
-
-        public Criteria andOuterTitleIn(List<String> values) {
-            addCriterion("OUTER_TITLE in", values, "outerTitle");
-            return (Criteria) this;
-        }
-
-        public Criteria andOuterTitleNotIn(List<String> values) {
-            addCriterion("OUTER_TITLE not in", values, "outerTitle");
-            return (Criteria) this;
-        }
-
-        public Criteria andOuterTitleBetween(String value1, String value2) {
-            addCriterion("OUTER_TITLE between", value1, value2, "outerTitle");
-            return (Criteria) this;
-        }
-
-        public Criteria andOuterTitleNotBetween(String value1, String value2) {
-            addCriterion("OUTER_TITLE not between", value1, value2, "outerTitle");
+        public Criteria andCreatorNotBetween(Long value1, Long value2) {
+            addCriterion("CREATOR not between", value1, value2, "creator");
             return (Criteria) this;
         }
 

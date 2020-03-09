@@ -1,13 +1,17 @@
-package com.xlx.majiang.exception;
+package com.xlx.majiang.enums;
+
+import com.xlx.majiang.exception.ICustomizeErrorCode;
 
 /**
  * 异常枚举:
  * 提供各种自定义异常
  * @author xielx on date 2019/6/22
  **/
-public enum CustomizeErrorCodeEnum implements  ICustomizeErrorCode{
-
-
+public enum ErrorCodeEnum implements ICustomizeErrorCode {
+  
+  
+  GET_USER_INFO_FAILED(10001,"获取用户信息失败"),
+  GET_ACCESS_TOKEN_FAILED(10002,"获取access_token失败"),
   QUESTION_NOT_FOUND(2001,"你找到的问题不在了,换个试试?"),
   TARGET_PARAM_NOT_FOUND(2002, "未选中任何问题或评论进行回复"),
   NOT_LOGIN(2003, "当前操作需要登录，请登陆后重试"),
@@ -34,7 +38,7 @@ public enum CustomizeErrorCodeEnum implements  ICustomizeErrorCode{
   private String message;
 
 
-  CustomizeErrorCodeEnum(Integer code, String message) {
+  ErrorCodeEnum(Integer code, String message) {
     this.code = code;
     this.message = message;
   }

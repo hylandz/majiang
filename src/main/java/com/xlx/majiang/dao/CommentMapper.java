@@ -1,7 +1,7 @@
 package com.xlx.majiang.dao;
 
-import com.xlx.majiang.model.Comment;
-import com.xlx.majiang.model.CommentExample;
+import com.xlx.majiang.entity.Comment;
+import com.xlx.majiang.entity.CommentExample;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.RowBounds;
 

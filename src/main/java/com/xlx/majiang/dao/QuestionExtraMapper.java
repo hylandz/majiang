@@ -1,6 +1,6 @@
 package com.xlx.majiang.dao;
 
-import com.xlx.majiang.model.Question;
+import com.xlx.majiang.entity.Question;
 
 import java.util.List;
 

@@ -5,9 +5,9 @@ import com.xlx.majiang.dto.CommentCreateDTO;
 import com.xlx.majiang.dto.CommentDTO;
 import com.xlx.majiang.dto.ResultDTO;
 import com.xlx.majiang.common.enums.CommentTypeEnum;
-import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
-import com.xlx.majiang.model.Comment;
-import com.xlx.majiang.model.User;
+import com.xlx.majiang.enums.ErrorCodeEnum;
+import com.xlx.majiang.entity.Comment;
+import com.xlx.majiang.entity.User;
 import com.xlx.majiang.service.CommentService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -44,11 +44,11 @@ public class CommentController {
     
     User user = (User) request.getSession().getAttribute(Constants.USER_SESSION);
     if (user == null){
-      return ResultDTO.errorOf(CustomizeErrorCodeEnum.NOT_LOGIN);
+      return ResultDTO.errorOf(ErrorCodeEnum.NOT_LOGIN);
     }
     
     if(commentCreateDTO == null || StringUtils.isBlank(commentCreateDTO.getContent())){
-      return ResultDTO.errorOf(CustomizeErrorCodeEnum.CONTENTS_IS_EMPTY);
+      return ResultDTO.errorOf(ErrorCodeEnum.CONTENTS_IS_EMPTY);
     }
     
     Comment comment = new Comment();

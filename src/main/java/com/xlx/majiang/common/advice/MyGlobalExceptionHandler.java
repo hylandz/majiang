@@ -2,7 +2,7 @@ package com.xlx.majiang.common.advice;
 
 import com.alibaba.fastjson.JSON;
 import com.xlx.majiang.dto.ResultDTO;
-import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
+import com.xlx.majiang.enums.ErrorCodeEnum;
 import com.xlx.majiang.exception.CustomizeException;
 import com.xlx.majiang.exception.ValidateCodeException;
 import lombok.extern.slf4j.Slf4j;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  */
 @Slf4j
 @ControllerAdvice(basePackages = "com.xlx.majiang")
-public class CustomizeExceptionHandler {
+public class MyGlobalExceptionHandler {
 
   @ExceptionHandler(ValidateCodeException.class)
   @ResponseBody
@@ -57,7 +57,7 @@ public class CustomizeExceptionHandler {
         errMap = bindingResult.getFieldErrors().stream().collect(Collectors.toMap(FieldError::getField,FieldError::getDefaultMessage));
         log.error("参数校验异常:{}",errMap);
     }
-    return ResultDTO.errorOf(CustomizeErrorCodeEnum.PARAMS_VALIDATE_ERROR,errMap);
+    return ResultDTO.errorOf(ErrorCodeEnum.PARAMS_VALIDATE_ERROR,errMap);
   }
   
   
@@ -78,7 +78,7 @@ public class CustomizeExceptionHandler {
                         .collect(Collectors.toMap(ConstraintViolation::getPropertyPath, ConstraintViolation::getMessage));
       log.error("ConstraintViolationException are:[{}]", errMap);
     }
-    return ResultDTO.errorOf(CustomizeErrorCodeEnum.PARAMS_VALIDATE_ERROR,errMap);
+    return ResultDTO.errorOf(ErrorCodeEnum.PARAMS_VALIDATE_ERROR,errMap);
   }
   
   
@@ -92,7 +92,7 @@ public class CustomizeExceptionHandler {
       if (t instanceof CustomizeException) {
         resultDTO = ResultDTO.errorOf((CustomizeException) t);
       } else {
-        resultDTO = ResultDTO.errorOf(CustomizeErrorCodeEnum.SYS_ERROR);
+        resultDTO = ResultDTO.errorOf(ErrorCodeEnum.SYS_ERROR);
       }
 
 

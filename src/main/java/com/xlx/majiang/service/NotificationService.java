@@ -4,12 +4,12 @@ import com.xlx.majiang.dto.NotificationDTO;
 import com.xlx.majiang.dto.PaginationDTO;
 import com.xlx.majiang.common.enums.NotificationStatusEnum;
 import com.xlx.majiang.common.enums.NotificationTypeEnum;
-import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
+import com.xlx.majiang.enums.ErrorCodeEnum;
 import com.xlx.majiang.exception.CustomizeException;
 import com.xlx.majiang.dao.NotificationMapper;
-import com.xlx.majiang.model.Notification;
-import com.xlx.majiang.model.NotificationExample;
-import com.xlx.majiang.model.User;
+import com.xlx.majiang.entity.Notification;
+import com.xlx.majiang.entity.NotificationExample;
+import com.xlx.majiang.entity.User;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -104,11 +104,11 @@ public class NotificationService {
 
     Notification notification = notificationMapper.selectByPrimaryKey(id);
     if (notification == null){
-      throw new CustomizeException(CustomizeErrorCodeEnum.NOTIFICATION_NOT_FOUND);
+      throw new CustomizeException(ErrorCodeEnum.NOTIFICATION_NOT_FOUND);
     }
 
     if (!Objects.equals(notification.getReceiver(),user.getId())){
-      throw new CustomizeException(CustomizeErrorCodeEnum.READ_NOTIFICATION_FAIL);
+      throw new CustomizeException(ErrorCodeEnum.READ_NOTIFICATION_FAIL);
     }
     //消息已读
     notification.setStatus(NotificationStatusEnum.READ.getStatus());

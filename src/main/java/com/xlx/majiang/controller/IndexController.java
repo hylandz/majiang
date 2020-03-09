@@ -31,7 +31,7 @@ public class IndexController {
      *
      * @param page  当前页
      * @param size  页面容量
-     * @param model model
+     * @param model entity
      * @return String
      */
     @GetMapping("/")

@@ -1,4 +1,4 @@
-package com.xlx.majiang.dto;
+package com.xlx.majiang.entity.oauth;
 
 import lombok.Data;
 

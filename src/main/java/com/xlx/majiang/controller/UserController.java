@@ -8,8 +8,8 @@ import com.xlx.majiang.common.validate.image.ImageCode;
 import com.xlx.majiang.dto.LoginDTO;
 import com.xlx.majiang.dto.RegisterDTO;
 import com.xlx.majiang.dto.ResultDTO;
-import com.xlx.majiang.exception.CustomizeErrorCodeEnum;
-import com.xlx.majiang.model.User;
+import com.xlx.majiang.enums.ErrorCodeEnum;
+import com.xlx.majiang.entity.User;
 import com.xlx.majiang.service.IMailService;
 import com.xlx.majiang.service.NotificationService;
 import com.xlx.majiang.service.RedisService;
@@ -115,7 +115,7 @@ public class UserController {
             return ResultDTO.okOf();
         } else {
             
-            return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_SEND_FAILED);
+            return ResultDTO.errorOf(ErrorCodeEnum.EMAIL_SEND_FAILED);
         }
     }
     
@@ -131,7 +131,7 @@ public class UserController {
         logger.info("验证码:[{}]", emailCode);
         //校验参数
         if (StringUtils.isEmpty(emailCode)) {
-            return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_CODE_IS_NULL);
+            return ResultDTO.errorOf(ErrorCodeEnum.EMAIL_CODE_IS_NULL);
         }
         
         Long ttl = redisService.getStringTTL(Constants.EMAIL_CODE);
@@ -140,7 +140,7 @@ public class UserController {
         logger.info("ttl=[{}],code=[{}]", ttl, code);
         //失效
         if (ttl < 0 || code == null) {
-            return ResultDTO.errorOf(CustomizeErrorCodeEnum.EMAIL_CODE_IS_NOT_AVAILABLE);
+            return ResultDTO.errorOf(ErrorCodeEnum.EMAIL_CODE_IS_NOT_AVAILABLE);
         }
         
         if (emailCode.equals(code)) {
@@ -148,7 +148,7 @@ public class UserController {
             return ResultDTO.okOf();
         }
         
-        return ResultDTO.errorOf(CustomizeErrorCodeEnum.CAPTCHA_WRONG);
+        return ResultDTO.errorOf(ErrorCodeEnum.CAPTCHA_WRONG);
     }
     
     /**
@@ -166,16 +166,16 @@ public class UserController {
         logger.info("接收参数:[{}]", loginDTO);
         //检验参数
         if (loginDTO.getUsername() == null) {
-            //model.addAttribute("error", "用户名不能为空");
-            return ResultDTO.errorOf(CustomizeErrorCodeEnum.ACCOUNT_IS_NULL);
+            //entity.addAttribute("error", "用户名不能为空");
+            return ResultDTO.errorOf(ErrorCodeEnum.ACCOUNT_IS_NULL);
         }
         if (StringUtils.isEmpty(loginDTO.getPassword())) {
-            //model.addAttribute("error", "密码不能为空");
-            return ResultDTO.errorOf(CustomizeErrorCodeEnum.CREDENTIALS_IS_NULL);
+            //entity.addAttribute("error", "密码不能为空");
+            return ResultDTO.errorOf(ErrorCodeEnum.CREDENTIALS_IS_NULL);
         }
         
        /* if (loginDTO.getImageCode() == null || !"jetb".equalsIgnoreCase(loginDTO.getImageCode())) {
-            //model.addAttribute("error", "验证码错误");
+            //entity.addAttribute("error", "验证码错误");
             return ResultDTO.errorOf(CustomizeErrorCodeEnum.CAPTCHA_WRONG);
         }*/
         
@@ -196,8 +196,8 @@ public class UserController {
             return ResultDTO.okOf();
         }
         
-        //model.addAttribute("error","用户名或密码错误");
-        return ResultDTO.errorOf(CustomizeErrorCodeEnum.UNAUTHENTICATED);
+        //entity.addAttribute("error","用户名或密码错误");
+        return ResultDTO.errorOf(ErrorCodeEnum.UNAUTHENTICATED);
         
     }
     
