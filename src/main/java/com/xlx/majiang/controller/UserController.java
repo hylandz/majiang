@@ -151,55 +151,6 @@ public class UserController {
         return ResultDTO.errorOf(ErrorCodeEnum.CAPTCHA_WRONG);
     }
     
-    /**
-     * 登录验证
-     *
-     * @param request  req
-     * @param response res
-     * @return dto
-     */
-    @PostMapping("/login")
-    @ResponseBody
-    public ResultDTO doLogin(LoginDTO loginDTO, HttpServletRequest request, HttpServletResponse response) {
-        
-        
-        logger.info("接收参数:[{}]", loginDTO);
-        //检验参数
-        if (loginDTO.getUsername() == null) {
-            //entity.addAttribute("error", "用户名不能为空");
-            return ResultDTO.errorOf(ErrorCodeEnum.ACCOUNT_IS_NULL);
-        }
-        if (StringUtils.isEmpty(loginDTO.getPassword())) {
-            //entity.addAttribute("error", "密码不能为空");
-            return ResultDTO.errorOf(ErrorCodeEnum.CREDENTIALS_IS_NULL);
-        }
-        
-       /* if (loginDTO.getImageCode() == null || !"jetb".equalsIgnoreCase(loginDTO.getImageCode())) {
-            //entity.addAttribute("error", "验证码错误");
-            return ResultDTO.errorOf(CustomizeErrorCodeEnum.CAPTCHA_WRONG);
-        }*/
-        
-        User user = userService.findUserByPwd(loginDTO.getUsername());
-        if (user != null) {
-            if (loginDTO.getRememberMe()) {
-                //记住我
-                Cookie cookie = new Cookie("token", user.getToken());
-                cookie.setMaxAge(7 * 24 * 60 * 60);
-                cookie.setPath("/");
-                response.addCookie(cookie);
-            } else {
-                //不记住
-                request.getSession().setAttribute(Constants.USER_SESSION, user);
-                Long unReadCount = notificationService.unReadCount(user.getId());
-                request.getSession().setAttribute(Constants.UN_READ_COUNT, unReadCount);
-            }
-            return ResultDTO.okOf();
-        }
-        
-        //entity.addAttribute("error","用户名或密码错误");
-        return ResultDTO.errorOf(ErrorCodeEnum.UNAUTHENTICATED);
-        
-    }
     
     
     /**
