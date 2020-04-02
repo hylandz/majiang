@@ -3,6 +3,16 @@
 <head th:replace="common :: common_head(~{::title})">
     <title>修改资料</title>
 </head>
+<style>
+    .avatar{
+        width: 20px;
+        height: 20px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+    }
+
+</style>
+
 <body>
 <div th:insert="~{navigation :: nav}"></div>
 <div class="table-responsive" >
@@ -24,9 +34,15 @@
             <td th:text="${user.id}"></td>
             <td th:text="${user.accountId}"></td>
             <td th:text="${user.name}"></td>
-            <td th:text="${user.bio}"></td>
+
+            <!--<td th:if="${#strings.length(user.bio)} >= 16" th:text="${#strings.substringAfter((#strings.substring(user.bio,0,16)),'...')}"></td>
+            <td th:if="${#strings.length(user.bio)} < 16" th:text="${user.bio}"></td>-->
+            <td th:switch="${#strings.length(user.bio)}">
+                <span th:case="${#strings.length(user.bio)} >= 16" th:text="${#strings.substringAfter((#strings.substring(user.bio,0,16)),'...')}"></span>
+                <span th:case="*" th:text="${user.bio}?:_"></span>
+            </td>
             <td>
-                <img src="${user.avatarUrl}" alt="error">
+                <img  class="avatar" th:src="${user.avatarUrl}" alt="">
             </td>
             <td th:text="${#dates.format(user.gmtCreate,'yyyy-MM-dd')}"></td>
             <td th:text="${#dates.format(user.gmtModified,'yyyy-MM-dd')}"></td>

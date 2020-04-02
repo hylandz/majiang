@@ -50,7 +50,7 @@ public class GithubController {
    * @param state 返回原state值,用于校验
    * @return html
    */
-  @GetMapping("/callback")
+  @GetMapping("/callbackToGithub")
   public String callback(@RequestParam(name = "code") String code,
                          @RequestParam(name = "state") String state,
                          HttpServletResponse response) {

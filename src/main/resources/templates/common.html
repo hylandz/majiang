@@ -8,6 +8,8 @@
     <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{css/bootstrap-theme.css}"/>
     <link rel="stylesheet" type="text/css" th:href="@{css/login.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{css/community.css}"/>
+
     <script type="application/javascript" th:src="@{js/jquery-3.4.1.min.js}"></script>
     <script type="application/javascript" th:src="@{js/bootstrap.min.js}"></script>
     <script type="application/javascript" th:src="@{layer/layer.js}"></script>
@@ -21,14 +23,14 @@
         <div id="other" style="margin: 0 auto">
             <!--Github-->
             <span style="margin:0px 20px 40px">
-                <a th:href="@{https://github.com/login/oauth/authorize(client_id='c4bb3fcaa494d4a6a120',redirect_uri=${#httpServletRequest.getServletContext().getAttribute('githubUri')},scope='user',state=1)}"
+                <a th:href="@{https://github.com/login/oauth/authorize(client_id='e698304670d8ec4cd1f3',redirect_uri=${#httpServletRequest.getServletContext().getAttribute('githubUri')},scope='user',state=1)}"
                    data-toggle="tooltip" data-placement="right" title="GitHub登录">
                     <img src="/static/images/oauth/github32x32.png" alt="not" th:src="@{/images/oauth/github32x32.png}" />
                 </a>
             </span>
             <!--码云-->
             <span style="margin:0px 10px">
-                <a th:href="@{https://gitee.com/oauth/authorize(client_id='38683ceca6a16edb1e8790730805c72f4e9f83e06b0c41215da28d5a056ff03f',redirect_uri=${#httpServletRequest.getServletContext().getAttribute('giteeUri')},response_type='code')}"
+                <a th:href="@{https://gitee.com/oauth/authorize(client_id='e52ccb1d03f63d074fd68f71e942d05990250d26b84ec01db58c9c2634f4a7fc',redirect_uri=${#httpServletRequest.getServletContext().getAttribute('giteeUri')},response_type='code',state=2)}"
                    data-toggle="tooltip" data-placement="right" title="码云登录">
                     <img src="/static/images/oauth/gitee32x32.png" alt="not" th:src="@{/images/oauth/gitee32x32.png}">
                 </a>
