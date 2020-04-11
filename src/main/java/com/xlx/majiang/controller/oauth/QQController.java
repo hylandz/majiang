@@ -1,5 +1,6 @@
 package com.xlx.majiang.controller.oauth;
 
+import com.xlx.majiang.common.util.CryptoUtil;
 import com.xlx.majiang.dto.ResultDTO;
 import com.xlx.majiang.dto.oauth.GiteeAccessTokenDTO;
 import com.xlx.majiang.entity.oauth.QQUser;
@@ -49,7 +50,7 @@ public class QQController {
         logger.info("state={}", state);
         
         // 参数与Gitee的一致,直接使用
-        GiteeAccessTokenDTO accessTokenDTO = new GiteeAccessTokenDTO(code, clientId, clientSecret, redirectUri, "authorization_code", state);
+        GiteeAccessTokenDTO accessTokenDTO = new GiteeAccessTokenDTO(code, clientId, CryptoUtil.decodeBase64(clientSecret.getBytes()), redirectUri, "authorization_code", state);
         
         // 获取Access_Token
         final String accessToken = qqProvider.getAccessToken(accessTokenDTO);
@@ -64,7 +65,7 @@ public class QQController {
     
     public String refreshToken() {
         // refreshToken是从第一次获取accessToken中返回的
-        GiteeAccessTokenDTO refreshToken = new GiteeAccessTokenDTO(clientId, clientSecret, "refresh_token", "");
+        GiteeAccessTokenDTO refreshToken = new GiteeAccessTokenDTO(clientId, CryptoUtil.decodeBase64(clientSecret.getBytes()), "refresh_token", "");
     
         return qqProvider.getAccessToken(refreshToken);
     }

@@ -1,5 +1,6 @@
 package com.xlx.majiang.controller.oauth;
 
+import com.xlx.majiang.common.util.CryptoUtil;
 import com.xlx.majiang.dto.oauth.GitHubAccessTokenDTO;
 import com.xlx.majiang.entity.oauth.GitHubUser;
 import com.xlx.majiang.entity.User;
@@ -55,7 +56,7 @@ public class GithubController {
                          @RequestParam(name = "state") String state,
                          HttpServletResponse response) {
 
-    GitHubAccessTokenDTO accessTokenDTO = new GitHubAccessTokenDTO(code,clientId,clientSecret,redirectUri,state);
+    GitHubAccessTokenDTO accessTokenDTO = new GitHubAccessTokenDTO(code,clientId, CryptoUtil.decodeBase64(clientSecret.getBytes()),redirectUri,state);
 
     // 经过授权,获取access_token
     String  accessToken = gitHubProvider.getAccessToken(accessTokenDTO);

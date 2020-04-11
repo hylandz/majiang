@@ -1,5 +1,6 @@
 package com.xlx.majiang.controller.oauth;
 
+import com.xlx.majiang.common.util.CryptoUtil;
 import com.xlx.majiang.dto.oauth.GiteeAccessTokenDTO;
 import com.xlx.majiang.entity.oauth.GiteeUser;
 import com.xlx.majiang.entity.User;
@@ -50,7 +51,7 @@ public class GiteeController {
                                HttpServletResponse response) {
         log.info("code={}",code);
         log.info("state={}",state);
-        GiteeAccessTokenDTO tokenDTO = new GiteeAccessTokenDTO(code, clientId, clientSecret,redirectUri,"authorization_code",state);
+        GiteeAccessTokenDTO tokenDTO = new GiteeAccessTokenDTO(code, clientId, CryptoUtil.decodeBase64(clientSecret.getBytes()),redirectUri,"authorization_code",state);
     
         String accessToken = giteeProvider.getAccessToken(tokenDTO);
         log.info("token:[{}]", accessToken);
@@ -71,9 +72,8 @@ public class GiteeController {
     
     public String refreshToken() {
         // refreshToken是从第一次获取accessToken中返回的
-        GiteeAccessTokenDTO refreshToken = new GiteeAccessTokenDTO(clientId, clientSecret, "refresh_token", "");
-        
-        final String accessToken = giteeProvider.getAccessToken(refreshToken);
-        return accessToken;
+        GiteeAccessTokenDTO refreshToken = new GiteeAccessTokenDTO(clientId, CryptoUtil.decodeBase64(clientSecret.getBytes()), "refresh_token", "");
+    
+        return giteeProvider.getAccessToken(refreshToken);
     }
 }
