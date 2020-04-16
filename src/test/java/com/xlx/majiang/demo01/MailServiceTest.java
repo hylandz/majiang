@@ -1,6 +1,6 @@
 package com.xlx.majiang.demo01;
 
-import com.xlx.majiang.service.impl.MailServiceImpl;
+import com.xlx.majiang.system.service.impl.MailServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Test;
 import org.junit.runner.RunWith;

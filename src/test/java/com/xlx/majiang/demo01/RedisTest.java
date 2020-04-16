@@ -1,6 +1,6 @@
 package com.xlx.majiang.demo01;
 
-import com.xlx.majiang.service.RedisService;
+import com.xlx.majiang.system.service.RedisService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

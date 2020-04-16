@@ -1,10 +1,10 @@
 package com.xlx.majiang.common.advice;
 
 import com.alibaba.fastjson.JSON;
-import com.xlx.majiang.dto.ResultDTO;
-import com.xlx.majiang.enums.ErrorCodeEnum;
-import com.xlx.majiang.exception.CustomizeException;
-import com.xlx.majiang.exception.ValidateCodeException;
+import com.xlx.majiang.system.dto.ResultDTO;
+import com.xlx.majiang.system.enums.ErrorCodeEnum;
+import com.xlx.majiang.system.exception.CustomizeException;
+import com.xlx.majiang.system.exception.ValidateCodeException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;

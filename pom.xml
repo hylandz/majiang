@@ -84,11 +84,11 @@
         </dependency>
 
         <!--hibernate 校验, 引入spring-boot-starter-web的jar包可省略-->
-        <dependency>
+       <!-- <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>6.1.0.Final</version>
-        </dependency>
+        </dependency>-->
 
         <!--统一表达式语言 JSR341-->
         <dependency>
@@ -97,6 +97,12 @@
             <version>3.0.1-b11</version>
         </dependency>
 
+        <!--jwt:json web token-->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.9.1</version>
+        </dependency>
 
         <!--mysql-->
         <!--<dependency>

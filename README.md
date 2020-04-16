@@ -122,7 +122,7 @@ spring.thymeleaf.cache=false
 #logging.level.org.thymeleaf=info
 #mybatis
 mybatis.configuration.map-underscore-to-camel-case=true
-mybatis.type-aliases-package=com.xlx.majiang.entity
+mybatis.type-aliases-package=com.xlx.majiang.system.tag.entity
 mybatis.mapper-locations=classpath:mapper/*.xml
 
 ```

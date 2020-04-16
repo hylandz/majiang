@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xlx.majiang.dao.CommentExtraMapper">
-    <resultMap id="BaseResultMap" type="com.xlx.majiang.entity.Comment">
+<mapper namespace="com.xlx.majiang.system.dao.CommentExtraMapper">
+    <resultMap id="BaseResultMap" type="com.xlx.majiang.system.entity.Comment">
         <id column="ID" jdbcType="BIGINT" property="id"/>
         <result column="PARENT_ID" jdbcType="BIGINT" property="parentId"/>
         <result column="TYPE" jdbcType="INTEGER" property="type"/>
@@ -12,7 +12,7 @@
         <result column="CONTENT" jdbcType="VARCHAR" property="content"/>
         <result column="COMMENT_COUNT" jdbcType="INTEGER" property="commentCount"/>
     </resultMap>
-    <update id="incCommentCount" parameterType="com.xlx.majiang.entity.Comment">
+    <update id="incCommentCount" parameterType="com.xlx.majiang.system.entity.Comment">
         update COMMENT
         set
             COMMENT_COUNT = COMMENT_COUNT + #{commentCount,jdbcType=INTEGER}

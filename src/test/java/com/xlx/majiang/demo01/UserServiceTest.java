@@ -1,7 +1,7 @@
 package com.xlx.majiang.demo01;
 
-import com.xlx.majiang.entity.User;
-import com.xlx.majiang.service.UserService;
+import com.xlx.majiang.system.entity.User;
+import com.xlx.majiang.system.service.UserService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;

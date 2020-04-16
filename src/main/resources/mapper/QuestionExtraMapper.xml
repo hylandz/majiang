@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xlx.majiang.dao.QuestionExtraMapper">
-    <resultMap id="BaseResultMap" type="com.xlx.majiang.entity.Question">
+<mapper namespace="com.xlx.majiang.system.dao.QuestionExtraMapper">
+    <resultMap id="BaseResultMap" type="com.xlx.majiang.system.entity.Question">
         <id column="ID" jdbcType="INTEGER" property="id"/>
         <result column="TITLE" jdbcType="VARCHAR" property="title"/>
         <result column="COMMENT_COUNT" jdbcType="INTEGER" property="commentCount"/>
@@ -16,19 +16,19 @@
     <sql id="Base_Column_List">
         ID, TITLE, COMMENT_COUNT, VIEW_COUNT, LIKE_COUNT, TAG, CREATOR, GMT_CREATE, GMT_MODIFIED
     </sql>
-    <update id="incView" parameterType="com.xlx.majiang.entity.Question">
+    <update id="incView" parameterType="com.xlx.majiang.system.entity.Question">
         update QUESTION
         set VIEW_COUNT = VIEW_COUNT + #{viewCount,jdbcType=INTEGER}
         where id = #{id}
     </update>
 
-    <update id="incCommentCount" parameterType="com.xlx.majiang.entity.Question">
+    <update id="incCommentCount" parameterType="com.xlx.majiang.system.entity.Question">
         update QUESTION
         set COMMENT_COUNT = COMMENT_COUNT + #{commentCount,jdbcType=INTEGER}
         where id = #{id}
     </update>
 
-    <select id="selectRelated" parameterType="com.xlx.majiang.entity.Question" resultMap="BaseResultMap">
+    <select id="selectRelated" parameterType="com.xlx.majiang.system.entity.Question" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from QUESTION

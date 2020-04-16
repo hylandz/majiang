@@ -1,7 +1,7 @@
 package com.xlx.majiang.common.validate.image;
 
 import com.xlx.majiang.common.constant.ValidateConstant;
-import com.xlx.majiang.exception.ValidateCodeException;
+import com.xlx.majiang.system.exception.ValidateCodeException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.ServletRequestBindingException;

@@ -7,7 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
-@MapperScan("com.xlx.majiang.dao")
+@MapperScan("com.xlx.majiang.system.dao")
 @EnableScheduling
 @EnableSwagger2
 public class MajiangApplication {
