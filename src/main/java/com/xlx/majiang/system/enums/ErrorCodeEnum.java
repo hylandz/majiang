@@ -31,11 +31,14 @@ public enum ErrorCodeEnum implements ICustomizeErrorCode {
   EMAIL_CODE_IS_NULL(2016,"验证码不能为空"),
   EMAIL_CODE_IS_NOT_AVAILABLE(2017,"邮箱验证码错误"),
   EMAIL_SEND_FAILED(2018,"邮件发送失败"),
-  PARAMS_VALIDATE_ERROR(2019,"参数校验错误");
+  PARAMS_VALIDATE_ERROR(2019,"参数校验错误"),
+  
+  JWT_TOKEN_UNVALIDATED(2020,"jwt_token无效")
+  ;
 
-  private Integer code;
+  private final Integer code;
 
-  private String message;
+  private final String message;
 
 
   ErrorCodeEnum(Integer code, String message) {

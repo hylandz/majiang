@@ -13,19 +13,22 @@ public class CryptoUtil {
        return Base64.getEncoder().encodeToString(str.getBytes());
     }
     
-    public static String decodeBase64(byte[] encode){
-        return  new String(Base64.getDecoder().decode(encode));
+    public static String decodeBase64(byte[] base64Data){
+        return  new String(Base64.getDecoder().decode(base64Data));
+    }
+    
+    public static byte[] encode(String src){
+        return Base64.getEncoder().encode(src.getBytes());
+    }
+    public static byte[] decode(byte[] base64Data){
+        return Base64.getDecoder().decode(base64Data);
     }
     
     
     
     public static void main(String[] args) {
-        String qq = "d3bf18f0a6d5985483d15ff8ca3e8c95";
-        String github = "f0ccab332c0f56cac0d5f37ac80a8ab6b26275de";
-        String gitee = "70bfbe7ba190b4064baaff8280240ae47364b4effd46ffeb3e3c546d63768c2e";
-        String h2 = "123";
-        String mail= "snwymjpmntmtjeic";
-        System.out.println(encodeBase64(mail));
+        String key = "西红柿炒鸡蛋";
+        System.out.println(encodeBase64(key));
         
     }
 }
