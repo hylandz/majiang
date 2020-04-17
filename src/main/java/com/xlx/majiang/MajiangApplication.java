@@ -11,9 +11,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableScheduling
 @EnableSwagger2
 public class MajiangApplication {
-
-  public static void main(String[] args) {
-    SpringApplication.run(MajiangApplication.class, args);
-  }
-
+    
+    public static void main(String[] args) {
+        // SpringApplication springApplication = new SpringApplication(MajiangApplication.class);
+        // 关闭banner
+        // springApplication.setBannerMode(Banner.Mode.OFF);
+        // springApplication.run(args);
+        SpringApplication.run(MajiangApplication.class, args);
+    }
+    
 }

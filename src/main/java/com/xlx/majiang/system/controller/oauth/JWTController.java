@@ -4,6 +4,7 @@ import com.xlx.majiang.common.util.JWTUtil;
 import com.xlx.majiang.system.dto.LoginDTO;
 import com.xlx.majiang.system.dto.ResultDTO;
 import com.xlx.majiang.system.enums.ErrorCodeEnum;
+import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,9 +36,14 @@ public class JWTController {
     }
     
     @GetMapping("/api/fresh")
-    public ResultDTO<String> freshToken(String username,LocalDateTime time){
+    public ResultDTO<String> freshToken(String username){
         String freshToken = JWTUtil.generateToken(username, LocalDateTime.now());
         return ResultDTO.oKOf("刷新token",freshToken);
     }
     
+    @GetMapping("/api/claim")
+    public ResultDTO<Claims> getClaims(String token){
+        Claims claims = JWTUtil.getJwtClaims(token);
+        return  claims != null ? ResultDTO.oKOf("payload私有字段",claims) : ResultDTO.errorOf();
+    }
 }
