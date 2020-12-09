@@ -39,7 +39,7 @@
 	    	targetPackage:pojo类所在的包全名
 	    	targetProject:pojo类所在项目下的路径
 	    -->
-        <javaModelGenerator targetPackage="com.xlx.majiang.system.tag.entity" targetProject="src/main/java">
+        <javaModelGenerator targetPackage="com.xlx.majiang.system.entity" targetProject="src/main/java">
             <!-- 是否允许子包,targetPackage.xxx.xx -->
             <property name="enableSubPackages" value="true"/>
             <!-- 是否对类CHAR类型的列进行trim操作 -->
@@ -76,9 +76,6 @@
         	domainObjectName:pojo类名
         	enableXxxByExample:是否要生成对应的Example
          -->
-        <table tableName="user" domainObjectName="User"></table>
-        <table tableName="question" domainObjectName="Question"></table>
-        <table tableName="comment" domainObjectName="Comment"></table>
-        <table tableName="notification" domainObjectName="Notification"></table>
+        <table tableName="account" domainObjectName="Account"></table>
     </context>
 </generatorConfiguration>
