@@ -80,7 +80,7 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>1.4.196</version>
+            <version>1.4.200</version>
         </dependency>
 
         <!--hibernate 校验, 引入spring-boot-starter-web的jar包可省略-->
@@ -199,7 +199,7 @@
                     <dependency>
                         <groupId>com.h2database</groupId>
                         <artifactId>h2</artifactId>
-                        <version>1.4.196</version>
+                        <version>1.4.200</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -213,7 +213,7 @@
                     <dependency>
                         <groupId>com.h2database</groupId>
                         <artifactId>h2</artifactId>
-                        <version>1.4.196</version>
+                        <version>1.4.200</version>
                     </dependency>
                 </dependencies>
             </plugin>

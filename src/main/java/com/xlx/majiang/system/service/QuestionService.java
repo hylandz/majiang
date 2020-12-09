@@ -15,6 +15,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
@@ -147,6 +148,7 @@ public class QuestionService {
 	 *
 	 * @param question .
 	 */
+	@Transactional
 	public void createOrUpdate(@Valid Question question) {
 		if (question.getId() == null) {
 			//新增

@@ -9,7 +9,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 @SpringBootTest
 public class MajiangApplicationTests {
 
-
   @Test
   public void contextLoads() {
   }

@@ -57,7 +57,7 @@ $(function () {
  */
 
 function reloadCode(){
-    $("#img-captcha").attr("src","/code/image?data=" + new Date() + "");
+    $("#img-captcha").attr("src","/code/image?data=" + new Date().getTime());
 }
 
 /**

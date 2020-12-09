@@ -6,7 +6,7 @@
         <result column="TITLE" jdbcType="VARCHAR" property="title"/>
         <result column="COMMENT_COUNT" jdbcType="INTEGER" property="commentCount"/>
         <result column="VIEW_COUNT" jdbcType="INTEGER" property="viewCount"/>
-        <result column="LIKE_COUNT" jdbcType="INTEGER" property="likeCount"/>
+        <result column="VIEW_COUNT" jdbcType="INTEGER" property="likeCount"/>
         <result column="TAG" jdbcType="VARCHAR" property="tag"/>
         <result column="CREATOR" jdbcType="BIGINT" property="creator"/>
         <result column="GMT_CREATE" jdbcType="BIGINT" property="gmtCreate"/>

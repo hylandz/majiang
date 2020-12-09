@@ -4,7 +4,7 @@ package com.xlx.majiang.system.dto.oauth;
  * GitHub授权时的参数封装
  * https://github.com/login/oauth/access_token?
  *
- * @Author xielx on 2019/6/21
+ * @author xielx on 2019/6/21
  */
 public class GitHubAccessTokenDTO extends AbstractAccessToken {
     

@@ -59,73 +59,9 @@ majiang
 ```
 
 ## 核心配置文件
-> application.properties
-```properties
-
-#开发环境
-server.port=8887
-
-#github
-github.client.id=
-github.client.secret=
-github.redirect.uri=http://localhost:8887/callback
-
-#码云
-gitee.client.id=
-gitee.client.secret=
-gitee.redirect.uri=http://localhost:8887/callbackToMY
-
-#发送邮件人
-mail.fromMail.addr=
-#邮箱服务器地址(QQ)
-spring.mail.host=smtp.qq.com
-#用户名(发)
-spring.mail.username=
-spring.mail.password=
 
 
 
-#spring-boot默认的HicriCP数据库
-spring.datasource.url=jdbc:h2:~/majiang
-spring.datasource.username=sa
-spring.datasource.password=123
-spring.datasource.driver-class-name=org.h2.Driver
-
-# Redis数据库索引（默认为0 redis有16个库）
-spring.redis.database=0
-# Redis服务器地址
-spring.redis.host=127.0.0.1
-# Redis服务器连接端口
-spring.redis.port=6379
-# Redis服务器连接密码（默认为空）
-spring.redis.password=
-# 连接池最大连接数（使用负值表示没有限制）
-spring.redis.jedis.pool.max-active=8
-# 连接池最大阻塞等待时间（使用负值表示没有限制）
-spring.redis.jedis.pool.max-wait=-1ms
-# 连接池中的最大空闲连接
-spring.redis.jedis.pool.max-idle=8
-# 连接池中的最小空闲连接
-spring.redis.jedis.pool.min-idle=0
-# 连接超时时间（毫秒）
-spring.redis.timeout=30000
-
-#thymeleaf
-spring.thymeleaf.mode=HTML
-spring.thymeleaf.encoding=UTF-8
-spring.thymeleaf.cache=false
-
-#日志
-#logging.file=/log
-#logging.level.com.xlx.majiang=info
-#logging.level.org.springframework=warn
-#logging.level.org.thymeleaf=info
-#mybatis
-mybatis.configuration.map-underscore-to-camel-case=true
-mybatis.type-aliases-package=com.xlx.majiang.system.tag.entity
-mybatis.mapper-locations=classpath:mapper/*.xml
-
-```
 
 
 ## 四、 GitHub oauth2认证的过程
