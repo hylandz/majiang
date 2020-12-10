@@ -27,7 +27,7 @@ IntelliJ IDEA 2019.1.2
 + `LomBok`
 + `H2 database`
 + `Flayway`
-+ `swagger`
++ `Swagger`
 
 ## 三、文件结构
 ```
@@ -100,63 +100,91 @@ majiang
 `access_token`|从github那里获取的token(String)
 
 ## 五、表设计
-### 5.1  user表/用户
-字段|	属性|	描述
-:--------:|:----:|:-----
-id|	bigint|	主键自增,Long
-acount_id|	varchar100|	第三方账号id,String
-name|	varchar50|	第三方账号名称,String
-avatar_url|	varchar100|	第三方账号头像图片ur,Stringl
-token|	varchar36|	密钥,cookie访问,String
-gmt_create|	bigint|	创建时间,Long
-gmt_modified|	bigint|	修改时间,Long
+### 5.1  user表
 
-### 5.2 question表/问题
-字段|	属性|	描述
-:--------:|:----:|:-----
-id|	bigint|	主键自增,Long
-title|varchar50|问题标题,String
-description|text|问题内容,String
-comment_count|int10|评论数量,String
-view_count|int10|浏览数量,Integer
-like_count|int10|点赞数量,Integer
-tag|varchar256|标签,(标签样式),String
-creator|bigint|创建/发出问题的人,Long
-gmt_create|	bigint|	创建时间,Long
-gmt_modified|	bigint|	修改时间,Long
+第三方用户登录
 
-### 5.3 notification表/消息通知
 字段|	属性|	描述
 :--------:|:----:|:-----
-id|	bigint|	主键自增,Long
-notifier|bigint|发送通知人id,Long
-notifier_name|varchar50|发送通知人的姓名,String`①XXX某某某`
-receiver|bigint|接收通知人,Long`回复了谁发的问题,谁发的评论id`
+id|	bigint| 主键自增 
+acount_id|	varchar100| 第三方账号id 
+name|	varchar50| 第三方账号名称 
+avatar_url|	varchar100| 第三方账号头像图片ur 
+token|	varchar36| 密钥,cookie访问 
+gmt_create|	bigint| 创建时间 
+gmt_modified|	bigint| 修改时间 
+
+### 5.2 question表
+
+问题表,发布问题
+
+字段|	属性|	描述
+:--------:|:----:|:-----
+id|	bigint| 主键自增 
+title|varchar50|问题标题
+description|text|问题内容
+comment_count|int10|评论数量
+view_count|int10|浏览数量
+like_count|int10|点赞数量
+tag|varchar256|标签,(标签样式)
+creator|bigint|创建/发出问题的人
+gmt_create|	bigint| 创建时间 
+gmt_modified|	bigint| 修改时间 
+
+### 5.3 notification表
+
+消息通知,
+
+字段|	属性|	描述
+:--------:|:----:|:-----
+id|	bigint| 主键自增 
+notifier|bigint|发送通知人id
+notifier_name|varchar50|发送通知人的姓名,`XXX某某某`
+receiver|bigint|接收通知人,回复了谁发的问题,谁发的评论id`
 outer_id|	bigint|问题id`问题id,得到title`
-type|int10|通知类型,1:回答了问题,2:回复了评论,Integer `②回答了问题/回复了评论`
-status|int10|通知状态,默认0:未读,1:已读,Integer`标记问题状态,如未读红色标记`
-outer_title|varchar256|问题的标题,String`③问题[为什么离职]`
-gmt_create|	bigint|	创建时间,Long
-gmt_modified|	bigint|	修改时间,Long
+type|int10|通知类型,1:回答了问题,2:回复了评论,②回答了问题/回复了评论`
+status|int10|通知状态,默认0:未读,1:已读,标记问题状态,如未读红色标记`
+outer_title|varchar256|问题的标题,③问题[为什么离职]`
+gmt_create|	bigint| 创建时间, 
+gmt_modified|	bigint| 修改时间, 
 
+### 5.4 comment表
 
-### 5.4comment/评论,提问表
+回答问题,评论
+
 字段|	属性|	描述
 :--------:|:----:|:-----
-id|	bigint|	主键自增,Long
+id|	bigint| 主键自增 
 parent_id|bigint|答问题,parent_id=该问题id,评论答的问题,parent_id=回答的问题的主键id,`只能对某个问题的回答做出一级评论,不能针对个人评论层层递进`
-type|int10|类型,Integer`回答该问题1或评论该问题的回答2`
-commentator|bigint|用户id,Long`谁回答?,谁评论的?`
-comment|varchar1024|回答内容,String`评论内容`
+type|int10|类型,回答该问题1或评论该问题的回答2`
+commentator|bigint|用户id,谁回答?,谁评论的?`
+comment|varchar1024|回答内容,评论内容`
 comment_count|int|回复统计,默认0`你发表的多少人回复你`
 like_count|int|点赞统计
-gmt_create|	bigint|	创建时间,Long
-gmt_modified|	bigint|	修改时间,Long
+gmt_create|	bigint| 创建时间 
+gmt_modified|	bigint| 修改时间 
+
+### 5.5 Account 表
+
+用户注册
+
+| 字段         | 属性    | 描述          |
+| ------------ | ------- | ------------- |
+| id           | bigint  | 主键自增,Long |
+| user_name    | varchar | 用户名        |
+| password     | varchar | 密码          |
+| email        | varchar | 邮箱          |
+| phone        | varchar | 手机号码      |
+| gmt_create   | bigint  | 创建时间      |
+| gmt_modified | bigint  | 修改时间      |
+|              |         |               |
+
 
 
 ## 六、 项目演示
 
-+ URL: http://localhost:8887/ 
+访问URL: http://localhost:8887/ 
+
 + 账户1: 41381772 密码:41381772
 + 账户2: 41381773 密码:41381773
 + 账户3: 41381774 密码:41381774
