@@ -65,37 +65,45 @@ majiang
 
 
 ## 四、 GitHub oauth2认证的过程
-### 第一步: 点击第三方登录,认证
+### 第一步: 登录
+
+点击第三方登录,
+
   > GET:    https://github.com/login/oauth/authorize?
 
-需要参数 | 描述
+必要参数 | 描述
 :----:|:-----:
-`client_id`|github API给定id(String)
-`redirect_uri`|认证成功返回的url(String)
-`scope`|获取资源信息范围,user用户,repo仓库(String)
-`state`|随机字符串(String)
+client_id|`String`github API给定id
+redirect_uri|`String`回调url
+scop|`String`获取资源信息范围,user用户,repo仓库
+state|`String`随机字符串
 
+初次登录会让你确认是否授权,是,然后会让你登录Github,输入密码登录.
 
-### 第二步: 初次会让你确认是否授权,是,然后会让你登录Github
+授权成功后,会返回到你指定的`redirect_uri`回调地址,并携带参数`code`,`state`
 
-### 第三步: 登录成功后,会返回你指定的redirect_uri,携带参数code,state
+### 第二步: 获取token
 
-### 第四步: 继续向github请求获取token
+通过返回的`code`获取访问的口令 token
+
   > POST:    https://github.com/login/oauth/access_token
 
-需要参数 | 描述
+必要参数 | 描述
 :----:|:-----:
-`client_id`|github API给定id(String)
-`client_secret`|github API 给定的secret(String)
-`redirect_uri`|认证成功返回的url(String)
-`scope`|获取资源信息范围,user用户,repo仓库(String)
-`state`|随机字符串(String)
-`code`|返回的code(String)
+`client_id`|`String`github API给定id
+`client_secret`|`String`github API 给定的secret
+`redirect_uri`|`String`回调url
+`scope`|`String`获取资源信息范围,user用户,repo仓库
+`state`|`String`随机字符串
+`code`|`String`返回的code
 
-### 第五步: 获取token后,用于请求获取GitHub的用户信息
+### 第三步: 获取GitHub的用户信息
+
+获取token后,用于请求获取用户信息,返回JSON 格式的用户信息
+
   > GET:    https://api.github.com/user?
 
-需要参数 | 描述
+必要参数 | 描述
 ----|:-----
 `access_token`|从github那里获取的token(String)
 
