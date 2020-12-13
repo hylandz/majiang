@@ -187,6 +187,147 @@ gmt_modified|	bigint| 修改时间
 | gmt_modified | bigint  | 修改时间      |
 |              |         |               |
 
+### 5.6 SQL脚本
+
+```sql
+-- user
+create table USER
+(
+    ID BIGINT IDENTITY(1,1)
+        primary key,
+    ACCOUNT_ID VARCHAR(100),
+    NAME VARCHAR(50),
+    TOKEN VARCHAR(36),
+    GMT_CREATE BIGINT,
+    GMT_MODIFIED BIGINT,
+    BIO VARCHAR(256),
+    AVATAR_URL VARCHAR(100)
+);
+
+comment on column USER.ACCOUNT_ID is '账号id';
+
+comment on column USER.NAME is '账号名称';
+
+comment on column USER.TOKEN is 'token';
+
+comment on column USER.GMT_CREATE is '创建';
+
+comment on column USER.GMT_MODIFIED is '修改';
+
+comment on column USER.BIO is '个性名称';
+
+comment on column USER.AVATAR_URL is '头像url';
+
+-- question
+create table QUESTION
+(
+	ID BIGINT IDENTITY(1,1),
+	TITLE VARCHAR(50),
+	DESCRIPTION TEXT,
+	COMMENT_COUNT INTEGER default 0,
+	VIEW_COUNT INTEGER default 0,
+	LIKE_COUNT INTEGER default 0,
+	TAG VARCHAR(256),
+	CREATOR BIGINT,
+	GMT_CREATE BIGINT,
+	GMT_MODIFIED BIGINT,
+	constraint QUESTION_PK
+		primary key (ID)
+);
+
+comment on column QUESTION.ID is '主键';
+
+comment on column QUESTION.TITLE is '标题';
+
+comment on column QUESTION.DESCRIPTION is '描述';
+
+comment on column QUESTION.COMMENT_COUNT is '评论数';
+
+comment on column QUESTION.VIEW_COUNT is '阅览数';
+
+comment on column QUESTION.LIKE_COUNT is '点赞数';
+
+comment on column QUESTION.TAG is '标签';
+
+-- notification
+create table NOTIFICATION
+(
+	ID BIGINT  IDENTITY(1,1),
+	NOTIFIER BIGINT not null,
+	RECEIVER BIGINT not null,
+	OUTER_ID BIGINT not null,
+	TYPE INTEGER not null,
+	STATUS INTEGER default 0 not null,
+	NOTIFIER_NAME VARCHAR(100),
+	OUTER_TITLE VARCHAR(256),
+	GMT_CREATE BIGINT,
+	GMT_MODIFIED BIGINT,
+	constraint NOTIFICATION_PK
+		primary key (ID)
+);
+
+comment on column NOTIFICATION.ID is '主键';
+
+comment on column NOTIFICATION.NOTIFIER is '通知者';
+
+comment on column NOTIFICATION.RECEIVER is '接收者';
+
+comment on column NOTIFICATION.OUTER_ID is '外部id';
+
+comment on column NOTIFICATION.TYPE is '通知类型';
+
+comment on column NOTIFICATION.STATUS is '状态';
+
+-- comment
+create table COMMENT
+(
+	ID BIGINT  IDENTITY(1,1),
+	PARENT_ID BIGINT not null,
+	TYPE INTEGER not null,
+	COMMENTATOR BIGINT not null,
+	CONTENT VARCHAR(1024),
+	COMMENT_COUNT INTEGER default 0,
+	GMT_CREATE BIGINT,
+	GMT_MODIFIED BIGINT,
+	LIKE_COUNT INTEGER,
+	constraint COMMENT_PK
+		primary key (ID)
+);
+
+comment on column COMMENT.PARENT_ID is '父id';
+
+comment on column COMMENT.TYPE is '类型';
+
+comment on column COMMENT.COMMENTATOR is '评论人';
+
+comment on column COMMENT.CONTENT is '评论内容';
+
+comment on column COMMENT.COMMENT_COUNT is '评论数量';
+
+comment on column COMMENT.GMT_CREATE is '创建时间';
+
+comment on column COMMENT.GMT_MODIFIED is '修改时间';
+
+-- account
+create table account
+(
+    id bigint(11) auto_increment primary key,
+    user_name varchar(125) not null,
+    password varchar(55) not null,
+    email varchar(50),
+    gmt_create bigint(11),
+    gmt_modified bigint(11),
+    phone varchar(13),
+    gender int(1) default 1
+);
+
+comment on table account is '注册表';
+
+comment on column account.gender is '1:男,2:女,0:保密';
+
+
+```
+
 
 
 ## 六、 项目演示
