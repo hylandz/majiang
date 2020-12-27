@@ -3,6 +3,8 @@ package com.xlx.majiang.system.dto;
 import lombok.Data;
 import lombok.ToString;
 
+import javax.validation.constraints.NotEmpty;
+
 /**
  * 注册
  *
@@ -12,6 +14,7 @@ import lombok.ToString;
 @ToString
 public class RegisterDTO extends LoginDTO{
     
+    @NotEmpty
     private String phone;
     
 }

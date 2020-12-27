@@ -19,10 +19,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.annotation.Resource;
@@ -158,8 +155,9 @@ public class UserController {
      */
     @PostMapping("/user/register")
     @ResponseBody
-    public ResultDTO doRegister(RegisterDTO registerDTO) {
+    public ResultDTO doRegister(@RequestBody RegisterDTO registerDTO) {
         logger.info("前台注册参数:{}", registerDTO);
+        
         return ResultDTO.oKOf(registerDTO);
     }
     
