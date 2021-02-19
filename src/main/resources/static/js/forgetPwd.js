@@ -3,7 +3,7 @@
  */
 function emailCheck(obj) {
     const regex = /^\w+@[a-zA-Z0-9]{2,10}(?:\.[a-z]{1,4}){1,3}$/;
-    if (obj.val() == null || obj.val().length == 0) {
+    if (obj.val() == null || obj.val().length === 0) {
         obj.parent().attr("class", "col-sm-3 has-error");
         layer.msg('邮箱不为空', {
             icon: 5,
@@ -40,7 +40,7 @@ function invokeShowTime(obj) {
      */
     function showTime(obj) {
         //倒计时结束
-        if (countdown == 0) {
+        if (countdown === 0) {
             $(obj).attr("disabled", false);
             $(obj).text("获取验证码");
             countdown = 60;
@@ -107,30 +107,43 @@ function getCode(obj) {
  * 验证码验证
  */
 function verifyEmailCode() {
-    var emailCode = $("#emailCode");
-    var check = codeCheck(emailCode);
+    const emailCode = $("#emailCode");
+    const new_password = $("#new_password");
+    const confirm_pwd = $("#confirm_pwd");
+    if (confirm_pwd.val() !== new_password.val()){
+        layer.msg('密码不一致');
+        return;
+    }
+
+    const check = codeCheck(emailCode);
     if (check) {
         $.ajax({
             url:'emailAuth',
             data: {
-                emailCode: emailCode.val()
+                "emailCode": emailCode.val(),
+                "password": new_password.val()
             },
             dataType: 'json', //服务器返回json格式数据
+            contentType:"application/json; charset=utf-8", // 请求数据为json格式
             type: 'post', //HTTP请求类型
-            timeout: 10000, //超时时间设置为10秒；
+            // timeout: 10000, //超时时间设置为10秒；
             success: function (response) {
                 if (response.code === 200) {
-                    layer.msg(JSON.stringify(response));
+                    layer.msg(response.message);
 
                 } else {
-                    layer.msg(JSON.stringify(response));
+                    layer.msg(response.message);
                     emailCode.val('');
+                    new_password.val('');
+                    confirm_pwd.val('');
                 }
 
             },
             error: function () {
                 layer.msg('请求失败');
                 emailCode.val('');
+                new_password.val('');
+                confirm_pwd.val('');
             }
         });
     }

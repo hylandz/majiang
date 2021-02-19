@@ -28,8 +28,8 @@ public class MailServiceTest {
 
   @Test
   public void simpleMailTest(){
-    long time = mailService.sendSimpleMail("1491998594@qq.com","420923119@qq.com","Mj社区","尊敬的先生/女士:\n您好,恭喜您中奖500W");
-    log.info("发送简单文本邮件耗时:[{}]",time);
+    mailService.sendSimpleMail("1491998594@qq.com","420923119@qq.com","Mj社区","尊敬的先生/女士:\n您好,恭喜您中奖500W");
+    log.info("发送文本邮件成功");
   }
 
   @Test
@@ -40,16 +40,16 @@ public class MailServiceTest {
             + "  <h3>您好,这是一份html邮件</h3>\n"
             + "</body>\n"
             + "</html>";
-    long time = mailService.sendHtmlMail("1491998594@qq.com","420923119@qq.com","MJ社区",content);
-    log.info("发送HTML邮件耗时:[{}]",time);
+    mailService.sendHtmlMail("1491998594@qq.com","420923119@qq.com","MJ社区",content);
+    log.info("发送HTML邮件成功");
 
   }
   @Test
   public void attachmentsMailTest(){
     //2265
     String fileName = "D:\\hello.txt";
-   long time = mailService.sendAttachmentsMail("1491998594@qq.com","420923119@qq.com","MJ社区,附件","附件,请查收",fileName);
-    log.info("发送带有附件邮件耗时:[{}]",time);
+   mailService.sendAttachmentsMail("1491998594@qq.com","420923119@qq.com","MJ社区,附件","附件,请查收",fileName);
+    log.info("发送带有附件邮件成功");
   }
   @Test
   public void inlineResourceMailTest(){
@@ -57,8 +57,8 @@ public class MailServiceTest {
     long reId = System.currentTimeMillis();
     String content = "<html><body>这是有图片的邮件:<img src='cid:" + reId + "'/></body></html>";
     String imgPath = "E:\\panda.jpg";//30kb
-    long time = mailService.sendInlineResourceMail("1491998594@qq.com","420923119@qq.com","MJ社区,这是有图片的邮件",content,imgPath, Long.toString(reId));
-    log.info("发送附带资源邮件耗时:[{}]",time);
+    mailService.sendInlineResourceMail("1491998594@qq.com","420923119@qq.com","MJ社区,这是有图片的邮件",content,imgPath, Long.toString(reId));
+    log.info("发送附带资源邮件成功");
   }
 
 
@@ -68,8 +68,8 @@ public class MailServiceTest {
     Context context = new Context();
     context.setVariable("id", "006");
     String emailContent = templateEngine.process("emailTemplate", context);
-    long time = mailService.sendHtmlMail("1491998594@qq.com","420923119@qq.com","主题：这是模板邮件",emailContent);
-    log.info("发送模板邮件耗时:[{}]",time);
+    mailService.sendHtmlMail("1491998594@qq.com","420923119@qq.com","主题：这是模板邮件",emailContent);
+    log.info("发送模板邮件成功");
   }
 
 }

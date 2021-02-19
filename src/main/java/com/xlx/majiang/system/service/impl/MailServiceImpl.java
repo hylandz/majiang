@@ -6,7 +6,6 @@ import com.xlx.majiang.system.service.IMailService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.FileSystemResource;
-import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -31,7 +30,7 @@ public class MailServiceImpl implements IMailService {
 	private JavaMailSender javaMailSender;
 
 	@Override
-	public Long sendSimpleMail(String from,String to, String subject, String content) {
+	public void sendSimpleMail(String from,String to, String subject, String content) {
 		long start = System.currentTimeMillis();
 		SimpleMailMessage message = new SimpleMailMessage();
 
@@ -39,19 +38,11 @@ public class MailServiceImpl implements IMailService {
 		message.setTo(to);
 		message.setSubject(subject);
 		message.setText(content);
-
-		try{
-			javaMailSender.send(message);
-		}catch (MailException e){
-			logger.error("邮件发送异常:[{}]",e.getMessage());
-			throw new CustomizeException(ErrorCodeEnum.EMAIL_SEND_FAILED);
-		}
-		return (System.currentTimeMillis() - start);
-
+		javaMailSender.send(message);
 	}
 
 	@Override
-	public Long sendHtmlMail(String from,String to, String subject, String content) {
+	public void sendHtmlMail(String from,String to, String subject, String content) {
 		long start = System.currentTimeMillis();
 		MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 		try {
@@ -65,8 +56,6 @@ public class MailServiceImpl implements IMailService {
 			logger.error("发送html邮件时发生异常:[{}]",e.getMessage());
 			throw new CustomizeException(ErrorCodeEnum.EMAIL_SEND_FAILED);
 		}
-		long end = System.currentTimeMillis();
-		return (end - start);
 
 	}
 
@@ -78,7 +67,7 @@ public class MailServiceImpl implements IMailService {
 	 * @param filePath 附件路径
 	 */
 	@Override
-	public Long sendAttachmentsMail(String from,String to, String subject, String content, String filePath) {
+	public void sendAttachmentsMail(String from,String to, String subject, String content, String filePath) {
 		long start = System.currentTimeMillis();
 		MimeMessage message = javaMailSender.createMimeMessage();
 		//true表示需要创建一个multipart message
@@ -95,17 +84,12 @@ public class MailServiceImpl implements IMailService {
 			String fileName = filePath.substring(filePath.lastIndexOf(File.separator));
 			messageHelper.addAttachment(fileName,resource);
 
-
 			javaMailSender.send(message);
 		} catch (MessagingException e) {
 			logger.error("发送附件邮件异常:[{}]",e.getMessage());
-			return 0L;
 		}catch (Exception ex){
 			logger.error("其他异常:{}",ex.getMessage());
 		}
-
-		long end = System.currentTimeMillis();
-		return (end - start);
 	}
 
 	/**
@@ -118,7 +102,7 @@ public class MailServiceImpl implements IMailService {
 	 * @param rscId ?
 	 */
 	@Override
-	public Long sendInlineResourceMail(String from,String to, String subject, String content, String rscPath, String rscId) {
+	public void sendInlineResourceMail(String from,String to, String subject, String content, String rscPath, String rscId) {
 		long start = System.currentTimeMillis();
 		MimeMessage message = javaMailSender.createMimeMessage();
 		try {
@@ -131,13 +115,10 @@ public class MailServiceImpl implements IMailService {
 			//添加图片
 			FileSystemResource resource = new FileSystemResource(new File(rscPath));
 			messageHelper.addInline(rscId,resource);
-
 			javaMailSender.send(message);
 		} catch (MessagingException e) {
 			logger.error("发送图片邮件异常:[{}]",e.getMessage());
 			throw new CustomizeException(ErrorCodeEnum.EMAIL_SEND_FAILED);
 		}
-		long end = System.currentTimeMillis();
-		return (end - start);
 	}
 }

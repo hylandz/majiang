@@ -30,6 +30,7 @@ public enum ErrorCodeEnum implements ICustomizeErrorCode {
   EMAIL_FORMAT_WRONG(2015,"邮箱格式错误"),
   EMAIL_CODE_IS_NULL(2016,"验证码不能为空"),
   EMAIL_CODE_IS_NOT_AVAILABLE(2017,"邮箱验证码错误"),
+  EMAIL_CODE_INVALID(2017,"邮箱验证码无效"),
   EMAIL_SEND_FAILED(2018,"邮件发送失败"),
   PARAMS_VALIDATE_ERROR(2019,"参数校验错误"),
   

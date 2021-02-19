@@ -17,4 +17,10 @@ public interface AccountService {
      * @return
      */
     ResultDTO<Object> registerAccount(Account account);
+    
+    /**
+     * 修改密码
+     * @param password 新密码
+     */
+    void changeAccountPwd(String password);
 }

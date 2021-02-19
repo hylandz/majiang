@@ -12,7 +12,7 @@ public interface IMailService {
 	 * @param subject 邮件主题
 	 * @param content 邮件内容
 	 */
-	Long sendSimpleMail(String from,String to,String subject,String content);
+	void sendSimpleMail(String from,String to,String subject,String content);
 
 	/**
 	 * 发送html格式的邮件
@@ -21,10 +21,10 @@ public interface IMailService {
 	 * @param subject 邮件主题
 	 * @param content 邮件内容
 	 */
-	Long sendHtmlMail(String from,String to, String subject, String content);
-
-	Long sendAttachmentsMail(String from,String to, String subject, String content, String filePath);
-
-	Long sendInlineResourceMail(String from,String to, String subject, String content, String rscPath, String rscId);
+	void sendHtmlMail(String from,String to, String subject, String content);
+	
+	void sendAttachmentsMail(String from,String to, String subject, String content, String filePath);
+	
+	void sendInlineResourceMail(String from,String to, String subject, String content, String rscPath, String rscId);
 
 }
