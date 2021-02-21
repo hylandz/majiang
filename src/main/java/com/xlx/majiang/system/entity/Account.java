@@ -38,6 +38,6 @@ public class Account implements Serializable {
     
     @Transient
     @NotNull
-    private String emailCode;
+    private String imageCode;
 
 }

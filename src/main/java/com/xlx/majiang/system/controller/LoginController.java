@@ -68,12 +68,12 @@ public class LoginController {
                 cookie.setMaxAge(7 * 24 * 60 * 60);
                 cookie.setPath("/");
                 response.addCookie(cookie);
-            } else {
-                //不记住
-                request.getSession().setAttribute(Constants.USER_SESSION, user);
-                Long unReadCount = notificationService.unReadCount(user.getId());
-                request.getSession().setAttribute(Constants.UN_READ_COUNT, unReadCount);
             }
+    
+            request.getSession().setAttribute(Constants.USER_SESSION, user);
+            Long unReadCount = notificationService.unReadCount(user.getId());
+            request.getSession().setAttribute(Constants.UN_READ_COUNT, unReadCount);
+            
             return ResultDTO.okOf();
         }
         

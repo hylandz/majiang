@@ -34,6 +34,7 @@ public enum ErrorCodeEnum implements ICustomizeErrorCode {
   EMAIL_SEND_FAILED(2018,"邮件发送失败"),
   PARAMS_VALIDATE_ERROR(2019,"参数校验错误"),
   
+  REGISTER_FAIL(2021,"注册失败"),
   JWT_TOKEN_UNVALIDATED(2020,"jwt_token无效")
   ;
 

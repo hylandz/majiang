@@ -41,37 +41,10 @@ public class UserController {
     /*@Resource
     private RedisService redisService;*/
     
-    @Autowired
-    private ValidateGenerator imageCodeGenerator;
     
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
     
     
-    /**
-     * 生成图片验证码
-     *
-     * @param request
-     * @param response
-     * @throws IOException
-     */
-    @GetMapping("/code/image")
-    @ResponseBody
-    public void createImageCode(HttpServletRequest request, HttpServletResponse response) {
-        // 设置响应信息
-        response.setHeader("Pragma","No-cache");
-        response.setHeader("Cache-Control","no-cache");
-        response.setDateHeader("Expires",0);
-        response.setContentType("image/jpeg");
-    
-        ImageCode imageCode = imageCodeGenerator.generate(new ServletWebRequest(request));
-        logger.info("图片验证码:[{}]", imageCode.getCode());
-        request.getSession().setAttribute(ValidateConstant.SESSION_KEY, imageCode);
-        try {
-            ImageIO.write(imageCode.getImage(), "JPEG", response.getOutputStream());
-        } catch (IOException e) {
-            logger.error("验证码写出失败:{}",e.getMessage());
-        }
-    }
     
     
     

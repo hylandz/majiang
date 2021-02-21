@@ -124,9 +124,8 @@ function verifyEmailCode() {
                 "password": new_password.val()
             },
             dataType: 'json', //服务器返回json格式数据
-            contentType:"application/json; charset=utf-8", // 请求数据为json格式
+           // contentType:"application/json; charset=utf-8", // 请求数据为json格式
             type: 'post', //HTTP请求类型
-            // timeout: 10000, //超时时间设置为10秒；
             success: function (response) {
                 if (response.code === 200) {
                     layer.msg(response.message);

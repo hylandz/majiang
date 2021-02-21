@@ -23,4 +23,6 @@ public interface AccountService {
      * @param password 新密码
      */
     void changeAccountPwd(String password);
+    
+    Account doLogin(String username,String password);
 }

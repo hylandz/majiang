@@ -27,7 +27,7 @@ public class ImageCodeFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String uri = request.getRequestURI();
         String method = request.getMethod();
-        if (StringUtils.equals("/login",uri) && StringUtils.equalsIgnoreCase("post",method)){
+        if (StringUtils.equals("/user/register",uri) && StringUtils.equalsIgnoreCase("post",method)){
             try {
                 validate(new ServletWebRequest(request));
             }catch (ValidateCodeException e){

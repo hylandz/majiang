@@ -1,18 +1,19 @@
 let username = null;
 let pwd = null;
-//var confirm_password = null;
+let confirm_password = null;
 let remember = null;
 let imageCode = null;
-//var phone = null;
+let phone = null;
 $(function () {
 
     $('[data-toggle="tooltip"]').tooltip();
 
     username = $('#username');
     pwd = $('#password');
+    phone = $('#phone');
     remember = $("#rem");
     imageCode = $('#imageCode');
-
+    confirm_password = $('#confirmPwd');
     /**
      * 检验用户名
      */
@@ -37,6 +38,15 @@ $(function () {
             this.focus();
         }
     });
+    /**
+     * 确认密码
+     */
+    confirm_password.on("blur", function () {
+        if (confirm_password.val() == null || confirm_password.val()!== pwd.val()) {
+            layer.tips('二次密码不正确', '#confirmPwd');
+            this.focus();
+        }
+    });
 
 
     /**
@@ -45,6 +55,15 @@ $(function () {
     imageCode.on("blur", function () {
         if (imageCode.val() == null || (imageCode.val()).length === 0) {
             layer.tips('验证码不为空', '#verifyCode', {tips: 2});
+            this.focus();
+        }
+    });
+    /**
+     * 手机号码
+     */
+    phone.on("blur", function () {
+        if (phone.val() == null || (phone.val()).length === 0) {
+            layer.tips('手机号码不为空', '#verifyCode', {tips: 2});
             this.focus();
         }
     });
@@ -64,11 +83,11 @@ function reloadCode(){
  * 登录
  */
 function login() {
-    $.ajax('login', {
+    $.ajax({
+        url: 'login',
         data: {
             username: username.val(),
             password: pwd.val(),
-            imageCode: imageCode.val(),
             rememberMe: remember.is(':checked')
         },
         dataType: 'json',//服务器返回json格式数据
@@ -95,16 +114,17 @@ function login() {
  * 用户注册
  */
 function registerUser() {
-        $.post("/user/register", JSON.stringify({
+        $.post("/user/register", {
             username: username.val(),
             password: pwd.val(),
+            phone: phone.val(),
             imageCode: imageCode.val(),
-        }), function (r,s) {
-            if (s === 'success'){
+        }, function (r) {
+            if (r.code === 200){
                 alert("注册成功")
                 window.location.href="/login";
             }else {
-                alert('error:' + s);
+                alert('error:' + r.message);
             }
         });
 }

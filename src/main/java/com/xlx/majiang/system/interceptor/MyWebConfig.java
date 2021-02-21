@@ -29,6 +29,10 @@ public class MyWebConfig implements WebMvcConfigurer{
     registration.excludePathPatterns("/static/**").addPathPatterns("/**");
   }
   
+  /**
+   * 图片验证码过滤器：先验证验证码是否正确
+   * @return
+   */
   @Bean
   public FilterRegistrationBean<ImageCodeFilter> imageCodeFilterRegistrationBean(){
     FilterRegistrationBean<ImageCodeFilter> registrationBean = new FilterRegistrationBean<>();
