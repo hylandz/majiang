@@ -111,18 +111,18 @@
             <version>1.4.2</version>
         </dependency>-->
         <!--mysql-->
-        <dependency>
+        <!--<dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.22</version>
-        </dependency>
+        </dependency>-->
 
         <!--druid-->
-        <dependency>
+        <!--<dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>1.1.18</version>
-        </dependency>
+        </dependency>-->
 
         <!--swagger-->
         <dependency>
