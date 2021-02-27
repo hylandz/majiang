@@ -23,7 +23,7 @@
     <div class="row">
         <div class="col-md-12">
             <!--数据表单-->
-            <form class="form-horizontal" role="form">
+            <form class="form-horizontal">
                 <!-- 用户名 -->
                 <div class="form-group has-feedback">
                     <label for="username" class="col-sm-2 control-label">用户名</label>
@@ -91,8 +91,12 @@
                 <!--按钮-->
                 <div class="form-group">
                     <div class="col-sm-offset-2 col-sm-10">
-                        <button  id="btnBig" class="btn btn-success btnRegister" onclick="registerUser()">注册</button>
+                        <button  id="btnBig" class="btn btn-success btnRegister" onclick="registerUser()" disabled="disabled">注册</button>
                     </div>
+                </div>
+                <div id="note">
+                    <h2 style="color: red;display: inline" >抱歉，目前还未开放注册入口!!!!</h2>
+                    <span><a th:href="@{/login}">点我跳转登录界面使用第三方登录</a></span>
                 </div>
                 <!--  第三方登录-->
                <!-- <div th:replace="~{common :: third_way}"></div>-->

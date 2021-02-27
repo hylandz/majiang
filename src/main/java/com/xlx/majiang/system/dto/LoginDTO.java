@@ -13,12 +13,10 @@ import javax.validation.constraints.NotNull;
 @Data
 public class LoginDTO {
 
-	@NotNull
+	@NotNull(message = "用户名不为空")
 	private String username;
-	@NotEmpty
+	@NotEmpty(message = "密码不为空")
 	private String password;
 	
 	private Boolean rememberMe;
-	@NotEmpty
-	private String imageCode;
 }

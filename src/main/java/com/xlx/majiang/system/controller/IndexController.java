@@ -81,7 +81,7 @@ public class IndexController {
      */
     @GetMapping("/register")
     public String registerHtml() {
-        return "/register";
+        return "register";
     }
     
     /**

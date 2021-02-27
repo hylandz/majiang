@@ -32,6 +32,7 @@ public class Account implements Serializable {
 
     private Long gmtModified;
 
+    @NotEmpty
     private String phone;
 
     private Integer gender;

@@ -22,7 +22,7 @@ $(function () {
     }).on("blur", function () {
         if (username.val() == null || username.val().length === 0) {
             layer.tips('用户名不能为空', '#username');
-            this.focus();
+
         }
     });
 
@@ -35,7 +35,6 @@ $(function () {
     }).on("blur", function () {
         if (pwd.val() == null || pwd.val().length <= 5) {
             layer.tips('密码格式不正确', '#password');
-            this.focus();
         }
     });
     /**
@@ -44,7 +43,6 @@ $(function () {
     confirm_password.on("blur", function () {
         if (confirm_password.val() == null || confirm_password.val()!== pwd.val()) {
             layer.tips('二次密码不正确', '#confirmPwd');
-            this.focus();
         }
     });
 
@@ -55,7 +53,6 @@ $(function () {
     imageCode.on("blur", function () {
         if (imageCode.val() == null || (imageCode.val()).length === 0) {
             layer.tips('验证码不为空', '#verifyCode', {tips: 2});
-            this.focus();
         }
     });
     /**
@@ -63,8 +60,7 @@ $(function () {
      */
     phone.on("blur", function () {
         if (phone.val() == null || (phone.val()).length === 0) {
-            layer.tips('手机号码不为空', '#verifyCode', {tips: 2});
-            this.focus();
+            layer.tips('手机号码不为空', '#phone', {tips: 2});
         }
     });
 
@@ -85,13 +81,14 @@ function reloadCode(){
 function login() {
     $.ajax({
         url: 'login',
-        data: {
+        data: JSON.stringify({
             username: username.val(),
             password: pwd.val(),
             rememberMe: remember.is(':checked')
-        },
+        }),
         dataType: 'json',//服务器返回json格式数据
         type: 'post',//HTTP请求类型
+        contentType: "application/json; charset=utf-8",
         timeout: 10000,//超时时间设置为10秒；
         success: function (response) {
             if (response.code === 200) {
@@ -114,19 +111,30 @@ function login() {
  * 用户注册
  */
 function registerUser() {
-        $.post("/user/register", {
-            username: username.val(),
-            password: pwd.val(),
-            phone: phone.val(),
-            imageCode: imageCode.val(),
-        }, function (r) {
-            if (r.code === 200){
-                alert("注册成功")
-                window.location.href="/login";
-            }else {
-                alert('error:' + r.message);
-            }
-        });
+
+   $.ajax({
+       url: 'user/register',
+       data: {
+           userName: username.val(),
+           password: pwd.val(),
+           phone: phone.val(),
+           imageCode: imageCode.val(),
+       },
+       dataType: 'json',
+       type: 'post',
+       success:function (r){
+           if (r.code === 200){
+               alert("注册成功")
+               window.location.href="/login";
+           }else {
+               alert('error:' + r.message);
+           }
+       },
+       error: function (){
+           alert("服务请求失败！");
+       }
+
+   });
 }
 
 /**

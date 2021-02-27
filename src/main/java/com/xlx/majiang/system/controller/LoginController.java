@@ -7,11 +7,12 @@ import com.xlx.majiang.system.entity.User;
 import com.xlx.majiang.system.enums.ErrorCodeEnum;
 import com.xlx.majiang.system.service.NotificationService;
 import com.xlx.majiang.system.service.UserService;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
@@ -25,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author xielx at 2020/3/10 10:47
  */
 @Controller
+@Validated
 public class LoginController {
     
     @Resource
@@ -33,7 +35,7 @@ public class LoginController {
     @Resource
     private NotificationService notificationService;
     
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+    private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
     /**
      * 登录验证
      *
@@ -43,17 +45,17 @@ public class LoginController {
      */
     @PostMapping("/login")
     @ResponseBody
-    public ResultDTO doLogin(LoginDTO loginDTO, HttpServletRequest request, HttpServletResponse response) {
+    public ResultDTO doLogin(@RequestBody  @Validated LoginDTO loginDTO, HttpServletRequest request, HttpServletResponse response) {
         
         
         logger.info("接收参数:[{}]", loginDTO);
         //检验参数
-        if (loginDTO.getUsername() == null) {
+        /*if (loginDTO.getUsername() == null) {
             return ResultDTO.errorOf(ErrorCodeEnum.ACCOUNT_IS_NULL);
         }
         if (StringUtils.isEmpty(loginDTO.getPassword())) {
             return ResultDTO.errorOf(ErrorCodeEnum.CREDENTIALS_IS_NULL);
-        }
+        }*/
         
        /* if (loginDTO.getImageCode() == null || !"jetb".equalsIgnoreCase(loginDTO.getImageCode())) {
             //entity.addAttribute("error", "验证码错误");

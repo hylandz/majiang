@@ -1,6 +1,8 @@
 package com.xlx.majiang.common.validate.image;
 
+import com.alibaba.fastjson.JSON;
 import com.xlx.majiang.common.constant.ValidateConstant;
+import com.xlx.majiang.system.dto.ResultDTO;
 import com.xlx.majiang.system.exception.ValidateCodeException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -15,9 +17,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
- * 图片验证码的过滤器
+ * 注册过程图片验证码的过滤器，验证码错误就不在验证表单数据了
  *
  * @author xielx at 2020/2/11 20:34
  */
@@ -27,21 +30,25 @@ public class ImageCodeFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String uri = request.getRequestURI();
         String method = request.getMethod();
-        if (StringUtils.equals("/user/register",uri) && StringUtils.equalsIgnoreCase("post",method)){
+        if (StringUtils.contains("/user/register",uri) && StringUtils.equalsIgnoreCase("post",method)){
             try {
                 validate(new ServletWebRequest(request));
             }catch (ValidateCodeException e){
                 log.error("校验验证图片码异常:[{}]",e.getMessage());
                 // 需要处理捕获的异常,跳转
-                request.getRequestDispatcher("/login.html").forward(request,response);
-                return;
+               // request.getRequestDispatcher("/login.html").forward(request,response);
+                response.setCharacterEncoding("UTF-8");
+                response.setContentType("application/json;charset=UTF-8");
+                try(PrintWriter out = response.getWriter()){
+                    out.write(JSON.toJSONString(ResultDTO.errorOf(e)));
+                    return;
+                }
             }
-            
-            
         }
-        
+        log.info(" 验证码正确,执行下一个过滤链");
         // 验证码正确,执行下一个过滤链
         filterChain.doFilter(request,response);
+        
     }
     
     /**

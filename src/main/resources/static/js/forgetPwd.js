@@ -110,6 +110,7 @@ function verifyEmailCode() {
     const emailCode = $("#emailCode");
     const new_password = $("#new_password");
     const confirm_pwd = $("#confirm_pwd");
+    const receiveMail = $("#receiveMail");
     if (confirm_pwd.val() !== new_password.val()){
         layer.msg('密码不一致');
         return;
@@ -121,7 +122,8 @@ function verifyEmailCode() {
             url:'emailAuth',
             data: {
                 "emailCode": emailCode.val(),
-                "password": new_password.val()
+                "password": new_password.val(),
+                receiveMail: receiveMail.val()
             },
             dataType: 'json', //服务器返回json格式数据
            // contentType:"application/json; charset=utf-8", // 请求数据为json格式

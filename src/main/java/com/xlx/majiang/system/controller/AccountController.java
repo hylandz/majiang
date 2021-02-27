@@ -18,10 +18,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.ServletWebRequest;
 
 import javax.annotation.Resource;
@@ -98,7 +95,7 @@ public class AccountController {
         
         //生成随机验证码
         String code = EmailUtils.getRandomNumber();
-        String content = "尊敬的先生/女士:\n您好,验证密码:" + code + ",有效期限:1分钟";
+        String content = "尊敬的先生/女士:\n您好,验证密码:" + code + ",有效期限:5分钟";
         try {
             iMailService.sendSimpleMail(from, receiveMail, "验证", content);
             HttpSession session = request.getSession();
@@ -120,7 +117,10 @@ public class AccountController {
      */
     @PostMapping("/emailAuth")
     @ResponseBody
-    public ResultDTO emailAuthorized(@RequestParam String emailCode,@RequestParam String password, HttpServletRequest request) {
+    public ResultDTO emailAuthorized(@RequestParam String emailCode,
+                                     @RequestParam String password,
+                                     @RequestParam String receiveMail,
+                                     HttpServletRequest request) {
         //校验参数
         /*if (StringUtils.isEmpty(account.getEmailCode())) {
             return ResultDTO.errorOf(ErrorCodeEnum.EMAIL_CODE_IS_NULL);
@@ -128,22 +128,21 @@ public class AccountController {
         HttpSession session = request.getSession();
         long createTime = (long) session.getAttribute("createTime");
         String code = (String) session.getAttribute(Constants.EMAIL_CODE);
-        if (System.currentTimeMillis() - createTime < 5 * 60 * 1000){// 5分钟内
-            if(Objects.equals(emailCode,code)){
+        if (System.currentTimeMillis() - createTime < 5 * 60 * 1000) {// 5分钟内
+            if (Objects.equals(emailCode, code)) {
                 // 修改密码
-                accountService.changeAccountPwd(password);
-                session.removeAttribute(Constants.EMAIL_CODE);
-                return ResultDTO.okOf("密码修改成功");
-            }else {
-                return ResultDTO.errorOf(ErrorCodeEnum.EMAIL_CODE_IS_NOT_AVAILABLE);
+                try {
+                    accountService.changeAccountPwdByEmail(password, receiveMail);
+                    session.removeAttribute(Constants.EMAIL_CODE);
+                    return ResultDTO.okOf("密码修改成功");
+                } catch (Exception e) {
+    
+                    return ResultDTO.errorOf(ErrorCodeEnum.EMAIL_CODE_IS_NOT_AVAILABLE);
+                }
             }
-        }else {
-    
-            return ResultDTO.errorOf(ErrorCodeEnum.EMAIL_CODE_INVALID);
         }
-    
+        return ResultDTO.errorOf(ErrorCodeEnum.EMAIL_CODE_INVALID);
     }
-    
     /**
      * 用户注册
      *
@@ -152,14 +151,15 @@ public class AccountController {
      */
     @PostMapping("/user/register")
     @ResponseBody
-    public ResultDTO doRegister(@Validated Account account,HttpServletRequest request) {
+    public ResultDTO doRegister(@Validated Account account) {
         logger.info("前台注册参数:{}", account);
-       String validateCode = (String) request.getSession().getAttribute((ValidateConstant.SESSION_KEY));
-       if (Objects.equals(account.getImageCode(),validateCode)){// 验证码匹配
-           return accountService.registerAccount(account);
-       }
-        logger.info("{},注冊失败", LocalDateTime.now());
-       return ResultDTO.errorOf(ErrorCodeEnum.REGISTER_FAIL);
+        try{
+            accountService.registerAccount(account);
+            return ResultDTO.okOf("注册成功");
+        }catch (Exception e){
+            logger.info("{},注冊失败", LocalDateTime.now());
+            return ResultDTO.errorOf(ErrorCodeEnum.REGISTER_FAIL);
+        }
     }
     
     

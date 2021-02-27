@@ -1,6 +1,5 @@
 package com.xlx.majiang.system.service;
 
-import com.xlx.majiang.system.dto.ResultDTO;
 import com.xlx.majiang.system.entity.Account;
 
 /**
@@ -16,13 +15,14 @@ public interface AccountService {
      * @param account Account
      * @return
      */
-    ResultDTO<Object> registerAccount(Account account);
+    int registerAccount(Account account);
     
     /**
      * 修改密码
      * @param password 新密码
+     * @param email
      */
-    void changeAccountPwd(String password);
+    void changeAccountPwdByEmail(String password,String email);
     
     Account doLogin(String username,String password);
 }

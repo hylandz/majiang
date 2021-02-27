@@ -1,7 +1,6 @@
 package com.xlx.majiang.system.service.impl;
 
 import com.xlx.majiang.system.dao.AccountMapper;
-import com.xlx.majiang.system.dto.ResultDTO;
 import com.xlx.majiang.system.entity.Account;
 import com.xlx.majiang.system.entity.AccountExample;
 import com.xlx.majiang.system.service.AccountService;
@@ -26,20 +25,19 @@ public class AccountServiceImpl implements AccountService {
     private AccountMapper accountMapper;
     
     @Override
-    public ResultDTO<Object> registerAccount(Account account) {
+    public int registerAccount(Account account) {
         account.setGmtCreate(System.currentTimeMillis());
-        accountMapper.insertSelective(account);
-        return ResultDTO.okOf("注册成功");
+        return accountMapper.insertSelective(account);
     }
     
     @Override
-    public void changeAccountPwd(String password) {
+    public void changeAccountPwdByEmail(String password, String email) {
         Account account = new Account();
         account.setPassword(password);
         account.setGmtModified(System.currentTimeMillis());
         
         AccountExample ae = new AccountExample();
-        ae.createCriteria().andPasswordEqualTo(password);
+        ae.createCriteria().andEmailEqualTo(email);
         accountMapper.updateByExampleSelective(account,ae);
     }
     
