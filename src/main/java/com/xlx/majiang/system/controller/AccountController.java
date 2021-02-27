@@ -113,6 +113,7 @@ public class AccountController {
      *
      * @param emailCode 请求数据
      * @param password 请求数据
+     * @param receiveMail 请求数据
      * @return .
      */
     @PostMapping("/emailAuth")
