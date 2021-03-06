@@ -332,13 +332,20 @@ comment on column account.gender is '1:男,2:女,0:保密';
 
 
 
-## 六、 项目演示
+## 七、 项目演示
+
+### 本地运行
 
 访问URL: http://localhost:8887/ 
 
-+ 账户1: 41381772 密码:41381772
-+ 账户2: 41381773 密码:41381773
-+ 账户3: 41381774 密码:41381774
+
+
+### 线上演示
+
+线上: https://www.hylandz.cn 
+
+### 效果图
+
 <table>
 <tr>
   <td><img src="./display/01.png" title="登录" ></td>
@@ -373,5 +380,5 @@ comment on column account.gender is '1:男,2:女,0:保密';
 
 
 
-## 七、 Contributor
+## 八、 Contributor
 [@猕猴桃](https://github.com/XielinX)
