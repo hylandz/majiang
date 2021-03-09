@@ -1,19 +1,25 @@
 package com.xlx.majiang.system.provider;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.xlx.majiang.system.dto.oauth.AbstractAccessToken;
+import com.xlx.majiang.system.dto.oauth.TokenResult;
 import com.xlx.majiang.system.entity.oauth.QQUser;
 import com.xlx.majiang.system.enums.ErrorCodeEnum;
 import com.xlx.majiang.system.exception.CustomizeException;
 import lombok.extern.slf4j.Slf4j;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import java.io.IOException;
 
 /**
  * QQ工具类
- *
+ * 1. 前端通过QQ登录按钮请求,返回uri,携带code
+ * 2. 通过code获取AccessToken
+ * 3. 通过AccessToken获取用户身份的OpenId
+ * 4. 通过AccessToken和OpenId获取或修改用户个人信息
  * @author xielx at 2020/3/8 17:12
  */
 @Slf4j
@@ -26,7 +32,7 @@ public class QQProvider {
      * @param accessTokenDTO api封装参数
      * @return token
      */
-    public String getAccessToken(AbstractAccessToken accessTokenDTO){
+    public TokenResult getAccessToken(AbstractAccessToken accessTokenDTO){
         MediaType mediaType = MediaType.get("application/json;charset=utf-8");
         OkHttpClient client = new OkHttpClient();
         RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));
@@ -47,7 +53,7 @@ public class QQProvider {
             String str = responseBody.string();
             log.info("响应数据:{}",str);
             // 截取必要数据,access_token,expires_in,refresh_token
-            return "";
+            return JSON.parseObject(str,TokenResult.class);
         } catch (IOException e) {
             log.error("获取token失败:[{}]",e.getMessage());
             throw new CustomizeException(ErrorCodeEnum.GET_ACCESS_TOKEN_FAILED);
@@ -60,13 +66,19 @@ public class QQProvider {
      * @param accessToken step2中的token
      * @return openId
      */
-    public String getOpenId(String accessToken){
+    public String getOpenId(String accessToken,String fmt){
         OkHttpClient client = new OkHttpClient();
         // GET
-        String open_id_api = "https://graph.qq.com/oauth2.0/me?access_token=";
+        String url;
+        if (StringUtils.isEmpty(fmt)){
+             url = "https://graph.qq.com/oauth2.0/me?access_token=" + accessToken;
+        }else {
+           String open_id_api = "https://graph.qq.com/oauth2.0/me?access_token=%s&fmt=%s";
+           url = String.format(open_id_api,accessToken,fmt);
+        }
         final Request request = new Request.Builder()
-                                      .url(open_id_api + accessToken)
-                                      .build();
+                                        .url(url)
+                                        .build();
     
         try(final Response response = client.newCall(request).execute()){
             final ResponseBody body = response.body();
@@ -74,7 +86,7 @@ public class QQProvider {
                 final String str = body.string();
                 log.info("响应数据:{}",str);
                 // 截取需要的字符
-                return str;
+                return JSONObject.parseObject(str).getString("openid");
             }
             return "";
         } catch (IOException e) {
@@ -82,6 +94,9 @@ public class QQProvider {
             throw new CustomizeException(e.getMessage());
         }
     }
+    
+    
+    
     
     /**
      * step4:获取QQ用户信息
@@ -108,7 +123,7 @@ public class QQProvider {
             }
             
         } catch (IOException e) {
-            log.info("响应失败:{}",e.getMessage());
+            log.error("响应失败:{}",e.getMessage());
             throw new CustomizeException(ErrorCodeEnum.GET_USER_INFO_FAILED);
         }
     

@@ -37,12 +37,17 @@ public class SessionInterceptor implements HandlerInterceptor {
 
 	@Value("${gitee.redirect.uri}")
 	private String giteeUri;
+	
+	@Value("${qq.redirect.uri}")
+	private String QQUri;
 
+	
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		request.getServletContext().setAttribute("githubUri", githubUri);
 		request.getServletContext().setAttribute("giteeUri", giteeUri);
+		request.getServletContext().setAttribute("QQUri", QQUri);
 
 
 		Cookie[] cookies = request.getCookies();
